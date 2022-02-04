@@ -1,7 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import {connect} from "react-redux";
+import {
+  increaseCounter,
+  decreaseCounter,
+} from "./redux/Counter/counter.actions";
+
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
@@ -22,4 +28,17 @@ function App() {
   );
 }
 
-export default App;
+const mapsStateToProps = state => {
+  return {
+    count: state.counter.count,
+  };
+};
+
+const mapsDispatchToProps = dispatch => {
+  return {
+    increaseCounter : () => dispatch(increaseCounter()),
+    decreaseCounter : () => dispatch(decreaseCounter()),
+  }
+}
+
+export default connect(mapsStateToProps, mapsDispatchToProps)(App);
