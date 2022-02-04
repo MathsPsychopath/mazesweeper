@@ -28,9 +28,9 @@ Instead, you need to determine the shortest distance of the path(s) from the sta
  2. You need to find the shortest path (measured in number of squares) from start to end, and type this value into the input box. If there is no valid path, type 0.
  3. Points are awarded based on the difficulty & speed of answers you give. See below for more on points.
  4. Error amounts - in different game modes, you are allowed a certain error boundary around the true answer in which answers will still accepted.
-  - "*QuickMode*" has error boundary of (+1,-1)
-  - "Normal" has error boundary of (+2,-2)
-  - "Chill and Casual" has error boundary (+3,-3)
+    - "*QuickMode*" has error boundary of (+1,-1)
+    - "Normal" has error boundary of (+2,-2)
+    - "Chill and Casual" has error boundary (+3,-3)
 
 ---
 
