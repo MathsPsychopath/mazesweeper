@@ -55,7 +55,7 @@ In game modes like "*QuickMode*" and "Normal", if your answer is incorrect/not i
 | Points | Mode         | Distance | 
 |--------|--------------|----------| 
 |   -5   | *QuickMode*  |    _     |
-|   -2   |    Normal    |  <= 3    |
+|   -2   |    Normal    |    3     |
 |   -5   |    Normal    |  <= 5    |
 |   -7   |    Normal    |  <= 7    |
 |   -10  |    Normal    |   > 7    |
