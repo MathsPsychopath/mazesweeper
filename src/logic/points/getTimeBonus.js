@@ -4,5 +4,5 @@
  * @returns the bonus points acquired from time.
  */
 export default function getTimeBonus(time){
-    return 0;
+    return time < 30 ? 5 : time < 60 ? 3 : 1;
 }
