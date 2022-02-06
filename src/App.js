@@ -14,7 +14,6 @@ import {
 
 function App(props) {
   return (
-    <Switch> 
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -31,7 +30,6 @@ function App(props) {
           </a>
         </header>
       </div>
-    </Switch>
   );
 }
 
