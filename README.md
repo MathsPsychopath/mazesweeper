@@ -1,6 +1,5 @@
 # MazeSweeper
 
-
 ## What is this?
 
 MazeSweeper is a game heavily inspired by MineSweeper, except that you don't have to solve the board completely. 
