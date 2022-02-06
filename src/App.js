@@ -6,11 +6,12 @@ import {
   increaseCounter,
   decreaseCounter,
 } from "./redux/Counter/counter.actions";
+/*
 import {
   Switch,
   useRouteMatch,
   Route
-} from "react-router-dom";
+} from "react-router-dom";*/
 
 function App(props) {
   return (
