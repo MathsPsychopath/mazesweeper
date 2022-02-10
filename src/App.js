@@ -2,7 +2,12 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { connect } from "react-redux";
-import { setTimer, decrementTimer } from "./redux/Timer/timer.actions";
+import {
+  setTimer,
+  decrementTimer,
+  setInfinite,
+  pauseTimer,
+} from "./redux/Timer/timer.actions";
 /*
 import {
   Switch,
@@ -34,6 +39,8 @@ function App(props) {
 const mapsStateToProps = (state) => {
   return {
     time: state.timer.time,
+    paused: state.timer.paused,
+    isInfinite: state.timer.isInfinite,
   };
 };
 
@@ -41,6 +48,8 @@ const mapsDispatchToProps = (dispatch) => {
   return {
     setTimer: (time) => dispatch(setTimer(time)),
     decrementTimer: () => dispatch(decrementTimer()),
+    setInfinite: () => dispatch(setInfinite()),
+    pauseTimer: () => dispatch(pauseTimer()),
   };
 };
 
