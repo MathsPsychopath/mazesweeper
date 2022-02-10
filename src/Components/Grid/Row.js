@@ -12,7 +12,7 @@ export default function Row(props) {
   return (
     <div data-testid="row">
       {[...Array(getColumns(props.columns)).keys()].map((e, i) => (
-        <Square key={i} />
+        <Square key={"col-" + i} />
       ))}
     </div>
   );
