@@ -2,14 +2,18 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Row from "../../Components/Grid/Row";
 
-const testIfOnlySquares = (row) => {
+const INITIAL_COLOR = "bg-white";
+
+export const testIfOnlySquares = (row) => {
   let count = 0;
   [...row.childNodes].forEach((node) => {
-    expect([...node.classList]).toEqual(expect.arrayContaining(["bg-white"]));
+    expect([...node.classList]).toEqual(
+      expect.arrayContaining([INITIAL_COLOR])
+    );
 
     userEvent.click(node);
     expect([...node.classList]).not.toEqual(
-      expect.arrayContaining(["bg-white"])
+      expect.arrayContaining([INITIAL_COLOR])
     );
     count++;
   });
