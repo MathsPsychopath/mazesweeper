@@ -3,4 +3,10 @@
   min-height: 30px;
   max-width: 30px;
   max-height: 30px;
+  transition-duration: 75ms;
+}
+
+.square:hover {
+  border-width: 2px;
+  border-color: red;
 }
