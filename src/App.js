@@ -2,10 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { connect } from "react-redux";
-import {
-  increaseCounter,
-  decreaseCounter,
-} from "./redux/Counter/counter.actions";
+import { setTimer, decrementTimer } from "./redux/Timer/timer.actions";
 /*
 import {
   Switch,
@@ -51,14 +48,14 @@ function App(props) {
 
 const mapsStateToProps = (state) => {
   return {
-    count: state.counter.count,
+    time: state.timer.time,
   };
 };
 
 const mapsDispatchToProps = (dispatch) => {
   return {
-    increaseCounter: () => dispatch(increaseCounter()),
-    decreaseCounter: () => dispatch(decreaseCounter()),
+    setTimer: (time) => dispatch(setTimer(time)),
+    decrementTimer: () => dispatch(decrementTimer()),
   };
 };
 

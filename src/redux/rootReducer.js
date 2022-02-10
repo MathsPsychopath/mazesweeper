@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import counterReducer from "./Counter/counter.reducer";
 import gameReducer from "./GameState/game.reducer";
+import timerReducer from "./Timer/timer.reducer";
 
 const rootReducer = combineReducers({
-    counter: counterReducer,
-    game: gameReducer,
+  game: gameReducer,
+  timer: timerReducer,
 });
 
 export default rootReducer;
