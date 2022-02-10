@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-import counterReducer from "./Counter/counter.reducer";
+import timerReducer from "./Timer/timer.reducer";
 
 const rootReducer = combineReducers({
-    counter: counterReducer,
+  timer: timerReducer,
 });
 
 export default rootReducer;
-

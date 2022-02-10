@@ -1,11 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-import {connect} from "react-redux";
-import {
-  increaseCounter,
-  decreaseCounter,
-} from "./redux/Counter/counter.actions";
+import { connect } from "react-redux";
+import { setTimer, decrementTimer } from "./redux/Timer/timer.actions";
 /*
 import {
   Switch,
@@ -15,36 +12,36 @@ import {
 
 function App(props) {
   return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
-const mapsStateToProps = state => {
+const mapsStateToProps = (state) => {
   return {
-    count: state.counter.count,
+    time: state.timer.time,
   };
 };
 
-const mapsDispatchToProps = dispatch => {
+const mapsDispatchToProps = (dispatch) => {
   return {
-    increaseCounter : () => dispatch(increaseCounter()),
-    decreaseCounter : () => dispatch(decreaseCounter()),
-  }
-}
+    setTimer: (time) => dispatch(setTimer(time)),
+    decrementTimer: () => dispatch(decrementTimer()),
+  };
+};
 
 export default connect(mapsStateToProps, mapsDispatchToProps)(App);
