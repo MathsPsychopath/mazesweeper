@@ -19,7 +19,14 @@ export default function Grid(props) {
   return (
     <div data-testid="grid">
       {rowIndices.map((e, i) => {
-        return <Row columns={columns} key={"row-" + i} />;
+        return (
+          <Row
+            columns={columns}
+            key={"row-" + i}
+            shows={props.shows ? props.shows[i] : false}
+            numbers={props.numbers ? props.numbers[i] : undefined}
+          />
+        );
       })}
     </div>
   );

@@ -12,7 +12,11 @@ export default function Row(props) {
   return (
     <div data-testid="row" className="flex">
       {[...Array(getColumns(props.columns)).keys()].map((e, i) => (
-        <Square key={"col-" + i} />
+        <Square
+          key={"col-" + i}
+          show={props.shows ? props.show[i] : false}
+          number={props.numbers ? props.numbers[i] : undefined}
+        />
       ))}
     </div>
   );
