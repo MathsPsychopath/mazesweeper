@@ -10,7 +10,7 @@ function getColumns(columns) {
 
 export default function Row(props) {
   return (
-    <div data-testid="row">
+    <div data-testid="row" className="flex">
       {[...Array(getColumns(props.columns)).keys()].map((e, i) => (
         <Square key={"col-" + i} />
       ))}

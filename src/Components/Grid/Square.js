@@ -9,12 +9,12 @@ export default function Square() {
   const [color, setColor] = useState(COLOR_1);
   const classes = [color, "square", "border", "border-black"];
   return (
-    <div
+    <button
       data-testid="square"
       className={classes.join(" ")}
       onClick={() => setColor(color === COLOR_1 ? COLOR_2 : COLOR_1)}
     >
       {" "}
-    </div>
+    </button>
   );
 }
