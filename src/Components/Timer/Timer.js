@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const TIMES = [0, 150, 600];
 
 function formatTime(time, infinite = false) {
-  if (time < 0 || time > TIMES[TIMES.length - 1]) return `∞:∞`;
+  if (infinite || time < 0 || time > TIMES[TIMES.length - 1]) return `∞:∞`;
   const mins = Math.floor(time / 60);
   const secs = time % 60;
 
