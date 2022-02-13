@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 
@@ -16,10 +16,8 @@ function activeState(isActive, isLarge = true) {
 }
 //make smallnav stacked, and activate on button
 function SmallNav() {
-  const navStack = useRef();
-  const toggle = () => {
-    navStack.current.classList.toggle("hidden");
-  };
+  const [visibility, setVisibility] = useState("");
+  const toggle = () => setVisibility(visibility ? "" : "hidden");
   return (
     <header className="flex flex-col md:hidden">
       <div className="text-3xl pb-2 border-b">
@@ -29,8 +27,7 @@ function SmallNav() {
         </button>
       </div>
       <div
-        className="grid grid-cols-1 divide-y-2 justify-center rounded-2xl text-lg "
-        ref={navStack}
+        className={`grid grid-cols-1 divide-y-2 justify-center rounded-2xl text-lg ${visibility}`}
       >
         <NavLink
           className={({ isActive }) => activeState(isActive, false)}
