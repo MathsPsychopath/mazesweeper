@@ -1,0 +1,29 @@
+{
+  "types": {
+    "10x10": {
+      "size": "10x10",
+      "head": "100 squares of possible paths",
+      "body": [
+        "5 points for every correct solve",
+        "Good for a beginner's quick game/speedrun"
+      ]
+    },
+    "16x16": {
+      "size": "16x16",
+      "head": "256 squares of possible paths",
+      "body": [
+        "10 points for every correct solve",
+        "Best for the intermediate players"
+      ]
+    },
+    "16x30": {
+      "size": "16x30",
+      "head": "480 squares of possible paths",
+      "body": [
+        "A true behemoth",
+        "15 points for every correct solve",
+        "Best for the hardcore players, or those wanting challenge"
+      ]
+    }
+  }
+}
