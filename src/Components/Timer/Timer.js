@@ -20,5 +20,9 @@ export default function Timer(props) {
   timer should be started by some logic when the board is played/play is pressed
   timer should be cleaned up/stopped when time = 0 or when paused
   */
-  return <div>{formatTime(props.time, props.isInfinite)}</div>;
+  return (
+    <div className="w-32 p-4 text-4xl text-center border-2 border-black rounded-lg">
+      {formatTime(props.time, props.isInfinite)}
+    </div>
+  );
 }
