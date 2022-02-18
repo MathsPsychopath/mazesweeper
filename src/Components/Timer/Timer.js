@@ -1,7 +1,5 @@
 import React from "react";
 
-const TIMES = [0, 150, 600];
-
 function formatTime(time, infinite = false) {
   if (infinite) return `∞:∞`;
   if (time < 0) return "00:00";
