@@ -8,6 +8,17 @@ const COLOR_2 = "bg-orange-500";
 export default function Square(props) {
   const [color, setColor] = useState(COLOR_1);
   const classes = [color, "square", "border", "border-black"];
+
+  if (props.isDisplay)
+    return (
+      <div
+        data-testid="square"
+        className={classes.join(" ")}
+        onClick={() => undefined}
+      >
+        {" "}
+      </div>
+    );
   return (
     <button
       data-testid="square"

@@ -12,8 +12,12 @@ export default function SelectGrid() {
         <div>
           <h1>Select a grid size...</h1>
           {SIZES.map((size) => (
-            <button>
-              <GridTypes info={grids.types[size]} size={size} key={size} />
+            <button key={size}>
+              <GridTypes
+                info={grids.types[size]}
+                size={size}
+                isDisplay={true}
+              />
             </button>
           ))}
         </div>
