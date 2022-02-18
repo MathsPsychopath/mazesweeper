@@ -61,7 +61,7 @@ const mapsStateToProps = (state) => {
     time: state.timer.time,
     paused: state.timer.paused,
     isInfinite: state.timer.isInfinite,
-    grid: state.menu.gridSize,
+    gridSize: state.menu.gridSize,
     difficulty: state.menu.difficulty,
   };
 };
