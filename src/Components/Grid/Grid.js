@@ -23,6 +23,7 @@ export default function Grid(props) {
           <Row
             columns={columns}
             key={"row-" + i}
+            isDisplay={props.isDisplay}
             shows={props.shows ? props.shows[i] : false}
             numbers={props.numbers ? props.numbers[i] : undefined}
           />

@@ -14,6 +14,7 @@ export default function Row(props) {
       {[...Array(getColumns(props.columns)).keys()].map((e, i) => (
         <Square
           key={"col-" + i}
+          isDisplay={props.isDisplay}
           show={props.shows ? props.shows[i] : false}
           number={props.numbers ? props.numbers[i] : undefined}
         />
