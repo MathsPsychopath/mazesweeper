@@ -3,7 +3,8 @@ import React from "react";
 const TIMES = [0, 150, 600];
 
 function formatTime(time, infinite = false) {
-  if (infinite || time < 0 || time > TIMES[TIMES.length - 1]) return `∞:∞`;
+  if (infinite) return `∞:∞`;
+  if (time < 0) return "00:00";
   const mins = Math.floor(time / 60);
   const secs = time % 60;
 
@@ -11,18 +12,15 @@ function formatTime(time, infinite = false) {
 }
 
 /**
- * @param {Object} ...props - redux dispatch functions and states
+ * @param {Number} props.time - time in redux store
+ * @param {Boolean} props.isInfinite
  * @returns Timer component
  */
 export default function Timer(props) {
   /*
-  timer should be set by some logic when selecting the boards
+  timer should be set by some redux logic when selecting the boards
   timer should be started by some logic when the board is played/play is pressed
   timer should be cleaned up/stopped when time = 0 or when paused
   */
-  //if (props.time === 0 && !props.paused) {
-  //  props.pauseTimer();
-  //  return formatTime(props.time);
-  //}
   return <div>{formatTime(props.time, props.isInfinite)}</div>;
 }
