@@ -40,4 +40,12 @@ describe("Square should be a react component that represents a single unit in th
     const square = screen.getByTestId("square");
     expect(square.textContent).toEqual("8");
   });
+
+  test("It should not change colour if it is disabled", () => {
+    render(<Square isDisplay={true} />);
+    const square = screen.getByTestId("square");
+    expect([...square.classList]).toEqual(expect.arrayContaining(["bg-white"]));
+    userEvent.click(square);
+    expect([...square.classList]).toEqual(expect.arrayContaining(["bg-white"]));
+  });
 });
