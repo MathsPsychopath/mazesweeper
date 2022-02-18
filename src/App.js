@@ -3,6 +3,11 @@ import "./App.css";
 
 import { connect } from "react-redux";
 import {
+  changeDifficulty,
+  changeGrid,
+} from "./redux/MenuSelection/menu.actions";
+
+import {
   setTimer,
   decrementTimer,
   setInfinite,
@@ -56,6 +61,8 @@ const mapsStateToProps = (state) => {
     time: state.timer.time,
     paused: state.timer.paused,
     isInfinite: state.timer.isInfinite,
+    grid: state.menu.gridSize,
+    difficulty: state.menu.difficulty,
   };
 };
 
@@ -65,6 +72,8 @@ const mapsDispatchToProps = (dispatch) => {
     decrementTimer: () => dispatch(decrementTimer()),
     setInfinite: () => dispatch(setInfinite()),
     pauseTimer: () => dispatch(pauseTimer()),
+    changeDifficulty: () => dispatch(changeDifficulty()),
+    changeGrid: () => dispatch(changeGrid()),
   };
 };
 
