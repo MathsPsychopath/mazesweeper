@@ -9,7 +9,6 @@ const MODES = ["QuickMode", "Normal", "Chill & Casual"];
 
 export default function SelectGrid(props) {
   const { gridSize, mode } = props;
-  console.log(mode);
   return (
     <HeaderFooter>
       <div className="flex justify-around">
@@ -19,8 +18,8 @@ export default function SelectGrid(props) {
           isDisplay={true}
         />
         <div>
-          <h1 className="text-2xl">Select a grid size...</h1>
-          <div className="flex flex-col">
+          <h1 className="text-xl">Select a grid size...</h1>
+          <div className="flex justify-around">
             {SIZES.map((size) => (
               <Button
                 currentSelected={gridSize}
@@ -31,8 +30,8 @@ export default function SelectGrid(props) {
               </Button>
             ))}
           </div>
-          <h1 className="text-2xl">Select a mode...</h1>
-          <div className="flex flex-col">
+          <h1 className="text-xl">Select a mode...</h1>
+          <div className="flex justify-around">
             {MODES.map((modeInMap) => (
               <Button
                 currentSelected={mode}

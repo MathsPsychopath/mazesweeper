@@ -5,7 +5,7 @@ export default function Button(props) {
   return (
     <button
       onClick={() => onClickEvent(children)}
-      className={`m-4 border-2 border-black rounded-md ${
+      className={`m-4 p-2 border-2 border-black rounded-md ${
         children === currentSelected ? "bg-blue-100" : "bg-white"
       }`}
     >
