@@ -10,7 +10,7 @@ export default function reducer(state = INITIAL_STATE, action) {
     case CHANGE_MODE:
       return {
         ...state,
-        difficulty: action.newMode,
+        mode: action.newMode,
       };
     case CHANGE_GRID_SIZE:
       return {
