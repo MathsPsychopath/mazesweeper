@@ -21,7 +21,7 @@ function SmallNav() {
   return (
     <header className="flex flex-col md:hidden">
       <div className="text-3xl pb-2 border-b">
-        <NavLink to="/about">mazesweeper</NavLink>
+        <NavLink to="/">mazesweeper</NavLink>
         <button onClick={() => toggle()} className="absolute top-0 right-0 m-2">
           <AiOutlineMenu />
         </button>
@@ -31,7 +31,7 @@ function SmallNav() {
       >
         <NavLink
           className={({ isActive }) => activeState(isActive, false)}
-          to="/about"
+          to="/howtoplay"
         >
           About
         </NavLink>
