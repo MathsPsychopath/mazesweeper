@@ -18,22 +18,7 @@ import {
   Route
 } from "react-router-dom";*/
 
-const tempFunc = (props) => {
-  if (props.time === 0) return;
-  const timer = setInterval(() => {
-    if (props.time === 0) {
-      clearInterval(timer);
-      props.pauseTimer();
-      return;
-    }
-    props.pauseTimer();
-    props.decrementTimer();
-  }, 1000);
-};
-
 function App(props) {
-  //props.setTimer(150);
-  //props.pauseTimer();
   return (
     <div className="App">
       <SelectGrid {...props} />
