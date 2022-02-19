@@ -1,16 +1,16 @@
-import { CHANGE_DIFFICULTY, CHANGE_GRID_SIZE } from "./menu.types";
+import { CHANGE_MODE, CHANGE_GRID_SIZE } from "./menu.types";
 
 const INITIAL_STATE = {
-  difficulty: "QuickMode",
+  mode: "QuickMode",
   gridSize: "10x10",
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case CHANGE_DIFFICULTY:
+    case CHANGE_MODE:
       return {
         ...state,
-        difficulty: action.newDiff,
+        difficulty: action.newMode,
       };
     case CHANGE_GRID_SIZE:
       return {

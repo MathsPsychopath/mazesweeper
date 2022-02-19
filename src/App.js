@@ -2,10 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { connect } from "react-redux";
-import {
-  changeDifficulty,
-  changeGrid,
-} from "./redux/MenuSelection/menu.actions";
+import { changeMode, changeGrid } from "./redux/MenuSelection/menu.actions";
 
 import {
   setTimer,
@@ -72,8 +69,8 @@ const mapsDispatchToProps = (dispatch) => {
     decrementTimer: () => dispatch(decrementTimer()),
     setInfinite: () => dispatch(setInfinite()),
     pauseTimer: () => dispatch(pauseTimer()),
-    changeDifficulty: () => dispatch(changeDifficulty()),
-    changeGrid: () => dispatch(changeGrid()),
+    changeMode: (newDiff) => dispatch(changeMode(newDiff)),
+    changeGrid: (newGrid) => dispatch(changeGrid(newGrid)),
   };
 };
 

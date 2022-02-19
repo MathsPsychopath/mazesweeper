@@ -1,4 +1,4 @@
-import { CHANGE_DIFFICULTY, CHANGE_GRID_SIZE } from "./menu.types";
+import { CHANGE_MODE, CHANGE_GRID_SIZE } from "./menu.types";
 
 export const changeGrid = (newGrid) => {
   return {
@@ -7,9 +7,9 @@ export const changeGrid = (newGrid) => {
   };
 };
 
-export const changeDifficulty = (newDiff) => {
+export const changeMode = (newMode) => {
   return {
-    type: CHANGE_DIFFICULTY,
-    newDiff,
+    type: CHANGE_MODE,
+    newMode,
   };
 };
