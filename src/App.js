@@ -10,6 +10,7 @@ import {
   setInfinite,
   pauseTimer,
 } from "./redux/Timer/timer.actions";
+import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
 /*
 import {
   Switch,
@@ -35,6 +36,7 @@ function App(props) {
   //props.pauseTimer();
   return (
     <div className="App">
+      <SelectGrid {...props} />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -69,7 +71,7 @@ const mapsDispatchToProps = (dispatch) => {
     decrementTimer: () => dispatch(decrementTimer()),
     setInfinite: () => dispatch(setInfinite()),
     pauseTimer: () => dispatch(pauseTimer()),
-    changeMode: (newDiff) => dispatch(changeMode(newDiff)),
+    changeMode: (newMode) => dispatch(changeMode(newMode)),
     changeGrid: (newGrid) => dispatch(changeGrid(newGrid)),
   };
 };
