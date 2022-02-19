@@ -33,7 +33,7 @@ function SmallNav() {
           className={({ isActive }) => activeState(isActive, false)}
           to="/howtoplay"
         >
-          About
+          How to play
         </NavLink>
         <NavLink
           className={({ isActive }) => activeState(isActive, false)}
@@ -55,14 +55,14 @@ function LargeNav() {
   return (
     <header className="hidden md:flex font-sans justify-between">
       <div className="text-3xl my-4 mx-8">
-        <NavLink to="/about">mazesweeper</NavLink>
+        <NavLink to="/">mazesweeper</NavLink>
       </div>
       <div className="flex justify-between">
         <NavLink
           className={({ isActive }) => activeState(isActive)}
-          to="/about"
+          to="/howtoplay"
         >
-          About
+          How to play
         </NavLink>
         <NavLink className={({ isActive }) => activeState(isActive)} to="/play">
           Play
