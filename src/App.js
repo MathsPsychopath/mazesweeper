@@ -59,7 +59,7 @@ const mapsStateToProps = (state) => {
     paused: state.timer.paused,
     isInfinite: state.timer.isInfinite,
     gridSize: state.menu.gridSize,
-    difficulty: state.menu.difficulty,
+    mode: state.menu.mode,
   };
 };
 
