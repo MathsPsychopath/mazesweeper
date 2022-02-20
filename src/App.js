@@ -11,31 +11,34 @@ import {
   pauseTimer,
 } from "./redux/Timer/timer.actions";
 import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
-/*
-import {
-  Switch,
-  useRouteMatch,
-  Route
-} from "react-router-dom";*/
+import { Routes, Route } from "react-router-dom";
+
+function BoilerPlate(props) {
+  return (
+    <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <p>
+        Edit <code>src/App.js</code> and save to reload.
+      </p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn React
+      </a>
+    </header>
+  );
+}
 
 function App(props) {
   return (
     <div className="App">
-      <SelectGrid {...props} />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="play" element={<SelectGrid {...props} />} />
+        <Route index element={<BoilerPlate {...props} />} />
+      </Routes>
     </div>
   );
 }
