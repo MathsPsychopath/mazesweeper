@@ -14,11 +14,13 @@ export default function SelectGrid(props) {
   return (
     <HeaderFooter>
       <div className="flex justify-around my-12">
-        <GridTypes
-          info={grids.types[gridSize]}
-          size={gridSize}
-          isDisplay={true}
-        />
+        <div className={gridSize !== "16x30" ? "hidden lg:block" : "hidden"}>
+          <GridTypes
+            info={grids.types[gridSize]}
+            size={gridSize}
+            isDisplay={true}
+          />
+        </div>
         <div className="grid content-between">
           <div className="grid grid-rows-4">
             <h1 className="text-xl">Select a grid size...</h1>
