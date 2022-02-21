@@ -14,7 +14,7 @@ export default function SelectGrid(props) {
   return (
     <HeaderFooter>
       <div className="flex justify-around my-12">
-        <div className={gridSize !== "16x30" ? "hidden lg:block" : "hidden"}>
+        <div className="hidden md:block">
           <GridTypes
             info={grids.types[gridSize]}
             size={gridSize}

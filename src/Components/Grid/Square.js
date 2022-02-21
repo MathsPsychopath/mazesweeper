@@ -7,7 +7,14 @@ const COLOR_2 = "bg-orange-500";
 
 export default function Square(props) {
   const [color, setColor] = useState(COLOR_1);
-  const classes = [color, "square", "border", "border-black"];
+  const classes = [
+    color,
+    props.isDisplay ? "square-small" : "square",
+    "hover:border-2",
+    "hover:border-red-500",
+    "border",
+    "border-black",
+  ];
 
   if (props.isDisplay)
     return (
