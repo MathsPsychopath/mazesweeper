@@ -3,7 +3,7 @@ import "./App.css";
 
 import { connect } from "react-redux";
 import { changeMode, changeGrid } from "./redux/MenuSelection/menu.actions";
-
+import HeaderFooter from "./Components/Common/HeaderFooter";
 import {
   setTimer,
   decrementTimer,
@@ -35,10 +35,12 @@ function BoilerPlate(props) {
 function App(props) {
   return (
     <div className="App">
-      <Routes>
-        <Route path="play" element={<SelectGrid {...props} />} />
-        <Route index element={<BoilerPlate {...props} />} />
-      </Routes>
+      <HeaderFooter>
+        <Routes>
+          <Route path="play" element={<SelectGrid {...props} />} />
+          <Route index element={<BoilerPlate {...props} />} />
+        </Routes>
+      </HeaderFooter>
     </div>
   );
 }
