@@ -3,7 +3,7 @@ import Header from "./Header";
 
 export default function HeaderFooter(props) {
   return (
-    <div className="grid gap-y-[6em]">
+    <div className="flex flex-col gap-y-32">
       <Header />
       {props.children}
       <Footer />

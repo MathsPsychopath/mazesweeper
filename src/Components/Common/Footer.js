@@ -3,7 +3,7 @@ import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 export default function Footer() {
   return (
-    <footer className="flex justify-between mx-8 my-2 p-1">
+    <footer className="min-w-full flex justify-between my-2 p-8 absolute bottom-0">
       <div className="text-left">
         <h1 className="text-3xl font-sans hover:font-bold duration-75">
           mazesweeper
