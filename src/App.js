@@ -11,6 +11,7 @@ import {
   pauseTimer,
 } from "./redux/Timer/timer.actions";
 import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
+import HowToPlay from "./Components/Pages/HowToPlay/HowToPlay";
 import { Routes, Route } from "react-router-dom";
 
 function BoilerPlate(props) {
@@ -38,6 +39,7 @@ function App(props) {
       <HeaderFooter>
         <Routes>
           <Route path="play" element={<SelectGrid {...props} />} />
+          <Route path="howtoplay" element={<HowToPlay {...props} />} />
           <Route index element={<BoilerPlate {...props} />} />
         </Routes>
       </HeaderFooter>
