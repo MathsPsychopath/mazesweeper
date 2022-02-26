@@ -48,6 +48,7 @@ function SmallNav() {
           Leaderboard
         </NavLink>
       </div>
+      <div className="border-y"></div>
     </header>
   );
 }
