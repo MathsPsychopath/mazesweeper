@@ -47,7 +47,7 @@ export default function SelectGrid(props) {
           </div>
         </div>
         <div>
-          <Link to="/play">
+          <Link to="/playgame">
             <button className="flex mx-auto py-2 px-20 border-black border-2 rounded-md items-center">
               <IoPlay />
               Play Now!
