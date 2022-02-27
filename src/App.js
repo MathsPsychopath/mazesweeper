@@ -13,6 +13,7 @@ import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
 import HowToPlay from "./Components/Pages/HowToPlay/HowToPlay";
 import Landing from "./Components/Pages/Landing/Landing";
 import { Routes, Route } from "react-router-dom";
+import PlayGame from "./Components/Pages/PlayGame/PlayGame";
 
 function App(props) {
   return (
@@ -21,6 +22,7 @@ function App(props) {
         <Routes>
           <Route path="play" element={<SelectGrid {...props} />} />
           <Route path="howtoplay" element={<HowToPlay {...props} />} />
+          <Route path="playgame" element={<PlayGame {...props} />} />
           <Route index element={<Landing {...props} />} />
         </Routes>
       </HeaderFooter>
