@@ -25,6 +25,7 @@ export default function Timer(props) {
   timer should be started by some logic when the board is played/play is pressed
   timer should be cleaned up/stopped when time = 0 or when paused
   */
+  //TODO #2
   const { setTimer, mode, time, decrementTimer, paused } = props;
   useEffect(() => {
     //initialise timer at start
