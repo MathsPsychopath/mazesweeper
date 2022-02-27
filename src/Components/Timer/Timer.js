@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+const initialTimes = {
+  QuickMode: 150,
+  Normal: 600,
+  "Chill and Casual": Infinity,
+};
 
 function formatTime(time, infinite = false) {
   if (infinite) return `∞:∞`;
@@ -20,9 +26,26 @@ export default function Timer(props) {
   timer should be started by some logic when the board is played/play is pressed
   timer should be cleaned up/stopped when time = 0 or when paused
   */
+  const { setInfinite, setTimer, mode, time, isInfinite, decrementTimer } =
+    props;
+  useEffect(() => {
+    //initialise timer at start
+    const initTime = initialTimes[mode];
+    if (initTime === Infinity) {
+      setInfinite();
+    }
+    setTimer(initTime);
+  }, [mode, setTimer, setInfinite]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      decrementTimer();
+    }, 1000);
+    return () => clearInterval(timer);
+  });
   return (
     <div className="w-32 p-4 text-4xl text-center border-2 border-black rounded-lg">
-      {formatTime(props.time, props.isInfinite)}
+      {formatTime(time, isInfinite)}
     </div>
   );
 }
