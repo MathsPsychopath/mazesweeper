@@ -6,7 +6,6 @@ import HeaderFooter from "./Components/Common/HeaderFooter";
 import {
   setTimer,
   decrementTimer,
-  setInfinite,
   pauseTimer,
 } from "./redux/Timer/timer.actions";
 import {
@@ -53,7 +52,6 @@ const mapsStateToProps = (state) => {
   return {
     time: state.timer.time,
     paused: state.timer.paused,
-    isInfinite: state.timer.isInfinite,
     gridSize: state.menu.gridSize,
     mode: state.menu.mode,
     gameState: state.game.gameState,
@@ -64,7 +62,6 @@ const mapsDispatchToProps = (dispatch) => {
   return {
     setTimer: (time) => dispatch(setTimer(time)),
     decrementTimer: () => dispatch(decrementTimer()),
-    setInfinite: () => dispatch(setInfinite()),
     pauseTimer: () => dispatch(pauseTimer()),
     changeMode: (newMode) => dispatch(changeMode(newMode)),
     changeGrid: (newGrid) => dispatch(changeGrid(newGrid)),

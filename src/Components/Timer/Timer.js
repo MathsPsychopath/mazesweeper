@@ -6,8 +6,8 @@ const initialTimes = {
   "Chill and Casual": Infinity,
 };
 
-function formatTime(time, infinite = false) {
-  if (infinite) return `∞:∞`;
+function formatTime(time) {
+  if (time === Infinity) return `∞:∞`;
   if (time < 0) return "00:00";
   const mins = Math.floor(time / 60);
   const secs = time % 60;
@@ -17,7 +17,6 @@ function formatTime(time, infinite = false) {
 
 /**
  * @param {Number} props.time - time in redux store
- * @param {Boolean} props.isInfinite
  * @returns Timer component
  */
 export default function Timer(props) {
@@ -26,26 +25,22 @@ export default function Timer(props) {
   timer should be started by some logic when the board is played/play is pressed
   timer should be cleaned up/stopped when time = 0 or when paused
   */
-  const { setInfinite, setTimer, mode, time, isInfinite, decrementTimer } =
-    props;
+  const { setTimer, mode, time, decrementTimer, paused } = props;
   useEffect(() => {
     //initialise timer at start
     const initTime = initialTimes[mode];
-    if (initTime === Infinity) {
-      setInfinite();
-    }
     setTimer(initTime);
-  }, [mode, setTimer, setInfinite]);
+  }, [mode, setTimer]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       decrementTimer();
     }, 1000);
     return () => clearInterval(timer);
-  });
+  }, [paused, decrementTimer]);
   return (
     <div className="w-32 p-4 text-4xl text-center border-2 border-black rounded-lg">
-      {formatTime(time, isInfinite)}
+      {formatTime(time)}
     </div>
   );
 }
