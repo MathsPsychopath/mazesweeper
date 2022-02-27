@@ -1,27 +1,26 @@
-import { CYCLE_GAME_STATE, SET_GAME_STATE } from "./game.types";
+import { SET_IN_GAME, SET_POST_GAME, SET_PRE_GAME } from "./game.types";
 import * as states from "./gamestates";
 
 const INITIAL_STATE = {
   gameState: states.PRE_GAME,
 };
 
-const cycle = (currentGameState, state) => {
-  let currentPos = states.GAME_STATES.indexOf(state.gameState) + 1;
-  if (currentPos >= 3) currentPos = 0;
-  return states.GAME_STATES[currentPos];
-};
-
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CYCLE_GAME_STATE:
+    case SET_IN_GAME:
       return {
         ...state,
-        gameState: cycle(state.gameState, state),
+        gameState: states.IN_GAME,
       };
-    case SET_GAME_STATE:
+    case SET_PRE_GAME:
       return {
         ...state,
-        gameState: action.gameState,
+        gameState: states.PRE_GAME,
+      };
+    case SET_POST_GAME:
+      return {
+        ...state,
+        gameState: states.POST_GAME,
       };
     default:
       return state;
