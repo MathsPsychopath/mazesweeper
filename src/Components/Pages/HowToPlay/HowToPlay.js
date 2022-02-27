@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HowToPlay() {
   return (
-    <div className="grid mx-auto w-9/12 text-left mb-20">
+    <div className="grid mx-auto w-9/12 text-left mb-20 mt-8">
       <h2 className="text-3xl text-bold">What is this?</h2>
       <p>
         MazeSweeper is a game heavily inspired by MineSweeper, except that you
@@ -114,45 +114,49 @@ export default function HowToPlay() {
         based on the distance between your answer and the original, as well as
         the difficulty:
       </p>
-      <p>
-        *An underscore means "any mode or any distance" **Only 1 deduction is
-        selected
+      <p className="indent-5">
+        *An underscore means "any mode or any distance"{" "}
       </p>
-      <table>
+      <p className="indent-5">**Only 1 deduction is selected</p>
+      <table className="border border-slate-400 border-collapse text-center my-4">
         <thead>
-          <tr>
-            <th>Points</th>
-            <th>Mode</th>
-            <th>Distance</th>
+          <tr className="border border-slate-300 bg-slate-300">
+            <th className="border border-slate-300 font-normal">Points</th>
+            <th className="border border-slate-300 font-normal">Mode</th>
+            <th className="border border-slate-300 font-normal">Distance</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>-5</td>
-            <td>
+        <tbody className="border-collapse">
+          <tr className="border border-slate-300">
+            <td className="border border-slate-300">-5</td>
+            <td className="border border-slate-300">
               <em>QuickMode</em>
             </td>
-            <td>_</td>
+            <td className="border border-slate-300">_</td>
           </tr>
-          <tr>
-            <td>-2</td>
-            <td>Normal</td>
-            <td>3</td>
+          <tr className="border border-slate-300">
+            <td className="border border-slate-300">-2</td>
+            <td className="border border-slate-300">Normal</td>
+            <td className="border border-slate-300">3</td>
           </tr>
-          <tr>
-            <td>-5</td>
-            <td>Normal</td>
-            <td>{"<="} 5</td>
+          <tr className="border border-slate-300">
+            <td className="border border-slate-300">-5</td>
+            <td className="border border-slate-300">Normal</td>
+            <td className="border border-slate-300">
+              <span>&#8804;</span> 5
+            </td>
           </tr>
-          <tr>
-            <td>-7</td>
-            <td>Normal</td>
-            <td>{"<="} 7</td>
+          <tr className="border border-slate-300">
+            <td className="border border-slate-300">-7</td>
+            <td className="border border-slate-300">Normal</td>
+            <td className="border border-slate-300">
+              <span>&#8804;</span> 7
+            </td>
           </tr>
-          <tr>
-            <td>-10</td>
-            <td>Normal</td>
-            <td>{">"} 7</td>
+          <tr className="border border-slate-300">
+            <td className="border border-slate-300">-10</td>
+            <td className="border border-slate-300">Normal</td>
+            <td className="border border-slate-300">{">"} 7</td>
           </tr>
         </tbody>
       </table>
