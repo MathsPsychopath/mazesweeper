@@ -17,10 +17,22 @@ import {
 import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
 import HowToPlay from "./Components/Pages/HowToPlay/HowToPlay";
 import Landing from "./Components/Pages/Landing/Landing";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import PlayGame from "./Components/Pages/PlayGame/PlayGame";
 
 function App(props) {
+  const location = useLocation();
+  switch (location.pathname) {
+    case "/results":
+      props.setPostGame();
+      break;
+    case "/playgame":
+      props.setInGame();
+      break;
+    default:
+      props.setPreGame();
+  }
+  console.log(props.gameState);
   return (
     <div className="App">
       <HeaderFooter>
@@ -28,6 +40,8 @@ function App(props) {
           <Route path="play" element={<SelectGrid {...props} />} />
           <Route path="howtoplay" element={<HowToPlay {...props} />} />
           <Route path="playgame" element={<PlayGame {...props} />} />
+          <Route path="results" element={null} />
+          <Route path="leaderboard" element={null} />
           <Route index element={<Landing {...props} />} />
         </Routes>
       </HeaderFooter>

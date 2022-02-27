@@ -4,7 +4,6 @@ import React from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { IoPlay } from "react-icons/io5";
-import { IN_GAME } from "../../../redux/GameState/gamestates";
 
 const SIZES = ["10x10", "16x16", "16x30"];
 const MODES = ["QuickMode", "Normal", "Chill & Casual"];
@@ -49,10 +48,7 @@ export default function SelectGrid(props) {
         </div>
         <div>
           <Link to="/playgame">
-            <button
-              className="flex mx-auto py-2 px-20 border-black border-2 rounded-md items-center"
-              onClick={() => props.setGameState(IN_GAME)}
-            >
+            <button className="flex mx-auto py-2 px-20 border-black border-2 rounded-md items-center">
               <IoPlay />
               Play Now!
             </button>
