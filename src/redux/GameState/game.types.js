@@ -1,1 +1,2 @@
-export const GAME_STATE = "GAME_STATE";
+export const CYCLE_GAME_STATE = "CYCLE_GAME_STATE";
+export const SET_GAME_STATE = "SET_GAME_STATE";

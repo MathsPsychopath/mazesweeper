@@ -9,6 +9,7 @@ import {
   setInfinite,
   pauseTimer,
 } from "./redux/Timer/timer.actions";
+import { cycleGameState } from "./redux/GameState/game.actions";
 import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
 import HowToPlay from "./Components/Pages/HowToPlay/HowToPlay";
 import Landing from "./Components/Pages/Landing/Landing";
@@ -37,6 +38,7 @@ const mapsStateToProps = (state) => {
     isInfinite: state.timer.isInfinite,
     gridSize: state.menu.gridSize,
     mode: state.menu.mode,
+    gameState: state.game.gameState,
   };
 };
 
@@ -48,6 +50,7 @@ const mapsDispatchToProps = (dispatch) => {
     pauseTimer: () => dispatch(pauseTimer()),
     changeMode: (newMode) => dispatch(changeMode(newMode)),
     changeGrid: (newGrid) => dispatch(changeGrid(newGrid)),
+    cycleGameState: (gameState) => dispatch(cycleGameState(gameState)),
   };
 };
 

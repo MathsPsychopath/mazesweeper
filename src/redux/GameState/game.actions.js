@@ -1,8 +1,14 @@
-import { GAME_STATE } from "./game.types";
+import { CYCLE_GAME_STATE, SET_GAME_STATE } from "./game.types";
 
-export const switchGameState = (gameState) => {
+export const cycleGameState = () => {
   return {
-    type: GAME_STATE,
+    type: CYCLE_GAME_STATE,
+  };
+};
+
+export const setGameState = (gameState) => {
+  return {
+    type: SET_GAME_STATE,
     gameState,
   };
 };
