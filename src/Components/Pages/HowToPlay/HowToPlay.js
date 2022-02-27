@@ -56,6 +56,10 @@ export default function HowToPlay() {
               square in its 8 sq. perimeter is valid as a addition to sequence
               starting green.
             </li>
+            <li>
+              A square will have a number in it, referring to the number of path
+              squares adjacent to the current
+            </li>
           </ul>
         </li>
         <img
