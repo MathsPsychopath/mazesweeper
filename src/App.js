@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 import { connect } from "react-redux";
@@ -12,26 +11,8 @@ import {
 } from "./redux/Timer/timer.actions";
 import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
 import HowToPlay from "./Components/Pages/HowToPlay/HowToPlay";
+import Landing from "./Components/Pages/Landing/Landing";
 import { Routes, Route } from "react-router-dom";
-
-function BoilerPlate(props) {
-  return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  );
-}
 
 function App(props) {
   return (
@@ -40,7 +21,7 @@ function App(props) {
         <Routes>
           <Route path="play" element={<SelectGrid {...props} />} />
           <Route path="howtoplay" element={<HowToPlay {...props} />} />
-          <Route index element={<BoilerPlate {...props} />} />
+          <Route index element={<Landing {...props} />} />
         </Routes>
       </HeaderFooter>
     </div>
