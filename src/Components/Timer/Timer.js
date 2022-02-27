@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 const initialTimes = {
   QuickMode: 150,
   Normal: 600,
-  "Chill and Casual": Infinity,
+  "Chill & Casual": Infinity,
 };
 
 function formatTime(time) {
