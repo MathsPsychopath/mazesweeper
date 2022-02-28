@@ -4,13 +4,16 @@ import Timer from "../../Timer/Timer";
 import { useNavigate } from "react-router-dom";
 
 export default function PlayGame(props) {
-  const { time, paused, gameState, mode, gridSize } = props;
-  const { changeMode, changeGrid, setInfinite, cycleGameState } = props;
+  const { time } = props;
   const navigate = useNavigate();
-  if (time === 0) navigate("/results");
+  const timerDone = time === 0;
+  useEffect(() => {
+    timerDone && navigate("/results");
+  }, [timerDone, navigate]);
+  console.log(props.gridSize);
   return (
     <div className="mx-auto">
-      <Grid />
+      <Grid {...props} />
       <Timer {...props} />
     </div>
   );
