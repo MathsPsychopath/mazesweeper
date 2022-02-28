@@ -1,7 +1,7 @@
 import { SET_TIMER, DECREMENT, PAUSE } from "./timer.types";
 
 const INITIAL_STATE = {
-  time: 0,
+  time: 150,
   paused: true,
 };
 
