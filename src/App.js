@@ -24,6 +24,9 @@ function App(props) {
   switch (location.pathname) {
     case "/results":
       props.setPostGame();
+      props.setTimer(150);
+      props.changeMode("QuickMode"); //reset to default
+      props.changeGrid("10x10");
       break;
     case "/playgame":
       props.setInGame();
@@ -31,7 +34,6 @@ function App(props) {
     default:
       props.setPreGame();
   }
-  console.log(props.gameState);
   return (
     <div className="App">
       <HeaderFooter>
