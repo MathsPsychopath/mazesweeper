@@ -15,7 +15,7 @@ export default function SelectGrid(props) {
       <div className="hidden md:block">
         <GridTypes
           info={grids.types[gridSize]}
-          size={gridSize}
+          gridSize={gridSize}
           isDisplay={true}
         />
       </div>
