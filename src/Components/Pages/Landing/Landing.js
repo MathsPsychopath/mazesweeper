@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Landing() {
   return (
-    <div className="text-left mx-auto w-9/12 h-1/3 flex flex-col justify-between">
+    <div className="text-left mx-auto w-9/12 mb-20">
       <h1 className="font-bold text-3xl">About</h1>
       <p>
         This game is a MineSweeper-esque game. See "How to Play" for details on
@@ -10,6 +10,7 @@ export default function Landing() {
         back here, click on "Mazesweeper" on the navbar. Go to "Play" to set up
         a game, and "Leaderboard" to view how others did
       </p>
+      <br />
       <h2 className="font-bold text-2xl">How this game was made</h2>
       <p>
         This game was made using React, Redux and deployed via GitHub Actions to
@@ -20,6 +21,7 @@ export default function Landing() {
         It also uses Jest to test certain bits of functionality, which is done
         before every deploy on Actions.
       </p>
+      <br />
       <h2 className="font-bold text-2xl">About me</h2>
       <p>
         I'm Aaron, the guy who made this game. Visit and/or follow my LinkedIn
