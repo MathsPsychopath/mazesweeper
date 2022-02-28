@@ -14,7 +14,7 @@ function getSize(size) {
 }
 
 export default function Grid(props) {
-  const [rows, columns] = getSize(props.size);
+  const [rows, columns] = getSize(props.gridSize);
   const rowIndices = [...Array(rows).keys()];
   return (
     <div data-testid="grid">
