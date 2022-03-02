@@ -182,7 +182,6 @@ describe("function dijkstra should be able to perform dijkstra's algorithm on a 
       [1, 1],
     ];
     const states = dijkstra(mat, [0, 1], [1, 0]);
-    console.log(states);
     expect(states).toHaveLength(3);
     expect(states[2].found).toBeTruthy();
   });
@@ -195,7 +194,6 @@ describe("function dijkstra should be able to perform dijkstra's algorithm on a 
       [1, 0, 0, 1],
     ];
     const states = dijkstra(mat, [0, 3], [3, 0]);
-    console.log(states[8]);
     expect(states).toHaveLength(9);
     expect(states[8].found).toBeTruthy();
   });

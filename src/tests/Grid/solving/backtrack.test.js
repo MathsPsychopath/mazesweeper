@@ -4,7 +4,7 @@ describe("generator backtrack should yield the nodes in path & distance in rever
   test("it should throw if the backtrack map has no null value", () => {
     const prev = new Map([["1,1", [1, 1]]]);
     expect(() => {
-      for (const t of backtrack(prev, null, null)) console.log(t);
+      for (const t of backtrack(prev, null, null)) continue;
     }).toThrow();
   });
 
@@ -27,7 +27,7 @@ describe("generator backtrack should yield the nodes in path & distance in rever
       ["1,0", [1, 1]],
     ]);
     expect(() => {
-      for (const k of backtrack(prev, [1, 0], [1, 1])) console.log(k);
+      for (const k of backtrack(prev, [1, 0], [1, 1])) continue;
     }).toThrow();
   });
 
@@ -90,7 +90,6 @@ describe("generator backtrack should yield the nodes in path & distance in rever
     ];
     const states = dijkstra(mat, [4, 3], [0, 1]);
     const previous = states[states.length - 1].previous;
-    console.log(previous);
     expect(() => {
       for (const k of backtrack(previous, [4, 3], [0, 1])) continue;
     }).toThrow();
