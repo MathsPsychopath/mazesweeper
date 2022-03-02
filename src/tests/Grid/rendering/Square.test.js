@@ -4,7 +4,7 @@
 
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Square from "../../Components/Grid/Square";
+import Square from "../../../Components/Grid/Square";
 
 describe("Square should be a react component that represents a single unit in the grid/board", () => {
   test("It should change colour when clicked on from white to any other colour", () => {

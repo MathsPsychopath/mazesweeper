@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Grid from "./../../Components/Grid/Grid";
+import Grid from "../../../Components/Grid/Grid";
 
 describe("Grid should be a react component that is a container to many Square components", () => {
   //size is the number of Square components, in dimension form or raw value

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Row from "../../Components/Grid/Row";
+import Row from "../../../Components/Grid/Row";
 
 const INITIAL_COLOR = "bg-white";
 
