@@ -3,7 +3,6 @@
   "homepage": "https://mathspsychopath.github.io/mazesweeper/",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@react-hook/window-size": "^3.0.7",
     "@testing-library/jest-dom": "^5.16.2",
