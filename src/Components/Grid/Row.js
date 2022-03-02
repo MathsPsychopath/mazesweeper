@@ -17,6 +17,8 @@ export default function Row(props) {
           isDisplay={props.isDisplay}
           show={props.shows ? props.shows[i] : false}
           number={props.numbers ? props.numbers[i] : undefined}
+          rowNo={props.rowNo}
+          colNo={i}
         />
       ))}
     </div>

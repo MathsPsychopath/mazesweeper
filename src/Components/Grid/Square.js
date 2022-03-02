@@ -35,6 +35,7 @@ export default function Square(props) {
       data-testid="square"
       className={classes.join(" ")}
       onClick={() => setColor(color === COLOR_1 ? COLOR_2 : COLOR_1)}
+      id={"row-"+props.rowNo+"-col-"+props.colNo}
     >
       {props.show ? props.number : " "}
     </button>

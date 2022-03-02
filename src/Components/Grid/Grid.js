@@ -26,6 +26,7 @@ export default function Grid(props) {
             isDisplay={props.isDisplay}
             shows={props.shows ? props.shows[i] : false}
             numbers={props.numbers ? props.numbers[i] : undefined}
+            rowNo={i}
           />
         );
       })}
