@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const initialTimes = {
   QuickMode: 150,
@@ -20,25 +22,38 @@ function formatTime(time) {
  * @returns Timer component
  */
 export default function Timer(props) {
-  /*
-  timer should be set by some redux logic when selecting the boards
-  timer should be started by some logic when the board is played/play is pressed
-  timer should be cleaned up/stopped when time = 0 or when paused
-  */
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   //TODO #2
-  const { setTimer, mode, time, decrementTimer, paused } = props;
-  useEffect(() => {
-    //initialise timer at start
-    const initTime = initialTimes[mode];
-    setTimer(initTime);
-  }, [mode, setTimer]);
+  const { time, paused } = useSelector((state) => state.timer);
+  const setTimer = useCallback(
+    (time) => dispatch({ type: "SET_TIMER", newTime: time }),
+    [dispatch]
+  );
+  const decrementTimer = useCallback(
+    () => dispatch({ type: "DECREMENT" }),
+    [dispatch]
+  );
 
   useEffect(() => {
+    //initialise timer value at start
+    const initTime = initialTimes[props.mode];
+    setTimer(initTime);
+  }, [props.mode, setTimer]);
+
+  useEffect(() => {
+    //initialise timer countdown function
     const timer = setInterval(() => {
       decrementTimer();
     }, 1000);
     return () => clearInterval(timer);
   }, [paused, decrementTimer]);
+
+  useEffect(() => {
+    //on timer runout
+    if (time <= 0) dispatch({ type: "SET_PRE_ANSWER" }) && navigate("/results");
+  }, [navigate, dispatch, time]);
+
   return (
     <div className="w-32 p-4 text-4xl text-center border-2 border-black rounded-lg">
       {formatTime(time)}
