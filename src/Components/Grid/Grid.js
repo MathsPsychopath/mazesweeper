@@ -8,7 +8,7 @@ const DIMENSIONS = [
   [16, 30],
 ];
 
-function getSize(size) {
+export function getSize(size) {
   const index = SIZES.indexOf(size);
   return DIMENSIONS[index === -1 ? 0 : index];
 }
