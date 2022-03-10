@@ -1,4 +1,10 @@
-import { SET_IN_GAME, SET_POST_GAME, SET_PRE_GAME } from "./game.types";
+import {
+  SET_IN_GAME,
+  SET_POST_GAME,
+  SET_PRE_GAME,
+  SET_POST_ANSWER,
+  SET_PRE_ANSWER,
+} from "./game.types";
 
 export const setInGame = () => {
   return {
@@ -15,5 +21,17 @@ export const setPreGame = () => {
 export const setPostGame = () => {
   return {
     type: SET_POST_GAME,
+  };
+};
+
+export const setPreAnswer = () => {
+  return {
+    type: SET_PRE_ANSWER,
+  };
+};
+
+export const setPostAnswer = () => {
+  return {
+    type: SET_POST_ANSWER,
   };
 };

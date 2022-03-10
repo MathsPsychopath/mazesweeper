@@ -1,8 +1,15 @@
-import { SET_IN_GAME, SET_POST_GAME, SET_PRE_GAME } from "./game.types";
+import {
+  SET_IN_GAME,
+  SET_POST_GAME,
+  SET_PRE_GAME,
+  SET_POST_ANSWER,
+  SET_PRE_ANSWER,
+} from "./game.types";
 import * as states from "./gamestates";
 
 const INITIAL_STATE = {
   gameState: states.PRE_GAME,
+  gridState: states.PRE_ANSWER,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -21,6 +28,16 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         gameState: states.POST_GAME,
+      };
+    case SET_POST_ANSWER:
+      return {
+        ...state,
+        gridState: states.POST_ANSWER,
+      };
+    case SET_PRE_ANSWER:
+      return {
+        ...state,
+        gridState: states.PRE_ANSWER,
       };
     default:
       return state;
