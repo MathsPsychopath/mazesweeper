@@ -3,9 +3,9 @@ import { getSize } from "../../Components/Grid/Grid";
 /**
  *
  * @param {String} gridSize 10x10, 16x16, or 16x30
- * @returns matrix of the given grid size of random binary
+ * @returns matrix of the given grid size of random numbers
  */
-export default function generateGrid(gridSize) {
+export function generateGrid(gridSize) {
   const [rows, columns] = getSize(gridSize);
   console.log(gridSize);
   const grid = [...new Array(rows)].map((row) =>
@@ -14,4 +14,35 @@ export default function generateGrid(gridSize) {
   grid[0][0] = 1;
   grid[rows - 1][columns - 1] = 1;
   return grid;
+}
+
+/**
+ * call after generateGrid
+ * @param {Array<Array<Number>>} grid
+ * @returns matrix of numbers representing adjacent paths to element
+ */
+export function generateAdjacency(grid) {
+  const [rows, columns] = [grid.length, grid[0].length];
+  const adjacency = [];
+  for (let row = 0; row < rows; row++) {
+    const adjRow = [];
+    for (let col = 0; col < columns; col++) {
+      let paths = 0;
+      if (grid[row + 1]) {
+        if (grid[row + 1][col + 1] === 1) paths++;
+        if (grid[row + 1][col] === 1) paths++;
+        if (grid[row + 1][col - 1] === 1) paths++;
+      }
+      if (grid[row][col + 1] === 1) paths++;
+      if (grid[row][col - 1] === 1) paths++;
+      if (grid[row - 1]) {
+        if (grid[row - 1][col + 1] === 1) paths++;
+        if (grid[row - 1][col] === 1) paths++;
+        if (grid[row - 1][col - 1] === 1) paths++;
+      }
+      adjRow.push(paths);
+    }
+    adjacency.push(adjRow);
+  }
+  return adjacency;
 }
