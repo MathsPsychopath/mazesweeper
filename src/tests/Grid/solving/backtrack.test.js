@@ -53,17 +53,24 @@ describe("generator backtrack should yield the nodes in path & distance in rever
       [1, 0, 0, 1],
       [0, 1, 1, 0],
     ];
-    const states = dijkstra(map, [0, 0], [2, 0]);
+    const states = [];
+    for (const state of dijkstra(map, [0, 0], [2, 0])) {
+      states.push(state);
+    }
     const { previous } = states[states.length - 1];
     const result = backtrack(previous, [0, 0], [2, 0]);
     expect(result.distance).toBe(7);
-    expect(result.nodes[0]).toEqual(expect.arrayContaining([0, 0]));
-    expect(result.nodes[1]).toEqual(expect.arrayContaining([0, 1]));
-    expect(result.nodes[2]).toEqual(expect.arrayContaining([1, 2]));
-    expect(result.nodes[3]).toEqual(expect.arrayContaining([2, 3]));
-    expect(result.nodes[4]).toEqual(expect.arrayContaining([3, 2]));
-    expect(result.nodes[5]).toEqual(expect.arrayContaining([3, 1]));
-    expect(result.nodes[6]).toEqual(expect.arrayContaining([2, 0]));
+    expect(result.nodes).toEqual(
+      expect.arrayContaining([
+        [0, 0],
+        [0, 1],
+        [1, 2],
+        [2, 3],
+        [3, 2],
+        [3, 1],
+        [2, 0],
+      ])
+    );
   });
 
   test("it should throw an error if the start is not in the previous map", () => {
@@ -88,7 +95,10 @@ describe("generator backtrack should yield the nodes in path & distance in rever
       [0, 1, 0, 1, 1],
       [0, 1, 0, 1, 1],
     ];
-    const states = dijkstra(mat, [4, 3], [0, 1]);
+    const states = [];
+    for (const state of dijkstra(mat, [4, 3], [0, 1])) {
+      states.push(state);
+    }
     const previous = states[states.length - 1].previous;
     expect(() => {
       for (const k of backtrack(previous, [4, 3], [0, 1])) continue;

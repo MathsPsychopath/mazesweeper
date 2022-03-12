@@ -120,60 +120,47 @@ function isValidEnd(end, grid) {
 }
 
 /**
- * @typedef {Object} Dijkstra
- * @property {Array<Array<Number>>} neighbours - nodes to consider next
- * @property {Map<Array<Number>, Array<Number>>} visited - nodes previously considered
- * @property {Map<Array<Number>, Array<Number>>} previous - distance from end
- * @property {Boolean} found - if the end node has been found in visited map
- */
-
-/**
  * does the algorithm, considers nodes from bottom-right to top-left
  * @param {Array<Array<Number>>} grid - the grid of paths and walls
  * @param {Array<Number>} start - 2D tuple of coordinates of start
  * @param {Array<Number>} end - 2D tuple of coordinates of end
- * @returns {Array<Dijkstra>} array of objects with Array neighbours, Map visited, Map previous
+ * @yields {Object} an object containing the step's neighbours, current node, found && previous nodes map
  * @throws {Error} in case of invalid start/end square
  *
  */
-export function dijkstra(grid, start, end) {
+export function* dijkstra(grid, start, end) {
   if (!isValidPath(start, grid)) throw new Error("invalid starting square");
   if (!isValidEnd(end, grid)) throw new Error("invalid end square");
   const neighbours = [start]; //color yellow
   const visited = new Map();
   const previous = new Map([[start.toString(), null]]);
-  const states = [];
-  let i = 1;
-
-  while (neighbours.length > 0) {
+  for (let i = 0; neighbours.length > 0; i++) {
     const current = neighbours.shift();
     getPerimeter(current, grid, neighbours, visited, previous, start);
-    visited.set(current.toString(), i++);
-    states.push({
-      //requires new references
+    visited.set(current.toString(), i);
+    if (end[0] === current[0] && end[1] === current[1]) {
+      yield {
+        neighbours,
+        current,
+        found: true,
+        previous,
+      };
+      return;
+    }
+    yield {
       neighbours: neighbours.slice(),
-      visited: new Map(visited),
-      previous: new Map(previous),
-      found: visited.has(end.toString()),
-    });
-    if (end[0] === current[0] && end[1] === current[1]) break;
+      current,
+      found: false,
+    };
   }
-
-  return states;
 }
-
-/**
- * @typedef {Object} Backtrack
- * @property {Array<Array<Number>>} nodes - current node being considered
- * @property {Number} distance - distance from end
- */
 
 /**
  * @requires dijkstra(grid, start, end) to be called
  * @param {Map<String, Array<Number>>} previous reference to nearest previous
  * @param {Array<Number>} start 2D tuple representing start
  * @param {Array<Number>} end 2D tuple representing end
- * @returns {Backtrack} object containing partial backtrack info
+ * @returns {Object} object containing nodes on path and distance
  */
 export function backtrack(previous, start, end) {
   const values = [...previous.values()];
