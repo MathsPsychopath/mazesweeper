@@ -18,6 +18,7 @@ export default function Square(props) {
     "border-black",
     "duration-50",
     "cursor-pointer",
+    "grid-square",
   ];
 
   if (props.isDisplay)
@@ -37,7 +38,7 @@ export default function Square(props) {
       onClick={() => setColor(color === COLOR_1 ? COLOR_2 : COLOR_1)}
       id={"row-" + props.rowNo + "-col-" + props.colNo}
     >
-      {props.show ? props.number : " "}
+      {props.isDisplay ? " " : props.number}
     </button>
   );
 }

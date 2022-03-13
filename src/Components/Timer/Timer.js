@@ -18,14 +18,14 @@ function formatTime(time) {
 }
 
 /**
- * @param {Number} props.time - time in redux store
  * @returns Timer component
  */
-export default function Timer(props) {
+export default function Timer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //TODO #2
   const { time, paused } = useSelector((state) => state.timer);
+  const { mode } = useSelector((state) => state.menu);
   const setTimer = useCallback(
     (time) => dispatch({ type: "SET_TIMER", newTime: time }),
     [dispatch]
@@ -34,12 +34,11 @@ export default function Timer(props) {
     () => dispatch({ type: "DECREMENT" }),
     [dispatch]
   );
-
   useEffect(() => {
     //initialise timer value at start
-    const initTime = initialTimes[props.mode];
+    const initTime = initialTimes[mode];
     setTimer(initTime);
-  }, [props.mode, setTimer]);
+  }, [mode, setTimer]);
 
   useEffect(() => {
     //initialise timer countdown function

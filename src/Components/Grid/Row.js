@@ -15,7 +15,6 @@ export default function Row(props) {
         <Square
           key={"col-" + i}
           isDisplay={props.isDisplay}
-          show={props.shows ? props.shows[i] : false}
           number={props.numbers ? props.numbers[i] : undefined}
           rowNo={props.rowNo}
           colNo={i}

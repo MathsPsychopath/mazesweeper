@@ -145,7 +145,7 @@ export function* dijkstra(grid, start, end) {
         found: true,
         previous,
       };
-      return;
+      return previous; //works with both for...of and manual
     }
     yield {
       neighbours: neighbours.slice(),
@@ -160,7 +160,7 @@ export function* dijkstra(grid, start, end) {
  * @param {Map<String, Array<Number>>} previous reference to nearest previous
  * @param {Array<Number>} start 2D tuple representing start
  * @param {Array<Number>} end 2D tuple representing end
- * @returns {Object} object containing nodes on path and distance
+ * @returns {Array} nodes on final path
  */
 export function backtrack(previous, start, end) {
   const values = [...previous.values()];
@@ -171,15 +171,12 @@ export function backtrack(previous, start, end) {
     throw new Error("the end node is not in backtrack map");
   if (values.length === 1) return { nodes: [start], distance: 0 };
 
-  let distance = 1;
-  const states = { nodes: [end] };
+  const states = [end];
   let current = previous.get(end.toString());
   while (current !== null) {
     if (current === undefined) throw new Error("invalid backtrack map");
-    distance++;
-    states.nodes.unshift(current);
+    states.push(current);
     current = previous.get(current.toString());
   }
-  states.distance = distance;
   return states;
 }
