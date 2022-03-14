@@ -1,46 +1,58 @@
 /**
- *
- * @param {Array<Number>} node 2D tuple of the node's position in grid
- * @param {Array<Array<Number>>} grid the grid the node is inside of
- * @returns {Boolean} if the node is out of bounds from grid
+ * A 2 element array representing position in grid
+ * @typedef {(Array<Number>|String)} Node
  */
-function checkOutOfBounds(node, grid) {
-  const rows = grid.length;
-  const columns = grid[0].length;
-  const [rowPos, colPos] = node;
-  return rowPos < 0 || rowPos >= rows || colPos < 0 || colPos >= columns;
+/**
+ * A 2D array of binary (0|1)
+ * @typedef {Array<Array<(1|0)>>} Grid
+ */
+/**
+ * A Map stating whether a node has been visited or not
+ * @typedef {Map<Node, Boolean>} VisitedMap
+ */
+/**
+ * A Map showing the tentative distance the start and any node
+ * @typedef {Map<Node, Number>} DistanceMap
+ */
+/**
+ * A Map showing the predecessor of a given node
+ * @typedef {Map<Node, Node>} PreviousMap
+ */
+/**
+ * An Array of nodes adjacent to some current node
+ * @typedef {Array<Node>} NeighboursArray
+ */
+/**
+ * An Object representing a Dijkstra's Algorithm step
+ * @typedef {Object} UnfoundState
+ * @property {NeighboursArray} neighbours
+ * @property {Node} currentNode
+ * @property {false} found
+ */
+/**
+ * An Object containing the final step in Dijkstra's Algorithm
+ * @typedef {Object} FoundState
+ * @property {NeighboursArray} neighbours
+ * @property {Node} currentNode
+ * @property {true} found
+ * @property {PreviousMap} previous
+ */
+
+/**
+ *
+ * @param {Node} t1
+ * @param {Node} t2
+ * @returns {Boolean} is same node?
+ */
+function isSameNode(t1, t2) {
+  return t1[0] === t2[0] && t1[1] === t2[1];
 }
 
 /**
  *
- * @param {Array<Number>} node 2D tuple representing a location
- * @param {Array<Array<Number>>} grid the grid to look inside
- * @returns {Boolean} true if square is path in grid
- */
-function isValidPath(node, grid) {
-  return grid[node[0]][node[1]] > 0;
-}
-
-/**
- *
- * @param {Array<Number>} node 2D tuple of the node's position in grid
- * @param {Array<Array<Number>>} grid the grid the node is inside of
- * @param {Map<Array<Number>, Number>} visited key-value of previously visited nodes
- * @returns {Boolean} if node is considered valid
- */
-function checkInvalidNode(node, grid, visited) {
-  return (
-    checkOutOfBounds(node, grid) ||
-    visited.has(node.toString()) ||
-    !isValidPath(node, grid)
-  );
-}
-
-/**
- *
- * @param {Array<Number>} t1 2D tuple
- * @param {Array<Number>} t2 2D tuple
- * @returns {Array<Number>} sum of both tuples
+ * @param {Node} t1
+ * @param {Node} t2
+ * @returns {Node} sum of provided nodes
  */
 function addTuple(t1, t2) {
   return [t1[0] + t2[0], t1[1] + t2[1]];
@@ -48,119 +60,148 @@ function addTuple(t1, t2) {
 
 /**
  *
- * @param {Array<Number>} startNode 2D tuple of the start node
- * @param {Array<Number>} endNode 2D tuple of the end node
- * @returns {Number} sum of x and y difference coordinates
+ * @param {Node} node
+ * @param {Grid} grid
+ * @returns {Boolean} is out of bounds?
  */
-function distanceFromNode(startNode, endNode) {
-  return endNode[0] - startNode[0] + endNode[1] - startNode[1];
+function isOutOfBounds(node, grid) {
+  return grid[node[0]] === undefined || grid[node[0]][node[1]] === undefined;
 }
 
 /**
  *
- * @param {Array<Number>} array list of numbers to insert into
- * @param {Number} element item to insert
- * @returns {Number} index to insert
+ * @param {Node} node
+ * @param {Grid} grid
+ * @returns {Boolean} is valid path?
  */
-function getSortedInsertPos(array, element) {
-  let low = 0;
-  let high = array.length;
-  while (low < high) {
-    const mid = (low + high) >>> 1;
-    if (array[mid] < element) low = mid + 1;
-    else high = mid;
-  }
-  return low;
-}
-
-function insertNeighbour(neighbours, node, start) {
-  const neighboursDistances = neighbours.map((e) => distanceFromNode(e, start));
-  const index = getSortedInsertPos(
-    neighboursDistances,
-    distanceFromNode(node, start)
-  );
-  neighbours.splice(index + 1, 0, node);
+function isValidPath(node, grid) {
+  return !isOutOfBounds(node, grid) && grid[node[0]][node[1]] > 0;
 }
 
 /**
- * adds adjacent valid paths to neighbours, and sets its backreference to the current node.
- * @param {Array<Number>} node 2D tuple of the node's position in grid
- * @param {Array<Array<Number>>} grid the grid the node is inside of
- * @param {Array<Array<Number>>} neighbours list of adjacent unvisited nodes
- * @param {Map<Array<Number>, Array<Number>>} previous reference to nearest previous
- * @param {Map<Array<Number>, Number>} visited key-value of visited nodes
- * @param {Array<Number>} start 2D tuple of the start
+ *
+ * @param {Node} node
+ * @param {VisitedMap} visited
+ * @returns {Boolean} was visited?
  */
-function getPerimeter(node, grid, neighbours, visited, previous, start) {
+function wasVisited(node, visited) {
+  return visited.get(node.toString()) === true;
+}
+
+/**
+ *
+ * @param {VisitedMap} visited
+ * @param {DistanceMap} distances
+ * @returns {(null|Node)} null if there are no valid unvisited nodes, or the next node
+ */
+function getSmallestUnvisitedNode(visited, distances) {
+  const unvisitedNodes = [...distances.entries()]
+    .filter(
+      (entry) => !visited.get(entry[0]) && distances.get(entry[0]) < Infinity
+    )
+    .sort((a, b) => a[1] - b[1]);
+  if (!unvisitedNodes.length) return null;
+  return unvisitedNodes[0][0].split(",").map((point) => Number(point));
+}
+
+/**
+ *
+ * @param {VisitedMap} visited
+ * @param {DistanceMap} distances
+ * @param {PreviousMap} previous
+ * @param {Node} currentNode
+ * @param {Grid} grid
+ * @param {NeighboursArray} neighbours
+ */
+function considerNeighbours(
+  visited,
+  distances,
+  currentNode,
+  grid,
+  previous,
+  neighbours
+) {
   const offsets = [
+    [-1, 0],
+    [-1, 1],
+    [0, 1],
     [1, 1],
     [1, 0],
     [1, -1],
-    [0, 1],
     [0, -1],
-    [-1, 1],
-    [-1, 0],
     [-1, -1],
   ];
-  offsets.forEach((offset) => {
-    const newNode = addTuple(offset, node);
-    if (!checkInvalidNode(newNode, grid, visited)) {
-      const stringNeighbours = neighbours.map((e) => e.toString());
-      if (!stringNeighbours.includes(newNode.toString())) {
-        insertNeighbour(neighbours, newNode, start);
-        previous.set(newNode.toString(), node);
-      }
-    }
-  });
-}
-
-function isValidEnd(end, grid) {
-  if (!grid[end[0]]) return false;
-  return grid[end[0]][end[1]] !== undefined && isValidPath(end, grid);
+  const distance = distances.get(currentNode.toString()) + 1;
+  for (const offset of offsets) {
+    const potentialNode = addTuple(offset, currentNode);
+    if (
+      !isValidPath(potentialNode, grid) ||
+      wasVisited(potentialNode, visited) ||
+      distances.get(potentialNode.toString()) < distance
+    )
+      continue;
+    distances.set(potentialNode.toString(), distance);
+    previous.set(potentialNode.toString(), currentNode);
+    neighbours.push(potentialNode);
+  }
+  visited.set(currentNode.toString(), true);
 }
 
 /**
- * does the algorithm, considers nodes from bottom-right to top-left
- * @param {Array<Array<Number>>} grid - the grid of paths and walls
- * @param {Array<Number>} start - 2D tuple of coordinates of start
- * @param {Array<Number>} end - 2D tuple of coordinates of end
- * @yields {Object} an object containing the step's neighbours, current node, found && previous nodes map
- * @throws {Error} in case of invalid start/end square
  *
+ * @param {Array<Array<Number>>} grid random binary grid
+ * @param {Array<Number>} start tuples representing position in grid
+ * @param {Array<Number>} end tuples representing position in grid
+ * @yields {UnfoundState|FoundState}
+ * @returns {PreviousMap}
  */
 export function* dijkstra(grid, start, end) {
   if (!isValidPath(start, grid)) throw new Error("invalid starting square");
-  if (!isValidEnd(end, grid)) throw new Error("invalid end square");
-  const neighbours = [start]; //color yellow
+  if (!isValidPath(end, grid)) throw new Error("invalid end square");
+  //initialise all nodes as unvisited
   const visited = new Map();
+  const distances = new Map();
   const previous = new Map([[start.toString(), null]]);
-  for (let i = 0; neighbours.length > 0; i++) {
-    const current = neighbours.shift();
-    getPerimeter(current, grid, neighbours, visited, previous, start);
-    visited.set(current.toString(), i);
-    if (end[0] === current[0] && end[1] === current[1]) {
+  grid.forEach((row, i) => {
+    row.forEach((square, j) => {
+      square === 1 &&
+        (() => {
+          visited.set(`${i},${j}`, false);
+          distances.set(`${i},${j}`, Infinity);
+        })();
+    });
+  });
+  //set initial node
+  distances.set(start.toString(), 0);
+  let current = start;
+  while (current) {
+    const neighbours = []; //just for display
+    if (isSameNode(current, end)) {
       yield {
-        neighbours,
+        neighbours: [...neighbours],
         current,
         found: true,
         previous,
       };
-      return previous; //works with both for...of and manual
+      return previous; //supports non-for...of
     }
+    considerNeighbours(visited, distances, current, grid, previous, neighbours);
     yield {
-      neighbours: neighbours.slice(),
+      neighbours: [...neighbours],
       current,
       found: false,
     };
+    //console.log(current);
+    current = getSmallestUnvisitedNode(visited, distances);
   }
 }
 
 /**
- * @requires dijkstra(grid, start, end) to be called
- * @param {Map<String, Array<Number>>} previous reference to nearest previous
- * @param {Array<Number>} start 2D tuple representing start
- * @param {Array<Number>} end 2D tuple representing end
- * @returns {Array} nodes on final path
+ *
+ * @param {PreviousMap} previous
+ * @param {Node} start
+ * @param {Node} end
+ * @returns {Array<Node>}
  */
 export function backtrack(previous, start, end) {
   const values = [...previous.values()];

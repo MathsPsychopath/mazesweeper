@@ -18,6 +18,7 @@ export default function Square(props) {
     "border-black",
     "duration-50",
     "cursor-pointer",
+    "transition-colors",
     "grid-square",
   ];
 
