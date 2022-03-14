@@ -28,6 +28,7 @@ export default async function displaySolution(grid, gridSize) {
   });
   //show backtrack
   let backStep = 0;
+  if (!states[states.length - 1].found) return backStep;
   await new Promise((resolve) => {
     const map = states[states.length - 1].previous;
     if (!map) return 0;
