@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function Entry(props) {
   function handleChange(event) {
@@ -13,6 +13,7 @@ export default function Entry(props) {
         value={props.input}
         onChange={(event) => props.setInput(handleChange(event))}
         className="w-full"
+        disabled={props.isDisabled}
       />
     </div>
   );
