@@ -4,12 +4,14 @@ import React from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { IoPlay } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 
 const SIZES = ["10x10", "16x16", "16x30"];
 const MODES = ["QuickMode", "Normal", "Chill & Casual"];
 
-export default function SelectGrid(props) {
-  const { gridSize, mode } = props;
+export default function SelectGrid() {
+  const { gridSize, mode } = useSelector((state) => state.menu);
+  const dispatch = useDispatch();
   return (
     <div className="flex justify-around my-12">
       <div className="hidden md:block">
@@ -27,7 +29,12 @@ export default function SelectGrid(props) {
               <Button
                 currentSelected={gridSize}
                 key={size}
-                onClickEvent={props.changeGrid}
+                onClickEvent={() =>
+                  dispatch({
+                    type: "CHANGE_GRID_SIZE",
+                    newGrid: size,
+                  })
+                }
               >
                 {size}
               </Button>
@@ -39,7 +46,12 @@ export default function SelectGrid(props) {
               <Button
                 currentSelected={mode}
                 key={modeInMap}
-                onClickEvent={props.changeMode}
+                onClickEvent={() =>
+                  dispatch({
+                    type: "CHANGE_MODE",
+                    newMode: modeInMap,
+                  })
+                }
               >
                 {modeInMap}
               </Button>

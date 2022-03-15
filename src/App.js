@@ -21,6 +21,7 @@ import PlayGame from "./Components/Pages/PlayGame/PlayGame";
 
 function App(props) {
   const location = useLocation();
+  //need to migrate to redux hooks or will switch each timer tick
   switch (location.pathname) {
     case "/results":
       props.setPostGame();
