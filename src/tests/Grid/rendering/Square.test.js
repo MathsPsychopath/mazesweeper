@@ -17,10 +17,13 @@ describe("Square should be a react component that represents a single unit in th
     );
   });
 
-  test("It should change colour when clicked from any colour to white", () => {
-    //styles cannot be computed outside of className, so ensure that square has border black 1px
+  test("It should change cycle through 2 colours before changing to white", () => {
     render(<Square />);
     const square = screen.getByTestId("square");
+    userEvent.click(square);
+    expect([...square.classList]).not.toEqual(
+      expect.arrayContaining(["bg-white"])
+    );
     userEvent.click(square);
     expect([...square.classList]).not.toEqual(
       expect.arrayContaining(["bg-white"])
@@ -29,14 +32,14 @@ describe("Square should be a react component that represents a single unit in th
     expect([...square.classList]).toEqual(expect.arrayContaining(["bg-white"]));
   });
 
-  test("It should have a blank string with space if it has prop:show=false", () => {
-    render(<Square show={false} number={8} />);
+  test("It should have a blank string with space if it has prop:show=true", () => {
+    render(<Square isDisplay={true} number={8} />);
     const square = screen.getByTestId("square");
     expect(square.textContent).toEqual(" ");
   });
 
-  test("It should have the number given via props displayed when show=true", () => {
-    render(<Square show number={8} />);
+  test("It should have the number given via props displayed when show=false", () => {
+    render(<Square isDisplay={false} number={8} />);
     const square = screen.getByTestId("square");
     expect(square.textContent).toEqual("8");
   });

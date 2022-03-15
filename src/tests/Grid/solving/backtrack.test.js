@@ -39,11 +39,10 @@ describe("generator backtrack should yield the nodes in path & distance in rever
       ["1,1", [0, 1]],
     ]);
     let result = backtrack(prev, [0, 0], [1, 1]);
-    expect(result.distance).toBe(3);
-    expect(result.nodes).toHaveLength(3);
-    expect(result.nodes[0]).toEqual(expect.arrayContaining([0, 0]));
-    expect(result.nodes[1]).toEqual(expect.arrayContaining([0, 1]));
-    expect(result.nodes[2]).toEqual(expect.arrayContaining([1, 1]));
+    expect(result).toHaveLength(3);
+    expect(result[0]).toEqual(expect.arrayContaining([1, 1]));
+    expect(result[1]).toEqual(expect.arrayContaining([0, 1]));
+    expect(result[2]).toEqual(expect.arrayContaining([0, 0]));
   });
 
   test("it should yield the correct path and distance for given map 2", () => {
@@ -59,8 +58,7 @@ describe("generator backtrack should yield the nodes in path & distance in rever
     }
     const { previous } = states[states.length - 1];
     const result = backtrack(previous, [0, 0], [2, 0]);
-    expect(result.distance).toBe(7);
-    expect(result.nodes).toEqual(
+    expect(result).toEqual(
       expect.arrayContaining([
         [0, 0],
         [0, 1],
