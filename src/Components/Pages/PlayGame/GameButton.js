@@ -1,32 +1,70 @@
 import React from "react";
 import displaySolution from "../../../logic/grid/displaySolution";
 import { generateGrid } from "../../../logic/grid/generateGrid";
+import {
+  changePointAmount,
+  setPostAnswer,
+  setPreAnswer,
+} from "../../../redux/GameState/game.actions";
+import isValidDist from "../../../logic/points/isValidDist";
+import pointCalculator from "../../../logic/points/pointCalculator";
+import getDeduction from "../../../logic/points/getDeduction";
+import { zeroElapsed } from "../../../redux/Timer/timer.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-async function handleSubmit(props) {
-  const { dispatch, changeSolution, grid, gridSize, setInputState } = props;
-  setInputState(true);
-  const distance = await displaySolution(grid, gridSize);
-  dispatch({ type: "SET_POST_ANSWER" });
-  changeSolution(distance);
+function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
+  return async function (props) {
+    const { changeSolution, grid, setInputState, noSearch, input, setClicked } =
+      props;
+    setInputState(true);
+    setClicked(true);
+    const distance = await displaySolution(grid, gridSize, noSearch);
+    dispatch(setPostAnswer());
+    changeSolution(distance);
+    const offset = distance - parseInt(input, 10);
+    const valid = isValidDist(offset, mode);
+    let points = valid
+      ? pointCalculator(gridSize, elapsed)
+      : getDeduction(offset, mode);
+    console.log({
+      valid,
+      points,
+      offset,
+    });
+    console.log(points);
+    dispatch(changePointAmount(points));
+    dispatch(zeroElapsed());
+
+    if (mode === "Chill & Casual" && !valid) {
+      setTimeout(() => {
+        dispatch(setPreAnswer());
+        navigate("/results");
+      }, 2000);
+    }
+  };
 }
-
-function nextGrid(props) {
-  const { gridSize, newGrid, dispatch, setInput, setInputState } = props;
-  console.log("here");
-  newGrid(generateGrid(gridSize));
-  document.querySelectorAll(".grid-square").forEach((e) => {
-    e.classList.remove(
-      "bg-orange-500",
-      "bg-blue-500",
-      "bg-slate-700",
-      "bg-lime-400",
-      "bg-green-500"
-    );
-    e.classList.add("bg-white");
-  });
-  setInput("");
-  setInputState(false);
-  dispatch({ type: "SET_PRE_ANSWER" });
+//if one button is clicked, disable the other
+function nextGrid(dispatch, gridSize) {
+  return function (props) {
+    const { newGrid, setInput, setInputState, setClicked } = props;
+    console.log("here");
+    newGrid(generateGrid(gridSize));
+    document.querySelectorAll(".grid-square").forEach((e) => {
+      e.classList.remove(
+        "bg-orange-500",
+        "bg-blue-500",
+        "bg-slate-700",
+        "bg-lime-400",
+        "bg-green-500"
+      );
+      e.classList.add("bg-white");
+    });
+    setInput("");
+    setClicked(false);
+    setInputState(false);
+    dispatch(setPreAnswer());
+  };
 }
 
 /**
@@ -39,19 +77,30 @@ function nextGrid(props) {
  * @returns {JSX.Element} Submit
  */
 export default function GameButton(props) {
+  const elapsed = useSelector((state) => state.game.elapsed);
+  const { gridSize, mode } = useSelector((state) => state.menu);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   let handler;
   switch (props.children) {
     case "Submit":
-      handler = handleSubmit;
+    case "Submit without searching":
+      handler = handleSubmit(dispatch, elapsed, gridSize, mode, navigate);
       break;
     case "Next":
-      handler = nextGrid;
+      handler = nextGrid(dispatch, gridSize);
       break;
     default:
       handler = props.handleClick;
   }
   return (
-    <button onClick={() => handler(props)} disabled={props.isDisabled}>
+    <button
+      onClick={() => handler(props)}
+      disabled={props.isDisabled}
+      className={`rounded-md border-2 border-black p-1 m-1 ${
+        props.isDisabled && "bg-slate-400"
+      }`}
+    >
       <h1>{props.children}</h1>
     </button>
   );

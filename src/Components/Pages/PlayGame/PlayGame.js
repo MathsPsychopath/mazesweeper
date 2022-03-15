@@ -7,49 +7,69 @@ import {
   generateAdjacency,
 } from "../../../logic/grid/generateGrid";
 import SolutionLabel from "./SolutionLabel";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import GameButton from "./GameButton";
 
 export default function PlayGame() {
-  //TODO #3
-  const { gridSize } = useSelector((state) => state.menu.gridSize);
-  const game = useSelector((state) => state.game);
+  const { gridSize } = useSelector((state) => state.menu);
+  const { gridState, points } = useSelector((state) => state.game);
   const [input, setInput] = useState("");
+  const [submitClicked, setClicked] = useState(false);
   const [inputDisabled, setInputState] = useState(false);
   const [solution, changeSolution] = useState(0);
   const [grid, newGrid] = useState(generateGrid(gridSize));
 
-  const dispatch = useDispatch();
   return (
-    <div className="mx-auto">
+    <div className="mx-auto flex gap-x-10">
       <Grid gridSize={gridSize} numbers={generateAdjacency(grid)} />
-      <Timer />
-      <Entry input={input} setInput={setInput} isDisabled={inputDisabled} />
-      <GameButton
-        changeSolution={changeSolution}
-        grid={grid}
-        gridSize={gridSize}
-        dispatch={dispatch}
-        isDisabled={game.gridState === "POST_ANSWER"}
-        setInputState={setInputState}
-      >
-        Submit
-      </GameButton>
-      <GameButton
-        isDisabled={game.gridState === "PRE_ANSWER"}
-        gridSize={gridSize}
-        newGrid={newGrid}
-        dispatch={dispatch}
-        setInput={setInput}
-        setInputState={setInputState}
-      >
-        Next
-      </GameButton>
-      <SolutionLabel
-        isHidden={game.gridState === "PRE_ANSWER"}
-        answer={input}
-        solution={solution}
-      />
+      <div className="flex flex-col justify-around items-center w-80">
+        <Timer />
+        <div className="mx-auto">
+          <Entry input={input} setInput={setInput} isDisabled={inputDisabled} />
+        </div>
+        <div>
+          <h1>Points: {points}</h1>
+        </div>
+        <div className="flex justify-around">
+          <GameButton
+            changeSolution={changeSolution}
+            grid={grid}
+            isDisabled={gridState === "POST_ANSWER" || submitClicked}
+            setInputState={setInputState}
+            input={input}
+            submitClicked={submitClicked}
+            setClicked={setClicked}
+          >
+            Submit
+          </GameButton>
+          <GameButton
+            changeSolution={changeSolution}
+            grid={grid}
+            isDisabled={gridState === "POST_ANSWER" || submitClicked}
+            setInputState={setInputState}
+            noSearch
+            input={input}
+            submitClicked={submitClicked}
+            setClicked={setClicked}
+          >
+            Submit without searching
+          </GameButton>
+          <GameButton
+            isDisabled={gridState === "PRE_ANSWER"}
+            newGrid={newGrid}
+            setInput={setInput}
+            setInputState={setInputState}
+            setClicked={setClicked}
+          >
+            Next
+          </GameButton>
+        </div>
+        <SolutionLabel
+          isHidden={gridState === "PRE_ANSWER"}
+          answer={input}
+          solution={solution}
+        />
+      </div>
     </div>
   );
 }

@@ -6,26 +6,37 @@ import { getSize } from "../../Components/Grid/Grid";
  *
  * @param {Array<Array<Number>>} grid binary grid of walls and paths
  * @param {String} gridSize 10x10, 16x16, 16x30
+ * @param {Boolean} noSearch
  * @returns {Promise<Number>} the length of the shortest path
  */
-export default async function displaySolution(grid, gridSize) {
+export default async function displaySolution(
+  grid,
+  gridSize,
+  noSearch = false
+) {
   const [rows, columns] = getSize(gridSize);
   //show walls
   grid.forEach((row, i) =>
     row.forEach(
       (s, j) =>
         grid[i][j] === 0 &&
-        changeSquareColor([i, j], ["bg-white", "bg-orange-500"], "bg-slate-700")
+        changeSquareColor(
+          [i, j],
+          ["bg-white", "bg-orange-500", "bg-teal-400"],
+          "bg-slate-700"
+        )
     )
   );
   //show initial exploration
   const states = [...dijkstra(grid, [0, 0], [rows - 1, columns - 1])];
-  let forwardStep = 0;
-  await new Promise((resolve) => {
-    window.requestAnimationFrame(() => {
-      nextDijkstraFrame(states, forwardStep, resolve);
+  if (!noSearch) {
+    let forwardStep = 0;
+    await new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        nextDijkstraFrame(states, forwardStep, resolve);
+      });
     });
-  });
+  }
   //show backtrack
   let backStep = 0;
   if (!states[states.length - 1].found) return backStep;
@@ -33,7 +44,7 @@ export default async function displaySolution(grid, gridSize) {
     const map = states[states.length - 1].previous;
     if (!map) return 0;
     const trace = backtrack(map, [0, 0], [rows - 1, columns - 1]);
-    window.requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       nextBacktrackFrame(trace, backStep, resolve);
     });
   }).then((step) => (backStep = step));
@@ -63,7 +74,7 @@ async function nextDijkstraFrame(states, step, resolve) {
     }
     changeSquareColor(currentState.current, "bg-lime-400", "bg-blue-500");
 
-    window.requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       nextDijkstraFrame(states, ++step, resolve);
     });
   }, 50);
@@ -82,5 +93,5 @@ function nextBacktrackFrame(trace, step, resolve) {
     resolve(step);
     return;
   }
-  window.requestAnimationFrame(() => nextBacktrackFrame(trace, step, resolve));
+  requestAnimationFrame(() => nextBacktrackFrame(trace, step, resolve));
 }
