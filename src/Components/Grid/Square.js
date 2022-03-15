@@ -6,6 +6,13 @@ const COLOR_1 = "bg-white";
 const COLOR_2 = "bg-orange-500";
 const COLOR_3 = "bg-teal-400";
 
+/**
+ *
+ * @param {Boolean} props.isDisplay
+ * @param {Number} props.rowNo
+ * @param {Number} props.colNo
+ * @param {Number} props.number
+ */
 export default function Square(props) {
   const [color, setColor] = useState(COLOR_1);
   const width = useWindowWidth();

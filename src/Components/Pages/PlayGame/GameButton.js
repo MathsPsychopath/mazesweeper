@@ -27,12 +27,6 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
     let points = valid
       ? pointCalculator(gridSize, elapsed)
       : getDeduction(offset, mode);
-    console.log({
-      valid,
-      points,
-      offset,
-    });
-    console.log(points);
     dispatch(changePointAmount(points));
     dispatch(zeroElapsed());
 

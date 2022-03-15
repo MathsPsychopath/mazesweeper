@@ -5,6 +5,10 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import { IoPlay } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  changeGrid,
+  changeMode,
+} from "../../../redux/MenuSelection/menu.actions";
 
 const SIZES = ["10x10", "16x16", "16x30"];
 const MODES = ["QuickMode", "Normal", "Chill & Casual"];
@@ -29,12 +33,7 @@ export default function SelectGrid() {
               <Button
                 currentSelected={gridSize}
                 key={size}
-                onClickEvent={() =>
-                  dispatch({
-                    type: "CHANGE_GRID_SIZE",
-                    newGrid: size,
-                  })
-                }
+                onClickEvent={() => dispatch(changeGrid(size))}
               >
                 {size}
               </Button>
@@ -46,12 +45,7 @@ export default function SelectGrid() {
               <Button
                 currentSelected={mode}
                 key={modeInMap}
-                onClickEvent={() =>
-                  dispatch({
-                    type: "CHANGE_MODE",
-                    newMode: modeInMap,
-                  })
-                }
+                onClickEvent={() => changeMode(modeInMap)}
               >
                 {modeInMap}
               </Button>

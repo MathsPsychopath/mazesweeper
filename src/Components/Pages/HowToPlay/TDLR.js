@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ *
+ * @returns TLDR How-To
+ */
 export default function TDLR() {
   return (
     <>

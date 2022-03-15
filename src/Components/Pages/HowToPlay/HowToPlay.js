@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import GoodVersion from "./GoodVersion";
 import TDLR from "./TDLR";
 
+/**
+ *
+ * @returns How-To but with option to change
+ */
 export default function HowToPlay() {
   const [isGoodSelected, changeSelected] = useState(true);
   return (

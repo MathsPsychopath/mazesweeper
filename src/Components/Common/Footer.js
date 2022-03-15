@@ -1,6 +1,10 @@
 import React from "react";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
+/**
+ *
+ * @returns {JSX.Element} footer with links and credits
+ */
 export default function Footer() {
   return (
     <footer className="min-w-full flex justify-between my-2 p-8">

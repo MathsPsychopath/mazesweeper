@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 
+/**
+ *
+ * @param {Boolean} isActive
+ * @param {Boolean} isLarge
+ * @returns {String} responsive styles
+ */
 function activeState(isActive, isLarge = true) {
   if (isLarge) {
     return (
@@ -14,7 +20,11 @@ function activeState(isActive, isLarge = true) {
     (isActive ? "bg-blue-100" : "bg-white")
   );
 }
-//make smallnav stacked, and activate on button
+
+/**
+ *
+ * @returns {JSX.Element} small navbar stack
+ */
 function SmallNav() {
   const [visibility, setVisibility] = useState("");
   const toggle = () => setVisibility(visibility ? "" : "hidden");
@@ -52,6 +62,11 @@ function SmallNav() {
     </header>
   );
 }
+
+/**
+ *
+ * @returns {JSX.Element} large navbar
+ */
 function LargeNav() {
   return (
     <header className="hidden md:flex font-sans justify-between">
@@ -79,6 +94,10 @@ function LargeNav() {
   );
 }
 
+/**
+ *
+ * @returns {JSX.Element} responsive navbar
+ */
 export default function Header() {
   return (
     <>

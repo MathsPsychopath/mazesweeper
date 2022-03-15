@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ *
+ * @param {String} props.children label for button
+ * @param {String} props.currentSelected currently selected value
+ * @param {Function} props.onClickEvent onclick handler taking props.children
+ */
 export default function Button(props) {
   const { children, currentSelected, onClickEvent } = props;
   return (

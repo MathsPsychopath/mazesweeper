@@ -1,6 +1,12 @@
 import React from "react";
 import Grid from "../../Grid/Grid";
 
+/**
+ *
+ * @param {String} props.gridSize 10x10, 16x16, 16x30
+ * @param {Object} info information to display
+ * @param {isDisplay}
+ */
 export default function GridTypes(props) {
   const { gridSize, info, isDisplay } = props;
   return (

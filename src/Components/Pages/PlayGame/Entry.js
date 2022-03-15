@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ *
+ * @param {String} props.input previous input value
+ * @param {Function} props.setInput setState for input
+ * @param {Boolean} props.isDisabled
+ * @returns Entry field for numbers
+ */
 export default function Entry(props) {
   function handleChange(event) {
     return event.target.validity.valid ? event.target.value : props.input;

@@ -10,6 +10,10 @@ import SolutionLabel from "./SolutionLabel";
 import { useSelector } from "react-redux";
 import GameButton from "./GameButton";
 
+/**
+ *
+ * @returns PlayGame page
+ */
 export default function PlayGame() {
   const { gridSize } = useSelector((state) => state.menu);
   const { gridState, points } = useSelector((state) => state.game);

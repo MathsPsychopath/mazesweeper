@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ *
+ * @returns Extended How-To
+ */
 export default function GoodVersion() {
   return (
     <>
