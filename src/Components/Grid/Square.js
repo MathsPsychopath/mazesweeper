@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const COLOR_1 = "bg-white";
 const COLOR_2 = "bg-orange-500";
+const COLOR_3 = "bg-teal-400";
 
 export default function Square(props) {
   const [color, setColor] = useState(COLOR_1);
@@ -36,7 +37,11 @@ export default function Square(props) {
     <button
       data-testid="square"
       className={classes.join(" ")}
-      onClick={() => setColor(color === COLOR_1 ? COLOR_2 : COLOR_1)}
+      onClick={() =>
+        setColor(
+          color === COLOR_1 ? COLOR_2 : color === COLOR_2 ? COLOR_3 : COLOR_1
+        )
+      }
       id={"row-" + props.rowNo + "-col-" + props.colNo}
     >
       {props.isDisplay ? " " : props.number}

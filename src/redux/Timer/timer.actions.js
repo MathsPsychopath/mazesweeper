@@ -1,4 +1,10 @@
-import { SET_TIMER, DECREMENT, PAUSE, ELAPSE } from "./timer.types";
+import {
+  SET_TIMER,
+  DECREMENT,
+  PAUSE,
+  ELAPSE,
+  ZERO_ELAPSED,
+} from "./timer.types";
 
 export const setTimer = (newTime) => {
   return {
@@ -22,5 +28,11 @@ export const pauseTimer = () => {
 export const elapsed = () => {
   return {
     type: ELAPSE,
+  };
+};
+
+export const zeroElapsed = () => {
+  return {
+    type: ZERO_ELAPSED,
   };
 };

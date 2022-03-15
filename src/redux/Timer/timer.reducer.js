@@ -1,4 +1,10 @@
-import { SET_TIMER, DECREMENT, PAUSE, ELAPSE } from "./timer.types";
+import {
+  SET_TIMER,
+  DECREMENT,
+  PAUSE,
+  ELAPSE,
+  ZERO_ELAPSED,
+} from "./timer.types";
 
 const INITIAL_STATE = {
   time: 150,
@@ -27,6 +33,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         elapsed: state.elapsed + 1,
+      };
+    case ZERO_ELAPSED:
+      return {
+        ...state,
+        elapsed: 0,
       };
     default:
       return state;
