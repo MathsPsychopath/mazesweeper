@@ -5,6 +5,7 @@ import {
   SET_POST_ANSWER,
   SET_PRE_ANSWER,
   CHANGE_POINT_AMOUNT,
+  ZERO_POINTS,
 } from "./game.types";
 import * as states from "./gamestates";
 
@@ -48,6 +49,11 @@ const reducer = (state = INITIAL_STATE, action) => {
           action.newPoints + state.points <= 0
             ? 0
             : action.newPoints + state.points,
+      };
+    case ZERO_POINTS:
+      return {
+        ...state,
+        points: 0,
       };
     default:
       return state;

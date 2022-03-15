@@ -5,6 +5,7 @@ import {
   SET_POST_ANSWER,
   SET_PRE_ANSWER,
   CHANGE_POINT_AMOUNT,
+  ZERO_POINTS,
 } from "./game.types";
 
 export const setInGame = () => {
@@ -41,5 +42,11 @@ export const changePointAmount = (points) => {
   return {
     type: CHANGE_POINT_AMOUNT,
     newPoints: points,
+  };
+};
+
+export const zeroPoints = () => {
+  return {
+    type: ZERO_POINTS,
   };
 };
