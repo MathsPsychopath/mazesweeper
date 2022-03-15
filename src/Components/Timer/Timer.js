@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setPreAnswer } from "../../redux/GameState/game.actions";
+import { elapsed, setTimer } from "../../redux/Timer/timer.actions";
+import { decrementTimer } from "../../redux/Timer/timer.actions";
 
 const initialTimes = {
   QuickMode: 150,
@@ -26,35 +29,32 @@ export default function Timer() {
   //TODO #2
   const { time, paused } = useSelector((state) => state.timer);
   const { mode } = useSelector((state) => state.menu);
-  const setTimer = useCallback(
-    (time) => dispatch({ type: "SET_TIMER", newTime: time }),
-    [dispatch]
-  );
-  const decrementTimer = useCallback(
-    () => dispatch({ type: "DECREMENT" }),
-    [dispatch]
-  );
+
   useEffect(() => {
     //initialise timer value at start
     const initTime = initialTimes[mode];
-    setTimer(initTime);
-  }, [mode, setTimer]);
+    dispatch(setTimer(initTime));
+  }, [mode, dispatch]);
 
   useEffect(() => {
     //initialise timer countdown function
     const timer = setInterval(() => {
-      decrementTimer();
+      dispatch(decrementTimer());
+      dispatch(elapsed());
     }, 1000);
     return () => clearInterval(timer);
-  }, [paused, decrementTimer]);
+  }, [paused, dispatch]);
 
   useEffect(() => {
     //on timer runout
-    if (time <= 0) dispatch({ type: "SET_PRE_ANSWER" }) && navigate("/results");
+    if (time <= 0) dispatch(setPreAnswer()) && navigate("/results");
   }, [navigate, dispatch, time]);
 
   return (
-    <div className="w-32 p-4 text-4xl text-center border-2 border-black rounded-lg">
+    <div
+      className="w-32 p-4 text-4xl text-center border-2 border-black rounded-lg"
+      id="timer"
+    >
       {formatTime(time)}
     </div>
   );
