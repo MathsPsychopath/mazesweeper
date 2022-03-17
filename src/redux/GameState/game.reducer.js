@@ -6,6 +6,12 @@ import {
   SET_PRE_ANSWER,
   CHANGE_POINT_AMOUNT,
   ZERO_POINTS,
+  APPEND_SOLVE_TIME,
+  RESET_SOLVE_TIMES,
+  CHANGE_GRIDS_SOLVED,
+  UPDATE_BASE_SCORE,
+  UPDATE_PENALTIES,
+  UPDATE_TIME_BONUS,
 } from "./game.types";
 import * as states from "./gamestates";
 
@@ -13,6 +19,11 @@ const INITIAL_STATE = {
   gameState: states.PRE_GAME,
   gridState: states.PRE_ANSWER,
   points: 0,
+  solveTimes: [],
+  gridsSolved: 0,
+  baseScore: 0
+  penalties: 0
+  timeBonus: 0
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -55,6 +66,36 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         points: 0,
       };
+    case APPEND_SOLVE_TIME:
+      return {
+        ...state,
+        solveTimes: [...state.solveTimes, action.time],
+      };
+    case RESET_SOLVE_TIMES:
+      return {
+        ...state,
+        solveTimes: [],
+      };
+    case CHANGE_GRIDS_SOLVED:
+      return {
+        ...state,
+        gridsSolved: action.grids
+      };
+    case UPDATE_BASE_SCORE:
+      return {
+        ...state,
+        baseScore: action.baseScore
+      }
+    case UPDATE_PENALTIES:
+      return {
+        ...state,
+        penalties: action.penalty
+      }
+    case UPDATE_TIME_BONUS:
+      return {
+        ...state,
+        timeBonus: action.timeBonus
+      }
     default:
       return state;
   }

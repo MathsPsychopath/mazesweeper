@@ -6,6 +6,12 @@ import {
   SET_PRE_ANSWER,
   CHANGE_POINT_AMOUNT,
   ZERO_POINTS,
+  APPEND_SOLVE_TIME,
+  RESET_SOLVE_TIMES,
+  CHANGE_GRIDS_SOLVED,
+  UPDATE_BASE_SCORE,
+  UPDATE_PENALTIES,
+  UPDATE_TIME_BONUS,
 } from "./game.types";
 
 export const setInGame = () => {
@@ -48,5 +54,46 @@ export const changePointAmount = (points) => {
 export const zeroPoints = () => {
   return {
     type: ZERO_POINTS,
+  };
+};
+
+export const appendSolveTime = (time) => {
+  return {
+    type: APPEND_SOLVE_TIME,
+    time,
+  };
+};
+
+export const resetSolveTime = () => {
+  return {
+    type: RESET_SOLVE_TIMES,
+  };
+};
+
+export const changeGridsSolved = (grids) => {
+  return {
+    type: CHANGE_GRIDS_SOLVED,
+    grids,
+  };
+};
+
+export const updateBaseScore = (baseScore) => {
+  return {
+    type: UPDATE_BASE_SCORE,
+    baseScore,
+  };
+};
+
+export const updatePenalties = (penalty) => {
+  return {
+    type: UPDATE_PENALTIES,
+    penalty,
+  };
+};
+
+export const updateTimeBonus = (timeBonus) => {
+  return {
+    type: UPDATE_TIME_BONUS,
+    timeBonus,
   };
 };
