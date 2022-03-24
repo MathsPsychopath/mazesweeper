@@ -16,6 +16,7 @@ import HowToPlay from "./Components/Pages/HowToPlay/HowToPlay";
 import Landing from "./Components/Pages/Landing/Landing";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PlayGame from "./Components/Pages/PlayGame/PlayGame";
+import Results from "./Components/Pages/Results/Results";
 
 function App() {
   const location = useLocation();
@@ -42,7 +43,7 @@ function App() {
           <Route path="play" element={<SelectGrid />} />
           <Route path="howtoplay" element={<HowToPlay />} />
           <Route path="playgame" element={<PlayGame />} />
-          <Route path="results" element={null} />
+          <Route path="results" element={<Results />} />
           <Route path="leaderboard" element={null} />
           <Route index element={<Landing />} />
         </Routes>

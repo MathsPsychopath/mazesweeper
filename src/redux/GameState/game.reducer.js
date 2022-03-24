@@ -21,9 +21,9 @@ const INITIAL_STATE = {
   points: 0,
   solveTimes: [],
   gridsSolved: 0,
-  baseScore: 0
-  penalties: 0
-  timeBonus: 0
+  baseScore: 0,
+  penalties: 0,
+  timeBonus: 0,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -79,23 +79,23 @@ const reducer = (state = INITIAL_STATE, action) => {
     case CHANGE_GRIDS_SOLVED:
       return {
         ...state,
-        gridsSolved: action.grids
+        gridsSolved: action.grids,
       };
     case UPDATE_BASE_SCORE:
       return {
         ...state,
-        baseScore: action.baseScore
-      }
+        baseScore: action.baseScore,
+      };
     case UPDATE_PENALTIES:
       return {
         ...state,
-        penalties: action.penalty
-      }
+        penalties: action.penalty,
+      };
     case UPDATE_TIME_BONUS:
       return {
         ...state,
-        timeBonus: action.timeBonus
-      }
+        timeBonus: action.timeBonus,
+      };
     default:
       return state;
   }
