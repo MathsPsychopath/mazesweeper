@@ -45,7 +45,7 @@ export default function SelectGrid() {
               <Button
                 currentSelected={mode}
                 key={modeInMap}
-                onClickEvent={() => changeMode(modeInMap)}
+                onClickEvent={() => dispatch(changeMode(modeInMap))}
               >
                 {modeInMap}
               </Button>
