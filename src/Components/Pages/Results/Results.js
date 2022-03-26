@@ -4,12 +4,15 @@ import Publish from "./Publish";
 import Statistic from "./Statistic";
 import TableData from "./TableData";
 import { IoPlay } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const stats = ["Average Time", "Grids Solved", "Size"];
 const pointMetrics = ["Base Score", "Penalties", "Time Bonuses", "Final Score"];
 
 export default function Results() {
   const navigate = useNavigate();
+  const gameData2 = useSelector((state) => state.game);
+  console.log(gameData2);
   const pointsData = [0, 0, 0, 0];
   const gameData = ["0:38", "5", "16x16"];
   return (
