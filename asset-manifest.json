@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mazesweeper/static/css/main.073c9b0a.css",
-    "main.js": "/mazesweeper/static/js/main.e233eb15.js",
+    "main.js": "/mazesweeper/static/js/main.91b9ffd7.js",
     "index.html": "/mazesweeper/index.html",
     "main.073c9b0a.css.map": "/mazesweeper/static/css/main.073c9b0a.css.map",
-    "main.e233eb15.js.map": "/mazesweeper/static/js/main.e233eb15.js.map"
+    "main.91b9ffd7.js.map": "/mazesweeper/static/js/main.91b9ffd7.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.e233eb15.js"
+    "static/js/main.91b9ffd7.js"
   ]
 }
