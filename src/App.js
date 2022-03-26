@@ -1,7 +1,11 @@
 import "./App.css";
 
 import { useDispatch } from "react-redux";
-import { changeMode, changeGrid } from "./redux/MenuSelection/menu.actions";
+import {
+  changeMode,
+  changeGrid,
+  setUnpublished,
+} from "./redux/MenuSelection/menu.actions";
 import HeaderFooter from "./Components/Common/HeaderFooter";
 import { setTimer } from "./redux/Timer/timer.actions";
 import {
@@ -31,6 +35,7 @@ function App() {
     case "/playgame":
       dispatch(zeroPoints());
       dispatch(setInGame());
+      dispatch(setUnpublished());
       break;
     default:
       dispatch(setPreGame());

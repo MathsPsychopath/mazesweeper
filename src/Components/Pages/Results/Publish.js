@@ -7,11 +7,12 @@ import { AiOutlineLoading } from "react-icons/ai";
 export default function Publish() {
   const dispatch = useDispatch();
   const { publishState } = useSelector((state) => state.menu);
+  const gameData = useSelector((state) => state.game);
   if (publishState === "UNPUBLISHED") {
     return (
       <button
         className="flex items-center justify-center text-lg border-black rounded-md border bg-white p-4 w-1/3 m-2 hover:bg-blue-100"
-        onClick={() => publishStats(dispatch)}
+        onClick={() => publishStats(dispatch, gameData)}
       >
         <MdPublish />
         Publish Stats
