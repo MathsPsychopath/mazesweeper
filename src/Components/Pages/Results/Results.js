@@ -26,7 +26,7 @@ export default function Results() {
   const game = useSelector((state) => state.game);
   const { gridSize } = useSelector((state) => state.menu);
   const { solveTimes, baseScore, penalties, timeBonus, points } = game;
-  console.log(game);
+
   const pointsData = [baseScore, penalties * -1, timeBonus, points];
   const gameData = [getAverageTime(solveTimes), solveTimes.length, gridSize];
   return (

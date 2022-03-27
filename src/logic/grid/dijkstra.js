@@ -191,7 +191,6 @@ export function* dijkstra(grid, start, end) {
       current,
       found: false,
     };
-    //console.log(current);
     current = getSmallestUnvisitedNode(visited, distances);
   }
 }

@@ -75,7 +75,6 @@ function nextGrid(dispatch, gridSize) {
   return function (props) {
     const { newGrid, newGridReveals, setInput, setInputState, setClicked } =
       props;
-    console.log("here");
     newGrid(generateGrid(gridSize));
     newGridReveals(generateGrid(gridSize, true));
     document.querySelectorAll(".grid-square").forEach((e) => {
