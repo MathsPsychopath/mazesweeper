@@ -22,10 +22,16 @@ export default function PlayGame() {
   const [inputDisabled, setInputState] = useState(false);
   const [solution, changeSolution] = useState(0);
   const [grid, newGrid] = useState(generateGrid(gridSize));
-
+  const [gridReveals, newGridReveals] = useState(generateGrid(gridSize, true));
+  console.log(gridReveals);
   return (
     <div className="mx-auto flex gap-x-10 flex-col md:flex-row">
-      <Grid gridSize={gridSize} numbers={generateAdjacency(grid)} />
+      <Grid
+        gridSize={gridSize}
+        numbers={generateAdjacency(grid)}
+        gridReveals={gridReveals}
+        grid={grid}
+      />
       <div className="flex flex-col justify-around items-center w-80 gap-y-4 mt-4 mx-auto">
         <Timer />
         <div className="mx-auto">
@@ -63,6 +69,7 @@ export default function PlayGame() {
           <GameButton
             isDisabled={game.gridState === "PRE_ANSWER"}
             newGrid={newGrid}
+            newGridReveals={newGridReveals}
             setInput={setInput}
             setInputState={setInputState}
             setClicked={setClicked}

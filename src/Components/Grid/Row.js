@@ -30,6 +30,8 @@ export default function Row(props) {
           number={props.numbers ? props.numbers[i] : undefined}
           rowNo={props.rowNo}
           colNo={i}
+          isWall={!props.isDisplay && props.row[i] === 0}
+          reveal={props.reveal ? props.reveal[i] : false}
         />
       ))}
     </div>

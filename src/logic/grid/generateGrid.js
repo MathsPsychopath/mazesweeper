@@ -5,13 +5,16 @@ import { getSize } from "../../Components/Grid/Grid";
  * @param {String} gridSize 10x10, 16x16, or 16x30
  * @returns matrix of the given grid size of random numbers
  */
-export function generateGrid(gridSize) {
+export function generateGrid(gridSize, forReveals = false) {
   const [rows, columns] = getSize(gridSize);
   const grid = [...new Array(rows)].map((row) =>
-    [...new Array(columns)].map((square) => (Math.random() > 0.4 ? 1 : 0))
+    [...new Array(columns)].map((square) => {
+      if (forReveals) return Math.random() > 0.75 ? 1 : 0;
+      return Math.random() > 0.4 ? 1 : 0;
+    })
   );
-  grid[0][0] = 1;
-  grid[rows - 1][columns - 1] = 1;
+  grid[0][0] = forReveals ? 0 : 1;
+  grid[rows - 1][columns - 1] = forReveals ? 0 : 1;
   return grid;
 }
 

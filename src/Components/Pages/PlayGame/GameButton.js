@@ -73,9 +73,11 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
 //if one button is clicked, disable the other
 function nextGrid(dispatch, gridSize) {
   return function (props) {
-    const { newGrid, setInput, setInputState, setClicked } = props;
+    const { newGrid, newGridReveals, setInput, setInputState, setClicked } =
+      props;
     console.log("here");
     newGrid(generateGrid(gridSize));
+    newGridReveals(generateGrid(gridSize, true));
     document.querySelectorAll(".grid-square").forEach((e) => {
       e.classList.remove(
         "bg-orange-500",

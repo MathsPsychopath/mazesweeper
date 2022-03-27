@@ -30,12 +30,12 @@ export default function Square(props) {
     "grid-square",
   ];
 
-  if (props.isDisplay)
+  if (props.isDisplay || props.reveal)
     return (
       <div
         data-testid="square"
-        className={classes.join(" ")}
-        onClick={() => undefined}
+        className={classes.join(" ") + (props.isWall ? " bg-slate-700" : "")}
+        id={"row-" + props.rowNo + "-col-" + props.colNo}
       >
         {" "}
       </div>

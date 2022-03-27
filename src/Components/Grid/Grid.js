@@ -37,6 +37,8 @@ export default function Grid(props) {
             isDisplay={props.isDisplay}
             numbers={props.numbers ? props.numbers[i] : undefined}
             rowNo={i}
+            row={props.grid ? props.grid[i] : null}
+            reveal={props.gridReveals ? props.gridReveals[i] : false}
           />
         );
       })}
