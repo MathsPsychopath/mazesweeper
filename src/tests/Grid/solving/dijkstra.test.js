@@ -86,7 +86,6 @@ describe("function dijkstra should be able to perform dijkstra's algorithm on a 
     }
     expect(states).toHaveLength(4);
     expect(states[0].found).toBeFalsy();
-    console.log(states[0].neighbours);
     expect(states[0].neighbours).toEqual(
       expect.arrayContaining([
         [1, 0],
@@ -118,7 +117,6 @@ describe("function dijkstra should be able to perform dijkstra's algorithm on a 
     for (const state of dijkstra(mat, [0, 0], [2, 2])) {
       states.push(state);
     }
-    console.log(states);
     expect(states).toHaveLength(5);
     expect(states[4].found).toBeTruthy();
 

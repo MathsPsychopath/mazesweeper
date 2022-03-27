@@ -23,7 +23,7 @@ export default function PlayGame() {
   const [solution, changeSolution] = useState(0);
   const [grid, newGrid] = useState(generateGrid(gridSize));
   const [gridReveals, newGridReveals] = useState(generateGrid(gridSize, true));
-  console.log(gridReveals);
+
   return (
     <div className="mx-auto flex gap-x-10 flex-col md:flex-row">
       <Grid
