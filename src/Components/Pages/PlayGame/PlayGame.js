@@ -16,7 +16,7 @@ import GameButton from "./GameButton";
  */
 export default function PlayGame() {
   const { gridSize } = useSelector((state) => state.menu);
-  const { gridState, points } = useSelector((state) => state.game);
+  const game = useSelector((state) => state.game);
   const [input, setInput] = useState("");
   const [submitClicked, setClicked] = useState(false);
   const [inputDisabled, setInputState] = useState(false);
@@ -32,34 +32,36 @@ export default function PlayGame() {
           <Entry input={input} setInput={setInput} isDisabled={inputDisabled} />
         </div>
         <div>
-          <h1>Points: {points}</h1>
+          <h1>Points: {game.points}</h1>
         </div>
         <div className="flex justify-around">
           <GameButton
             changeSolution={changeSolution}
             grid={grid}
-            isDisabled={gridState === "POST_ANSWER" || submitClicked}
+            isDisabled={game.gridState === "POST_ANSWER" || submitClicked}
             setInputState={setInputState}
             input={input}
             submitClicked={submitClicked}
             setClicked={setClicked}
+            game={game}
           >
             Submit
           </GameButton>
           <GameButton
             changeSolution={changeSolution}
             grid={grid}
-            isDisabled={gridState === "POST_ANSWER" || submitClicked}
+            isDisabled={game.gridState === "POST_ANSWER" || submitClicked}
             setInputState={setInputState}
             noSearch
             input={input}
             submitClicked={submitClicked}
             setClicked={setClicked}
+            game={game}
           >
             Submit without searching
           </GameButton>
           <GameButton
-            isDisabled={gridState === "PRE_ANSWER"}
+            isDisabled={game.gridState === "PRE_ANSWER"}
             newGrid={newGrid}
             setInput={setInput}
             setInputState={setInputState}
@@ -69,7 +71,7 @@ export default function PlayGame() {
           </GameButton>
         </div>
         <SolutionLabel
-          isHidden={gridState === "PRE_ANSWER"}
+          isHidden={game.gridState === "PRE_ANSWER"}
           answer={input}
           solution={solution}
         />

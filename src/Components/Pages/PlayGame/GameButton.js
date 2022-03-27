@@ -2,9 +2,14 @@ import React from "react";
 import displaySolution from "../../../logic/grid/displaySolution";
 import { generateGrid } from "../../../logic/grid/generateGrid";
 import {
+  appendSolveTime,
+  changeGridsSolved,
   changePointAmount,
   setPostAnswer,
   setPreAnswer,
+  updateBaseScore,
+  updatePenalties,
+  updateTimeBonus,
 } from "../../../redux/GameState/game.actions";
 import isValidDist from "../../../logic/points/isValidDist";
 import pointCalculator from "../../../logic/points/pointCalculator";
@@ -12,6 +17,20 @@ import getDeduction from "../../../logic/points/getDeduction";
 import { zeroElapsed } from "../../../redux/Timer/timer.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import getTimeBonus from "../../../logic/points/getTimeBonus";
+
+function updateGameData(dispatch, game, elapsed, points, wasDeduction) {
+  const { gridsSolved, baseScore, penalties, timeBonus } = game;
+  if (wasDeduction) {
+    dispatch(updatePenalties(penalties - points));
+    return;
+  }
+  const currentTimeBonus = getTimeBonus(elapsed);
+  dispatch(updateBaseScore(baseScore + points - currentTimeBonus));
+  dispatch(changeGridsSolved(gridsSolved + 1));
+  dispatch(appendSolveTime(elapsed));
+  dispatch(updateTimeBonus(currentTimeBonus + timeBonus));
+}
 
 function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
   return async function (props) {
@@ -22,11 +41,7 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
       noSearch,
       input,
       setClicked,
-      time,
-      gridsSolved,
-      baseScore,
-      penalty,
-      timeBonus,
+      game,
     } = props;
     setInputState(true);
     setClicked(true);
@@ -39,6 +54,7 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
       ? pointCalculator(gridSize, elapsed)
       : getDeduction(offset, mode);
     dispatch(changePointAmount(points));
+    updateGameData(dispatch, game, elapsed, points, !valid);
     dispatch(zeroElapsed());
 
     if (mode === "Chill & Casual" && !valid) {
@@ -82,7 +98,7 @@ function nextGrid(dispatch, gridSize) {
  * @returns {JSX.Element} Submit
  */
 export default function GameButton(props) {
-  const elapsed = useSelector((state) => state.game.elapsed);
+  const elapsed = useSelector((state) => state.timer.elapsed);
   const { gridSize, mode } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
   const navigate = useNavigate();
