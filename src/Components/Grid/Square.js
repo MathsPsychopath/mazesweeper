@@ -16,7 +16,7 @@ const COLOR_3 = "bg-teal-400";
 export default function Square(props) {
   const [color, setColor] = useState(COLOR_1);
   const width = useWindowWidth();
-  const squareDim = props.isDisplay && width < 1536 ? "1.5em" : "2em";
+  const squareDim = width < 1536 ? "1.5em" : "2em";
   const classes = [
     color,
     "hover:border-2",

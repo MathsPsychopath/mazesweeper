@@ -28,7 +28,7 @@ export default function Grid(props) {
   const [rows, columns] = getSize(props.gridSize);
   const rowIndices = [...Array(rows).keys()];
   return (
-    <div data-testid="grid">
+    <div data-testid="grid" className="mx-auto">
       {rowIndices.map((e, i) => {
         return (
           <Row

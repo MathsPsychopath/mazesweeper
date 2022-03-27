@@ -24,9 +24,9 @@ export default function PlayGame() {
   const [grid, newGrid] = useState(generateGrid(gridSize));
 
   return (
-    <div className="mx-auto flex gap-x-10">
+    <div className="mx-auto flex gap-x-10 flex-col md:flex-row">
       <Grid gridSize={gridSize} numbers={generateAdjacency(grid)} />
-      <div className="flex flex-col justify-around items-center w-80">
+      <div className="flex flex-col justify-around items-center w-80 gap-y-4 mt-4 mx-auto">
         <Timer />
         <div className="mx-auto">
           <Entry input={input} setInput={setInput} isDisabled={inputDisabled} />

@@ -14,7 +14,9 @@ export default function Publish() {
         className="flex items-center justify-center text-lg border-black rounded-md border bg-white p-4 w-1/3 m-2 hover:bg-blue-100"
         onClick={() => publishStats(dispatch, gameData)}
       >
-        <MdPublish />
+        <span className="text-lg">
+          <MdPublish />
+        </span>
         Publish Stats
       </button>
     );

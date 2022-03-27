@@ -63,7 +63,7 @@ export default function Results() {
       </table>
       <div className="w-full flex justify-center">
         <button
-          className="flex items-center justify-center border-black rounded-md border bg-white p-4 w-1/3 m-2 hover:bg-blue-100"
+          className="flex items-center justify-center border-black rounded-md border bg-white p-4 w-1/3 m-2 hover:bg-blue-100 text-lg"
           onClick={() => navigate("/play")}
         >
           <IoPlay />
