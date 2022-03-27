@@ -35,7 +35,7 @@ export default function Results() {
       <h1 className="font-bold text-3xl">Results</h1>
       <div className="flex flex-col md:flex-row p-4 w-full">
         {stats.map((statistic, i) => (
-          <div key={i} className="w-full mr-4">
+          <div key={i} className="w-full mb-4 mr-4">
             <Statistic statistic={statistic} gameData={gameData[i]} />
           </div>
         ))}
