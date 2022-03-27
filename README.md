@@ -71,4 +71,5 @@ In game modes like "_QuickMode_" and "Normal", if your answer is incorrect/not i
 ## How this is hosted
 
 This repo is hosted using GitHub Pages, and uses React.js (via CRA), Redux.
-Unit tests done by Jest
+Unit tests done by Jest, deployed with GitHub Actions.
+The backend uses a GCP Cloud Function and MySQL database

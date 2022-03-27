@@ -20,6 +20,10 @@ export default function Landing() {
         <br />
         It also uses Jest to test certain bits of functionality, which is done
         before every deploy on Actions.
+        <br />
+        The backend uses a Google Cloud Platform Cloud Function, and a MySQL
+        database instance. GCP over AWS because AWS is too complicated and I
+        wasted my free tier by activating and not using it in Sixth Form.
       </p>
       <br />
       <h2 className="font-bold text-2xl">About me</h2>
