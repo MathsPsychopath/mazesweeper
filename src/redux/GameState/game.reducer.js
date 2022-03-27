@@ -67,9 +67,13 @@ const reducer = (state = INITIAL_STATE, action) => {
         points: 0,
       };
     case APPEND_SOLVE_TIME:
+      const solveTimes = state.solveTimes;
       return {
         ...state,
-        solveTimes: [...state.solveTimes, action.time],
+        solveTimes: [
+          ...solveTimes,
+          action.time - solveTimes[solveTimes.length - 1],
+        ],
       };
     case RESET_SOLVE_TIMES:
       return {

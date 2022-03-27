@@ -15,8 +15,19 @@ import { useNavigate } from "react-router-dom";
 
 function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
   return async function (props) {
-    const { changeSolution, grid, setInputState, noSearch, input, setClicked } =
-      props;
+    const {
+      changeSolution,
+      grid,
+      setInputState,
+      noSearch,
+      input,
+      setClicked,
+      time,
+      gridsSolved,
+      baseScore,
+      penalty,
+      timeBonus,
+    } = props;
     setInputState(true);
     setClicked(true);
     const distance = await displaySolution(grid, gridSize, noSearch);
