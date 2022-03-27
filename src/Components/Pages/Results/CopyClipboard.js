@@ -3,21 +3,23 @@ import reactDom from "react-dom";
 import { IoShareSocial, IoClose } from "react-icons/io5";
 
 function NotificationModal({ changeModalVis }) {
+  const modalRoot = document.getElementById("modal-root");
   const modal = document.createElement("div");
   useEffect(() => {
-    document.body.appendChild(modal);
-
+    modalRoot.appendChild(modal);
     return () => {
-      document.body.removeChild(modal);
+      modalRoot.removeChild(modal);
     };
-  }, [modal]);
+  }, [modal, modalRoot]);
 
   return reactDom.createPortal(
-    <div className="z-50">
-      <h1>Results copied to clipboard!</h1>
-      <button onClick={() => changeModalVis(false)}>
-        <IoClose />
-      </button>
+    <div className="z-50 fixed top-0 left-0 w-full flex justify-center items-center">
+      <div className="flex bg-purple-700 text-white p-2 w-full justify-center rounded-md">
+        <h1>Results copied to clipboard!</h1>
+        <button onClick={() => changeModalVis(false)}>
+          <IoClose />
+        </button>
+      </div>
     </div>,
     modal
   );

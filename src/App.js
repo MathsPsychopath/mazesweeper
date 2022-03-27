@@ -24,6 +24,7 @@ import Landing from "./Components/Pages/Landing/Landing";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PlayGame from "./Components/Pages/PlayGame/PlayGame";
 import Results from "./Components/Pages/Results/Results";
+import ModalRoot from "./Components/Common/ModalRoot";
 
 function App() {
   const location = useLocation();
@@ -51,6 +52,7 @@ function App() {
   }
   return (
     <div className="text-center">
+      <ModalRoot />
       <HeaderFooter>
         <Routes>
           <Route path="play" element={<SelectGrid />} />
