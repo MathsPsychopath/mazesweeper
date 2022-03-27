@@ -8,7 +8,7 @@ import { getSize } from "../../Components/Grid/Grid";
 export function generateGrid(gridSize) {
   const [rows, columns] = getSize(gridSize);
   const grid = [...new Array(rows)].map((row) =>
-    [...new Array(columns)].map((square) => (Math.random() > 0.5 ? 1 : 0))
+    [...new Array(columns)].map((square) => (Math.random() > 0.4 ? 1 : 0))
   );
   grid[0][0] = 1;
   grid[rows - 1][columns - 1] = 1;
