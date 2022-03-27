@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { useDispatch } from "react-redux";
 import {
   changeMode,
@@ -52,7 +50,7 @@ function App() {
       dispatch(changeGrid("10x10"));
   }
   return (
-    <div className="App">
+    <div className="text-center">
       <HeaderFooter>
         <Routes>
           <Route path="play" element={<SelectGrid />} />
