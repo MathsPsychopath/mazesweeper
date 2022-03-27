@@ -24,7 +24,9 @@ export default function Publish() {
   return (
     <button
       className={`flex items-center justify-center text-lg border-black rounded-md border bg-white p-4 w-1/3 m-2 ${
-        publishState === "PUBLISHED" ? "bg-green-500" : "bg-gray-400"
+        publishState === "PUBLISHED"
+          ? "bg-purple-700 text-white"
+          : "bg-gray-400"
       }`}
       disabled
     >
