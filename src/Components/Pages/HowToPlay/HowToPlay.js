@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import OptionButton from "../../Common/OptionButton";
 import GoodVersion from "./GoodVersion";
 import TDLR from "./TDLR";
 
@@ -11,22 +12,20 @@ export default function HowToPlay() {
   return (
     <div className="grid mx-auto w-9/12 text-left mb-20 mt-8">
       <div className="p-4">
-        <button
-          onClick={() => changeSelected(true)}
-          className={`p-2 border border-black rounded-lg ${
-            isGoodSelected && "bg-blue-100"
-          }`}
+        <OptionButton
+          currentState={isGoodSelected}
+          updateState={changeSelected}
+          updateValue={true}
         >
           Good version
-        </button>
-        <button
-          onClick={() => changeSelected(false)}
-          className={`p-2 border border-black rounded-lg ml-1 ${
-            isGoodSelected || "bg-blue-100"
-          }`}
+        </OptionButton>
+        <OptionButton
+          currentState={!isGoodSelected}
+          updateState={changeSelected}
+          updateValue={false}
         >
           TL:DR
-        </button>
+        </OptionButton>
       </div>
       {isGoodSelected && <GoodVersion />}
       {isGoodSelected || <TDLR />}
