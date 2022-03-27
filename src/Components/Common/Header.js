@@ -69,7 +69,7 @@ function SmallNav() {
  */
 function LargeNav() {
   return (
-    <header className="hidden md:flex font-sans justify-between w-screen">
+    <header className="hidden md:flex font-sans justify-between">
       <div className="text-3xl my-4 mx-8">
         <NavLink to="/">mazesweeper</NavLink>
       </div>
