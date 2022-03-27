@@ -6,6 +6,7 @@ import TableData from "./TableData";
 import { IoPlay } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { formatTime } from "../../Timer/Timer";
+import CopyClipboard from "./CopyClipboard";
 
 const stats = ["Average Time", "Grids Solved", "Size"];
 const pointMetrics = [
@@ -69,6 +70,7 @@ export default function Results() {
           <IoPlay />
           Play Again
         </button>
+        <CopyClipboard points={points} gameData={gameData} />
         <Publish />
       </div>
     </div>
