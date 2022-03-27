@@ -9,10 +9,15 @@ import {
 import HeaderFooter from "./Components/Common/HeaderFooter";
 import { setTimer } from "./redux/Timer/timer.actions";
 import {
+  changeGridsSolved,
+  resetSolveTime,
   setInGame,
   setPostGame,
   setPreAnswer,
   setPreGame,
+  updateBaseScore,
+  updatePenalties,
+  updateTimeBonus,
   zeroPoints,
 } from "./redux/GameState/game.actions";
 import SelectGrid from "./Components/Pages/SelectGrid/SelectGrid";
@@ -36,6 +41,11 @@ function App() {
       dispatch(zeroPoints());
       dispatch(setInGame());
       dispatch(setUnpublished());
+      dispatch(resetSolveTime());
+      dispatch(changeGridsSolved(0));
+      dispatch(updateBaseScore(0));
+      dispatch(updatePenalties(0));
+      dispatch(updateTimeBonus(0));
       break;
     default:
       dispatch(setPreGame());
