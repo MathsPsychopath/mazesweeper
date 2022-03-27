@@ -8,7 +8,12 @@ import { useSelector } from "react-redux";
 import { formatTime } from "../../Timer/Timer";
 
 const stats = ["Average Time", "Grids Solved", "Size"];
-const pointMetrics = ["Base Score", "Penalties", "Time Bonuses", "Final Score"];
+const pointMetrics = [
+  "Base Score",
+  "Penalties (incl. when points = 0)",
+  "Time Bonuses",
+  "Final Score",
+];
 
 function getAverageTime(solveTimes) {
   const average =
