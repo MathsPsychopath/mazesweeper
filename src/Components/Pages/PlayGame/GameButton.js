@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import getTimeBonus from "../../../logic/points/getTimeBonus";
 
-function updateGameData(dispatch, game, elapsed, points, wasDeduction) {
+function updateGameData(dispatch, game, elapsed, points, wasDeduction, mode) {
   const { gridsSolved, baseScore, penalties, timeBonus } = game;
   if (wasDeduction) {
     dispatch(updatePenalties(penalties - points));
@@ -29,7 +29,8 @@ function updateGameData(dispatch, game, elapsed, points, wasDeduction) {
   dispatch(updateBaseScore(baseScore + points - currentTimeBonus));
   dispatch(changeGridsSolved(gridsSolved + 1));
   dispatch(appendSolveTime(elapsed));
-  dispatch(updateTimeBonus(currentTimeBonus + timeBonus));
+  if (mode !== "Chill & Casual")
+    dispatch(updateTimeBonus(currentTimeBonus + timeBonus));
 }
 
 function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
@@ -53,16 +54,20 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
     let points = valid
       ? pointCalculator(gridSize, elapsed)
       : getDeduction(offset, mode);
-    dispatch(changePointAmount(points));
-    updateGameData(dispatch, game, elapsed, points, !valid);
-    dispatch(zeroElapsed());
-
     if (mode === "Chill & Casual" && !valid) {
       setTimeout(() => {
         dispatch(setPreAnswer());
         navigate("/results");
       }, 2000);
+      return;
     }
+    dispatch(
+      changePointAmount(
+        points - (mode === "Chill & Casual" ? getTimeBonus(elapsed) : 0)
+      )
+    );
+    updateGameData(dispatch, game, elapsed, points, !valid, mode);
+    dispatch(zeroElapsed());
   };
 }
 //if one button is clicked, disable the other

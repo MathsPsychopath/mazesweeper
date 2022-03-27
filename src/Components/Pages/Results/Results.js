@@ -5,16 +5,25 @@ import Statistic from "./Statistic";
 import TableData from "./TableData";
 import { IoPlay } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import { formatTime } from "../../Timer/Timer";
 
 const stats = ["Average Time", "Grids Solved", "Size"];
 const pointMetrics = ["Base Score", "Penalties", "Time Bonuses", "Final Score"];
 
+function getAverageTime(solveTimes) {
+  const average =
+    solveTimes.reduce((acc, cur) => acc + cur, 0) / solveTimes.length;
+  return isNaN(average) ? "???" : formatTime(Math.floor(average));
+}
+
 export default function Results() {
   const navigate = useNavigate();
-  const gameData2 = useSelector((state) => state.game);
-  console.log(gameData2);
-  const pointsData = [0, 0, 0, 0];
-  const gameData = ["0:38", "5", "16x16"];
+  const game = useSelector((state) => state.game);
+  const { gridSize } = useSelector((state) => state.menu);
+  const { solveTimes, baseScore, penalties, timeBonus, points } = game;
+  console.log(game);
+  const pointsData = [baseScore, penalties * -1, timeBonus, points];
+  const gameData = [getAverageTime(solveTimes), solveTimes.length, gridSize];
   return (
     //TODO #5 add user's historical data
     <div className="mx-auto text-left w-9/12 p-20 rounded-md bg-gray-100 flex flex-col items-center">

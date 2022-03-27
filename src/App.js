@@ -35,7 +35,6 @@ function App() {
       dispatch(setPostGame());
       dispatch(setTimer(150));
       dispatch(changeMode("QuickMode"));
-      dispatch(changeGrid("10x10"));
       break;
     case "/playgame":
       dispatch(zeroPoints());
@@ -50,6 +49,7 @@ function App() {
     default:
       dispatch(setPreGame());
       dispatch(setPreAnswer());
+      dispatch(changeGrid("10x10"));
   }
   return (
     <div className="App">

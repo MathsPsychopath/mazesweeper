@@ -11,7 +11,7 @@ const initialTimes = {
   "Chill & Casual": Infinity,
 };
 
-function formatTime(time) {
+export function formatTime(time) {
   if (time === Infinity) return `∞:∞`;
   if (time < 0) return "00:00";
   const mins = Math.floor(time / 60);
