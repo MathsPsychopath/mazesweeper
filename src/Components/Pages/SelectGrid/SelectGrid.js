@@ -18,7 +18,7 @@ export default function SelectGrid() {
   const { gridSize, mode } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
   return (
-    <div className="flex justify-around my-12">
+    <div className="flex flex-col lg:flex-row justify-around my-12">
       <div className="hidden md:block">
         <GridTypes
           info={grids.types[gridSize]}
@@ -41,7 +41,7 @@ export default function SelectGrid() {
             updateValues={MODES}
           />
         </div>
-        <div>
+        <div className="p-4 lg:p-0">
           <Link to="/playgame">
             <button className="flex mx-auto py-2 px-20 bg-blue-400 hover:bg-purple-200 active:bg-purple-400 text-white rounded-lg items-center">
               <IoPlay />

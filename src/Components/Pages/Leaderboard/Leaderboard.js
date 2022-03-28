@@ -25,7 +25,7 @@ export default function Leaderboard() {
   (async () => await getData())();
 
   return (
-    <div className="mx-auto text-left w-9/12 p-20 rounded-md bg-gray-100 flex flex-col items-center">
+    <div className="mx-auto text-left w-9/12 p-20 rounded-md bg-white flex flex-col items-center">
       <h1 className="font-bold text-3xl my-2">Leaderboard</h1>
       <div className="flex flex-col gap-y-2 place-self-start my-2">
         <OptionsList

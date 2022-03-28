@@ -25,7 +25,7 @@ export default function PlayGame() {
   const [gridReveals, newGridReveals] = useState(generateGrid(gridSize, true));
 
   return (
-    <div className="mx-auto flex gap-x-10 flex-col md:flex-row">
+    <div className="mx-auto flex gap-x-10 flex-col lg:flex-row py-20">
       <Grid
         gridSize={gridSize}
         numbers={generateAdjacency(grid)}
