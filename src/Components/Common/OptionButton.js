@@ -9,7 +9,7 @@ export default function OptionButton({
   return (
     <button
       className={`p-2 border border-black rounded-lg ${
-        currentState && "bg-blue-100"
+        currentState ? "bg-blue-100" : "bg-white"
       }`}
       onClick={() => updateState(updateValue)}
     >

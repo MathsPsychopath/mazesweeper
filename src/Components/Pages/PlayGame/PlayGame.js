@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Grid from "../../Grid/Grid";
 import Timer from "../../Timer/Timer";
-import Entry from "./Entry";
+import Entry from "../../Common/Entry";
 import {
   generateGrid,
   generateAdjacency,

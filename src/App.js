@@ -25,6 +25,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import PlayGame from "./Components/Pages/PlayGame/PlayGame";
 import Results from "./Components/Pages/Results/Results";
 import ModalRoot from "./Components/Common/ModalRoot";
+import Leaderboard from "./Components/Pages/Leaderboard/Leaderboard";
 
 function App() {
   const location = useLocation();
@@ -59,7 +60,7 @@ function App() {
           <Route path="howtoplay" element={<HowToPlay />} />
           <Route path="playgame" element={<PlayGame />} />
           <Route path="results" element={<Results />} />
-          <Route path="leaderboard" element={null} />
+          <Route path="leaderboard" element={<Leaderboard />} />
           <Route index element={<Landing />} />
         </Routes>
       </HeaderFooter>
