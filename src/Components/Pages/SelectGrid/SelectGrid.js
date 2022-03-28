@@ -26,7 +26,7 @@ export default function SelectGrid() {
           isDisplay={true}
         />
       </div>
-      <div className="grid content-between h-80 md:h-full">
+      <div className="grid content-between h-120">
         <div className="grid grid-rows-4 justify-items-center">
           <h1 className="text-xl">Select a grid size...</h1>
           <OptionsList

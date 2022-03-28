@@ -8,9 +8,11 @@ import Header from "./Header";
  */
 export default function HeaderFooter(props) {
   return (
-    <div className="flex flex-col h-screen justify-between mt-4">
+    <div className="flex flex-col justify-between pt-4 2xl:px-8 bg-slate-100">
       <Header />
-      {props.children}
+      <div className="bg-white xl:mx-16 my-8 rounded-lg px-8">
+        {props.children}
+      </div>
       <Footer />
     </div>
   );
