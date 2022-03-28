@@ -4,7 +4,7 @@ import React from "react";
  *
  * @returns TLDR How-To
  */
-export default function TDLR() {
+export default function TLDR() {
   return (
     <>
       <p>

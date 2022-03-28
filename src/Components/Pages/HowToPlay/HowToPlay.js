@@ -1,34 +1,25 @@
 import React, { useState } from "react";
-import OptionButton from "../../Common/OptionButton";
+import OptionsList from "../Leaderboard/OptionsList";
 import GoodVersion from "./GoodVersion";
-import TDLR from "./TDLR";
+import TLDR from "./TLDR";
 
 /**
  *
  * @returns How-To but with option to change
  */
 export default function HowToPlay() {
-  const [isGoodSelected, changeSelected] = useState(true);
+  const [isGoodSelected, changeSelected] = useState("Good version");
   return (
     <div className="grid mx-auto w-9/12 text-left mb-20 mt-8">
       <div className="p-4">
-        <OptionButton
-          currentState={isGoodSelected}
-          updateState={changeSelected}
-          updateValue={true}
-        >
-          Good version
-        </OptionButton>
-        <OptionButton
-          currentState={!isGoodSelected}
-          updateState={changeSelected}
-          updateValue={false}
-        >
-          TL:DR
-        </OptionButton>
+        <OptionsList
+          setState={changeSelected}
+          state={isGoodSelected}
+          updateValues={["Good version", "TL:DR"]}
+        />
       </div>
-      {isGoodSelected && <GoodVersion />}
-      {isGoodSelected || <TDLR />}
+      {isGoodSelected === "Good version" && <GoodVersion />}
+      {isGoodSelected === "TL:DR" && <TLDR />}
     </div>
   );
 }

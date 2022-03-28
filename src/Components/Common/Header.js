@@ -11,13 +11,13 @@ import { AiOutlineMenu } from "react-icons/ai";
 function activeState(isActive, isLarge = true) {
   if (isLarge) {
     return (
-      "my-6 py-1 mx-0.5 w-40 rounded-md " +
-      (isActive ? "bg-blue-100" : "bg-white")
+      "p-4 text-white font-bold rounded-lg mx-0.5 w-40 my-auto " +
+      (isActive ? "bg-purple-400" : "bg-blue-400")
     );
   }
   return (
-    "my-1 py-1 mx-0.5 rounded-md border-y" +
-    (isActive ? "bg-blue-100" : "bg-white")
+    "py-1 mx-0.5 text-white font-bold border-y " +
+    (isActive ? "bg-purple-400" : "bg-blue-400")
   );
 }
 
@@ -36,9 +36,7 @@ function SmallNav() {
           <AiOutlineMenu />
         </button>
       </div>
-      <div
-        className={`grid grid-cols-1 divide-y-2 justify-center rounded-2xl text-lg ${visibility}`}
-      >
+      <div className={`grid grid-cols-1 rounded-2xl text-lg ${visibility}`}>
         <NavLink
           className={({ isActive }) => activeState(isActive, false)}
           to="/howtoplay"
