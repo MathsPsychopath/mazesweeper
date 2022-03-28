@@ -9,6 +9,7 @@ import {
   changeGrid,
   changeMode,
 } from "../../../redux/MenuSelection/menu.actions";
+import OptionsList from "../Leaderboard/OptionsList";
 
 const SIZES = ["10x10", "16x16", "16x30"];
 const MODES = ["QuickMode", "Normal", "Chill & Casual"];
@@ -25,36 +26,24 @@ export default function SelectGrid() {
           isDisplay={true}
         />
       </div>
-      <div className="grid content-between">
-        <div className="grid grid-rows-4">
+      <div className="grid content-between h-80 md:h-full">
+        <div className="grid grid-rows-4 justify-items-center">
           <h1 className="text-xl">Select a grid size...</h1>
-          <div className="flex justify-around">
-            {SIZES.map((size) => (
-              <Button
-                currentSelected={gridSize}
-                key={size}
-                onClickEvent={() => dispatch(changeGrid(size))}
-              >
-                {size}
-              </Button>
-            ))}
-          </div>
-          <h1 className="text-xl">Select a mode...</h1>
-          <div className="flex justify-around">
-            {MODES.map((modeInMap) => (
-              <Button
-                currentSelected={mode}
-                key={modeInMap}
-                onClickEvent={() => dispatch(changeMode(modeInMap))}
-              >
-                {modeInMap}
-              </Button>
-            ))}
-          </div>
+          <OptionsList
+            setState={(updateValue) => dispatch(changeGrid(updateValue))}
+            state={gridSize}
+            updateValues={SIZES}
+          />
+          <h1 className="text-xl text-center">Select a mode...</h1>
+          <OptionsList
+            setState={(updateValue) => dispatch(changeMode(updateValue))}
+            state={mode}
+            updateValues={MODES}
+          />
         </div>
         <div>
           <Link to="/playgame">
-            <button className="flex mx-auto py-2 px-20 border-black border-2 rounded-md items-center">
+            <button className="flex mx-auto py-2 px-20 bg-blue-400 hover:bg-purple-200 active:bg-purple-400 text-white rounded-lg items-center">
               <IoPlay />
               Play Now!
             </button>
