@@ -6,6 +6,31 @@ import TextEntry from "../../Common/TextEntry";
 
 const URL = ""; //replace with GCP CF endpoint
 
+function formatData(dataArray) {
+  /**
+   * {
+   *  data: [{
+   *    id: #,
+   *    points: #,
+   *    baseScore: #,
+   *    timeBonus: #,
+   *    gridsSolved: #,
+   *    penalties: #,
+   *    username: "",
+   * }]
+   * }
+   */
+  return dataArray.map((dataObject) => {
+    const gameStats = Object.entries(dataObject).filter(
+      (entry) => entry[0] !== "id" || entry[0] !== "username"
+    );
+    return {
+      gameStats,
+      username: dataObject.username,
+    };
+  });
+}
+
 function ClosedMenu({ setClosed }) {
   return (
     <div className="my-2 bg-slate-100 p-8 rounded-lg flex flex-col items-center">
@@ -22,19 +47,26 @@ function OpenedMenu({ setData, setClosed }) {
   const [sortBy, setCondition] = useState("points");
   const [filterBy, setPredicate] = useState("none");
   const [playerName, setPlayerName] = useState("Enter username");
-
-  const [isQuerying, setFetchState] = useState(false);
-  if (isQuerying) console.log("here to suppress warning"); //to remove
+  const [gridSize, setGridSize] = useState("none");
   async function getData() {
-    setFetchState(true);
     const response = await fetch(
       URL +
         `?length=${length}&filter=${filterBy}` +
-        (playerName.length > 0 && `&name=${playerName}`)
+        (playerName.length > 0 && `&name=${playerName}`) +
+        (filterBy !== "grid size" && `&gridSize=${gridSize}`)
     );
     const jsonData = await response.json();
-    setData(jsonData.data);
-    setFetchState(false);
+    const formatted = formatData(jsonData.data);
+
+    setData(formatted);
+    /**
+     * [{
+     *        gameStats: {
+     *          subhead: head,...
+     *        },
+     *        username: STRING
+     *    }, ...]
+     */
   }
 
   return (
@@ -62,6 +94,15 @@ function OpenedMenu({ setData, setClosed }) {
         <h1 className="text-xl">Search username:</h1>
         <TextEntry input={playerName} setInput={setPlayerName} />
       </div>
+      <div className={filterBy === "grid size" ? "flex flex-col" : "hidden"}>
+        <OptionsList
+          setState={setGridSize}
+          state={gridSize}
+          updateValues={["10x10", "16x16", "16x30"]}
+          title="Sizes:"
+        />
+      </div>
+
       <div className="flex justify-center">
         <Button handleClick={setClosed} handleClickParams={[true]}>
           Close
