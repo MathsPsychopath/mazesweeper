@@ -70,7 +70,7 @@ function OpenedMenu({ setData, setClosed }) {
   }
 
   return (
-    <div className="my-2 bg-slate-100 p-8 rounded-lg">
+    <div className="my-2 bg-slate-100 p-4 md:p-8 rounded-lg">
       <h1 className="text-2xl text-gray-400">Search Parameters</h1>
       <OptionsList
         setState={setLength}
