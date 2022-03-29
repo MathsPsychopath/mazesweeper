@@ -9,11 +9,11 @@ export default function SuspenseStatistic() {
       }
     >
       <div className="flex flex-col gap-2 sm:flex-row justify-evenly justify-items-center">
-        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
-        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
-        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
-        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
-        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-20 h-12 mx-2 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-20 h-12 mx-2 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-20 h-12 mx-2 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-20 h-12 mx-2 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-20 h-12 mx-2 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
       </div>
       <div className="bg-gray-300 w-3/12 p-1.5 m-2 mx-4 animate-pulse rounded-full duration-200"></div>
     </div>
