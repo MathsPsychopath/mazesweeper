@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Statistic from "../Results/Statistic";
 import SearchParameters from "./SearchParameters";
-
-const URL = ""; //replace with GCP CF endpoint
+import SuspenseStatistic from "./SuspenseStatistic";
 
 export default function Leaderboard() {
   const [data, setData] = useState([]);
@@ -12,7 +11,7 @@ export default function Leaderboard() {
       <h1 className="font-bold text-3xl my-2">Leaderboard</h1>
       <SearchParameters setData={setData} />
       {/**filter by grid size, playername (sanitise on backend) */}
-      {/**use the skeleton loading/suspense api? */}
+      <SuspenseStatistic />
       <Statistic gameData="thing" statistic="7" />
     </div>
   );
