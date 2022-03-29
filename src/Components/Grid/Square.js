@@ -30,16 +30,19 @@ export default function Square(props) {
     "grid-square",
   ];
 
-  if (props.isDisplay || props.reveal)
+  if (props.isDisplay || props.reveal || color === "bg-slate-700") {
+    if (props.isWall && color !== "bg-slate-700") setColor("bg-slate-700");
+    else if (!props.isWall && color !== "bg-white") setColor("bg-white");
     return (
       <div
         data-testid="square"
-        className={classes.join(" ") + (props.isWall ? " bg-slate-700" : "")}
+        className={classes.join(" ")}
         id={"row-" + props.rowNo + "-col-" + props.colNo}
       >
         {" "}
       </div>
     );
+  }
   return (
     <button
       data-testid="square"
@@ -51,7 +54,7 @@ export default function Square(props) {
       }
       id={"row-" + props.rowNo + "-col-" + props.colNo}
     >
-      {props.isDisplay ? " " : props.number}
+      {props.number}
     </button>
   );
 }
