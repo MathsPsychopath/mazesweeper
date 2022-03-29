@@ -32,12 +32,14 @@ export default function SelectGrid() {
             setState={(updateValue) => dispatch(changeGrid(updateValue))}
             state={gridSize}
             updateValues={SIZES}
+            center
           />
           <h1 className="text-xl text-center">Select a mode...</h1>
           <OptionsList
             setState={(updateValue) => dispatch(changeMode(updateValue))}
             state={mode}
             updateValues={MODES}
+            center
           />
         </div>
         <div className="p-4 lg:p-0">
