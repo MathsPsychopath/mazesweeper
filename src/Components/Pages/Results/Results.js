@@ -7,6 +7,7 @@ import { IoPlay } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { formatTime } from "../../Timer/Timer";
 import CopyClipboard from "./CopyClipboard";
+import Button from "../../Common/Button";
 
 const stats = ["Average Time", "Grids Solved", "Size"];
 const pointMetrics = [
@@ -63,16 +64,10 @@ export default function Results() {
         </tbody>
       </table>
       <div className="w-full flex justify-center">
-        <button
-          className={
-            "flex items-center justify-center border-black bg-blue-400 text-white " +
-            "hover:bg-purple-200 active:bg-purple-400 rounded-lg p-4 w-1/3 m-2 text-lg"
-          }
-          onClick={() => navigate("/play")}
-        >
+        <Button handleClick={navigate} handleClickParams={["/play"]}>
           <IoPlay />
           Play Again
-        </button>
+        </Button>
         <CopyClipboard points={points} gameData={gameData} />
         <Publish />
       </div>
