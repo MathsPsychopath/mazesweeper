@@ -1,11 +1,17 @@
 import React from "react";
 import OptionButton from "./OptionButton";
 
-export default function OptionsList({ setState, state, updateValues, title }) {
+export default function OptionsList({
+  setState,
+  state,
+  updateValues,
+  title,
+  center = false,
+}) {
   return (
     <div className="flex flex-col">
-      <h1 className="text-xl">{title}</h1>
-      <div className="flex gap-x-2">
+      {title && <h1 className="text-xl">{title}</h1>}
+      <div className={"flex gap-2 flex-wrap " + (center && "justify-center")}>
         {updateValues.map((value) => (
           <OptionButton
             currentState={state === value}
