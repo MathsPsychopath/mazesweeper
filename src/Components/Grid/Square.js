@@ -30,7 +30,7 @@ export default function Square(props) {
     "grid-square",
   ];
 
-  if (props.isDisplay || props.reveal) {
+  if (props.isDisplay || props.reveal || color === "bg-slate-700") {
     if (props.isWall && color !== "bg-slate-700") setColor("bg-slate-700");
     else if (!props.isWall && color !== "bg-white") setColor("bg-white");
     return (
