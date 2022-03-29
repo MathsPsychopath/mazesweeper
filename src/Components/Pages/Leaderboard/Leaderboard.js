@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Entry from "../../Common/Entry";
 import Statistic from "../Results/Statistic";
-import OptionsList from "./OptionsList";
+import OptionsList from "../../Common/OptionsList";
 
 const URL = ""; //replace with GCP CF endpoint
 
@@ -10,7 +10,9 @@ export default function Leaderboard() {
   const [sortBy, setCondition] = useState("points");
   const [filterBy, setPredicate] = useState("none");
   const [playerName, setPlayerName] = useState("Enter player name");
-  const [isQuerying, setState] = useState(false);
+
+  const [isQuerying, setFetchState] = useState(false);
+  const [closed, setClosed] = useState(false);
 
   const [data, setData] = useState([]);
   async function getData() {
@@ -25,9 +27,9 @@ export default function Leaderboard() {
   (async () => await getData())();
 
   return (
-    <div className="mx-auto text-left w-9/12 p-20 rounded-md bg-white flex flex-col items-center">
+    <div className="mx-auto text-left py-8 px-auto rounded-md bg-white flex flex-col items-center">
       <h1 className="font-bold text-3xl my-2">Leaderboard</h1>
-      <div className="flex flex-col gap-y-2 place-self-start my-2">
+      <div className="flex flex-col gap-y-2 place-self-start my-2 bg-slate-100 mx-auto p-8 rounded-lg">
         <OptionsList
           setState={setLength}
           state={length}
@@ -47,6 +49,7 @@ export default function Leaderboard() {
           title="Filter by:"
         />
         <Entry input={playerName} setInput={setPlayerName} />
+        <button onClick={() => null}>Close</button>
         <button onClick={async () => await getData()}>Apply</button>
       </div>
       {/**filter by grid size, playername (sanitise on backend) */}

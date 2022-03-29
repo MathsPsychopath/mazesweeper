@@ -1,5 +1,5 @@
 import React from "react";
-import OptionButton from "../../Common/OptionButton";
+import OptionButton from "./OptionButton";
 
 export default function OptionsList({ setState, state, updateValues, title }) {
   return (

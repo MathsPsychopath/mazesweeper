@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import OptionsList from "../Leaderboard/OptionsList";
+import OptionsList from "../../Common/OptionsList";
 import GoodVersion from "./GoodVersion";
 import TLDR from "./TLDR";
 

@@ -1,7 +1,6 @@
 import grids from "./grids.json";
 import GridTypes from "./GridTypes";
 import React from "react";
-import Button from "./Button";
 import { Link } from "react-router-dom";
 import { IoPlay } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +8,7 @@ import {
   changeGrid,
   changeMode,
 } from "../../../redux/MenuSelection/menu.actions";
-import OptionsList from "../Leaderboard/OptionsList";
+import OptionsList from "../../Common/OptionsList";
 
 const SIZES = ["10x10", "16x16", "16x30"];
 const MODES = ["QuickMode", "Normal", "Chill & Casual"];
