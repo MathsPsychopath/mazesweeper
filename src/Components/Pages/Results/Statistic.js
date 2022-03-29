@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Statistic(props) {
+export default function Statistic({ gameData, statistic, children }) {
   return (
     <div
       className={
@@ -8,8 +8,14 @@ export default function Statistic(props) {
         "border-l-4 bg-white flex flex-col bg-gray-50"
       }
     >
-      <h1>{props.gameData}</h1>
-      <p className="text-gray-400">{props.statistic}</p>
+      {gameData && statistic ? (
+        <>
+          <h1>{gameData}</h1>
+          <p className="text-gray-400">{statistic}</p>
+        </>
+      ) : (
+        <>{children}</>
+      )}
     </div>
   );
 }

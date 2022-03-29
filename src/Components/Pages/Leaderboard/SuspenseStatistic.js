@@ -4,12 +4,18 @@ export default function SuspenseStatistic() {
   return (
     <div
       className={
-        "rounded-md flex w-9/12 md:w-[40em] h-16 border-purple-500 border-b-4 " +
-        "border-l-4 bg-white flex flex-col bg-gray-50 pt-3"
+        "rounded-md flex h-80 sm:w-[40em] sm:h-24 border-purple-500 border-b-4 " +
+        "border-l-4 bg-slate-50 flex-col pt-3 mx-auto"
       }
     >
-      <div className="bg-gray-300 p-1.5 m-1 mx-4 animate-pulse rounded-full duration-200"></div>
-      <div className="bg-gray-300 w-3/12 p-1.5 m-1 mx-4 animate-pulse rounded-full duration-200"></div>
+      <div className="flex flex-col gap-2 sm:flex-row justify-evenly justify-items-center">
+        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+        <div className="w-24 h-12 animate-pulse rounded-2xl duration-200 bg-gray-400"></div>
+      </div>
+      <div className="bg-gray-300 w-3/12 p-1.5 m-2 mx-4 animate-pulse rounded-full duration-200"></div>
     </div>
   );
 }
