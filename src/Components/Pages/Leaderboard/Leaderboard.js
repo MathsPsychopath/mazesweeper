@@ -7,8 +7,8 @@ function StatisticBlob({ head, subhead }) {
   return (
     <div
       className={
-        "py-2 px-4 bg-purple-200 text-white font-semibold rounded-lg " +
-        "flex flex-col items-center border-purple-400 border-l-4 border-b-4"
+        "py-2 px-4 bg-green-500 text-white font-semibold rounded-lg " +
+        "flex flex-col items-center border-green-700 border-l-4 border-b-4"
         //potential alt. cyan, blue, green, @400/600, @200/400
       }
     >
