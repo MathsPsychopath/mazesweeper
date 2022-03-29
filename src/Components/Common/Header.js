@@ -29,7 +29,7 @@ function SmallNav() {
   const [visibility, setVisibility] = useState("");
   const toggle = () => setVisibility(visibility ? "" : "hidden");
   return (
-    <header className="flex flex-col md:hidden mb-8 w-screen">
+    <header className="flex flex-col md:hidden mb-8 w-full">
       <div className="text-3xl pb-2 border-b">
         <NavLink to="/">mazesweeper</NavLink>
         <button onClick={() => toggle()} className="absolute top-0 right-0 m-2">
