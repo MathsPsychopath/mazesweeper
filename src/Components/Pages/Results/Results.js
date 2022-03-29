@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Publish from "./Publish";
-import Statistic from "./Statistic";
+import Statistic from "../../Common/Statistic";
 import TableData from "./TableData";
 import { IoPlay } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -33,7 +33,7 @@ export default function Results() {
   const gameData = [getAverageTime(solveTimes), solveTimes.length, gridSize];
   return (
     //TODO #5 add user's historical data
-    <div className="mx-auto text-left w-9/12 p-20 rounded-md flex flex-col items-center">
+    <div className="mx-auto text-left w-full py-20 px-4 md:px-20 rounded-md flex flex-col items-center">
       <h1 className="font-bold text-3xl">Results</h1>
       <div className="flex flex-col md:flex-row p-4 w-full">
         {stats.map((statistic, i) => (
