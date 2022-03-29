@@ -49,6 +49,9 @@ function OpenedMenu({ setData, setClosed }) {
   const [playerName, setPlayerName] = useState("Enter username");
   const [gridSize, setGridSize] = useState("none");
   async function getData() {
+    //console.log({
+    //  length,sortBy, filterBy, playerName, gridSize
+    //}) //testing only
     const response = await fetch(
       URL +
         `?length=${length}&filter=${filterBy}` +

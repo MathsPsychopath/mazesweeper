@@ -26,7 +26,7 @@ function Stats({ i, dataObject }) {
       <Statistic>
         <div className="flex flex-col grow sm:flex-row md:gap-1 justify-evenly ">
           {Object.entries(dataObject.gameStats).map((stat) => (
-            <StatisticBlob head={stat[1]} subhead={stat[0]} />
+            <StatisticBlob head={stat[1]} subhead={stat[0]} key={stat.join()} />
           ))}
           <h1 className="sm:pl-8 text-gray-400 text-xl">
             {i + 1}:{dataObject.username}
