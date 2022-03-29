@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Landing() {
   return (
-    <div className="text-left mx-auto w-9/12 mb-20">
+    <div className="text-left mx-auto w-9/12 mb-20 mt-8">
       <h1 className="font-bold text-3xl">About</h1>
       <p>
         This game is a MineSweeper-esque game. See "How to Play" for details on

@@ -5,7 +5,7 @@ import SuspenseStatistic from "./SuspenseStatistic";
 
 export default function Leaderboard() {
   const [data, setData] = useState([]);
-
+  if (data) console.log("here to suppress warning"); //to remove
   return (
     <div className="mx-auto text-left py-8 px-auto rounded-md bg-white flex flex-col items-center">
       <h1 className="font-bold text-3xl my-2">Leaderboard</h1>

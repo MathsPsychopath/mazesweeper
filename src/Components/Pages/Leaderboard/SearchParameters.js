@@ -24,7 +24,7 @@ function OpenedMenu({ setData, setClosed }) {
   const [playerName, setPlayerName] = useState("Enter username");
 
   const [isQuerying, setFetchState] = useState(false);
-
+  if (isQuerying) console.log("here to suppress warning"); //to remove
   async function getData() {
     setFetchState(true);
     const response = await fetch(
