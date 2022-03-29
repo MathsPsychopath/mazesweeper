@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import AsyncButton from "../../Common/AsyncButton";
 import Button from "../../Common/Button";
 import OptionsList from "../../Common/OptionsList";
 import TextEntry from "../../Common/TextEntry";
+
+const URL = ""; //replace with GCP CF endpoint
 
 function ClosedMenu({ setClosed }) {
   return (
@@ -23,6 +26,7 @@ function OpenedMenu({ setData, setClosed }) {
   const [isQuerying, setFetchState] = useState(false);
 
   async function getData() {
+    setFetchState(true);
     const response = await fetch(
       URL +
         `?length=${length}&filter=${filterBy}` +
@@ -30,8 +34,8 @@ function OpenedMenu({ setData, setClosed }) {
     );
     const jsonData = await response.json();
     setData(jsonData.data);
+    setFetchState(false);
   }
-  (async () => await getData())();
 
   return (
     <div className="my-2 bg-slate-100 p-8 rounded-lg">
@@ -59,10 +63,12 @@ function OpenedMenu({ setData, setClosed }) {
         <TextEntry input={playerName} setInput={setPlayerName} />
       </div>
       <div className="flex justify-center">
-        <button className="p-4 " onClick={() => setClosed(true)}>
+        <Button handleClick={setClosed} handleClickParams={[true]}>
           Close
-        </button>
-        <button onClick={async () => await getData()}>Apply</button>
+        </Button>
+        <AsyncButton asyncCallback={getData} callbackParams={[]}>
+          Apply
+        </AsyncButton>
       </div>
     </div>
   );
