@@ -32,7 +32,7 @@ export default function Results() {
   const gameData = [getAverageTime(solveTimes), solveTimes.length, gridSize];
   return (
     //TODO #5 add user's historical data
-    <div className="mx-auto text-left w-9/12 p-20 rounded-md bg-gray-100 flex flex-col items-center">
+    <div className="mx-auto text-left w-9/12 p-20 rounded-md flex flex-col items-center">
       <h1 className="font-bold text-3xl">Results</h1>
       <div className="flex flex-col md:flex-row p-4 w-full">
         {stats.map((statistic, i) => (
@@ -64,7 +64,10 @@ export default function Results() {
       </table>
       <div className="w-full flex justify-center">
         <button
-          className="flex items-center justify-center border-black rounded-md border bg-white p-4 w-1/3 m-2 hover:bg-blue-100 text-lg"
+          className={
+            "flex items-center justify-center border-black bg-blue-400 text-white " +
+            "hover:bg-purple-200 active:bg-purple-400 rounded-lg p-4 w-1/3 m-2 text-lg"
+          }
           onClick={() => navigate("/play")}
         >
           <IoPlay />

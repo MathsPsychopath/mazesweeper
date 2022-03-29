@@ -11,7 +11,10 @@ export default function Publish() {
   if (publishState === "UNPUBLISHED") {
     return (
       <button
-        className="flex items-center justify-center text-lg border-black rounded-md border bg-white p-4 w-1/3 m-2 hover:bg-blue-100"
+        className={
+          "flex items-center justify-center text-lg border-black text-white bg-blue-400 " +
+          "hover:bg-purple-200 active:bg-purple-400 rounded-lg p-4 w-1/3 m-2"
+        }
         onClick={() => publishStats(dispatch, gameData)}
       >
         <span className="text-lg">
@@ -23,11 +26,12 @@ export default function Publish() {
   }
   return (
     <button
-      className={`flex items-center justify-center text-lg border-black rounded-md border bg-white p-4 w-1/3 m-2 ${
-        publishState === "PUBLISHED"
-          ? "bg-purple-700 text-white"
-          : "bg-gray-400"
-      }`}
+      className={
+        "flex items-center justify-center text-lg rounded-lg text-white " +
+        `p-4 w-1/3 m-2 ${
+          publishState === "PUBLISHED" ? "bg-purple-700" : "bg-gray-400"
+        }`
+      }
       disabled
     >
       {publishState === "PUBLISHED" ? (
