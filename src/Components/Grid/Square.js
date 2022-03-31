@@ -1,60 +1,56 @@
 import { useWindowWidth } from "@react-hook/window-size";
 import React from "react";
-import { useState } from "react";
 
-const COLOR_1 = "bg-white";
-const COLOR_2 = "bg-orange-500";
-const COLOR_3 = "bg-teal-400";
-
-/**
- *
- * @param {Boolean} props.isDisplay
- * @param {Number} props.rowNo
- * @param {Number} props.colNo
- * @param {Number} props.number
- */
-export default function Square(props) {
-  const [color, setColor] = useState(COLOR_1);
+export default function Square({
+  isDisplay,
+  rowNo,
+  colNo,
+  number,
+  reveal,
+  colour,
+  setColourAtCoordinate,
+}) {
   const width = useWindowWidth();
   const squareDim = width < 1920 ? "1.5em" : "2em";
-  const classes = [
-    color,
-    "hover:border-2",
-    `[min-width:${squareDim}] [max-width:${squareDim}] [min-height:${squareDim}] [max-height:${squareDim}] `,
-    "hover:border-red-500",
-    "border",
-    "border-black",
-    "duration-50",
-    "cursor-pointer",
-    "transition-colors",
-    "grid-square",
-  ];
+  const classes =
+    "hover:border-2 hover:border-red-500 border border-black duration-50" +
+    "cursor-pointer transition-colors grid-square " +
+    `min-w-[${squareDim}] max-w-[${squareDim}] min-h-[${squareDim}] max-h-[${squareDim}] `;
 
-  if (props.isDisplay || props.reveal || color === "bg-slate-700") {
-    if (props.isWall && color !== "bg-slate-700") setColor("bg-slate-700");
-    else if (!props.isWall && color !== "bg-white") setColor("bg-white");
+  if (isDisplay) {
     return (
       <div
         data-testid="square"
-        className={classes.join(" ")}
-        id={"row-" + props.rowNo + "-col-" + props.colNo}
+        className={classes}
+        id={"row-" + rowNo + "-col-" + colNo}
       >
         {" "}
       </div>
     );
   }
+  if (reveal)
+    return (
+      <button data-testid="square" className={classes + `${colour}`} disabled>
+        {" "}
+      </button>
+    );
   return (
     <button
       data-testid="square"
-      className={classes.join(" ")}
+      className={classes + `${colour}`}
       onClick={() =>
-        setColor(
-          color === COLOR_1 ? COLOR_2 : color === COLOR_2 ? COLOR_3 : COLOR_1
+        setColourAtCoordinate(
+          rowNo,
+          colNo,
+          colour === "bg-white"
+            ? "bg-orange-500"
+            : colour === "bg-orange-500"
+            ? "bg-teal-400"
+            : "bg-white"
         )
       }
-      id={"row-" + props.rowNo + "-col-" + props.colNo}
     >
-      {props.number}
+      {number}
     </button>
   );
 }

@@ -18,27 +18,32 @@ export function getSize(size) {
   return DIMENSIONS[index === -1 ? 0 : index];
 }
 
-/**
- *
- * @param {String} props.gridSize
- * @param {Boolean} props.isDisplay
- * @param {Array<Array<Number>>} props.numbers
- */
-export default function Grid(props) {
-  const [rows, columns] = getSize(props.gridSize);
+export default function Grid({
+  isDisplay,
+  gridSize,
+  numbers,
+  gridReveals,
+  colours,
+  setColourAtCoordinate,
+}) {
+  const [rows, columns] = getSize(gridSize);
   const rowIndices = [...Array(rows).keys()];
   return (
     <div data-testid="grid" className="mx-auto">
       {rowIndices.map((e, i) => {
+        if (isDisplay)
+          return (
+            <Row isDisplay columns={columns} key={"row-" + i} rowIndex={i} />
+          );
         return (
           <Row
             columns={columns}
             key={"row-" + i}
-            isDisplay={props.isDisplay}
-            numbers={props.numbers ? props.numbers[i] : undefined}
-            rowNo={i}
-            row={props.grid ? props.grid[i] : null}
-            reveal={props.gridReveals ? props.gridReveals[i] : false}
+            rowNumbers={numbers[i]}
+            rowIndex={i}
+            rowReveals={gridReveals[i]}
+            colours={colours[i]}
+            setColourAtCoordinate={setColourAtCoordinate}
           />
         );
       })}

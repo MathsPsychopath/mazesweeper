@@ -13,27 +13,34 @@ function getColumns(columns) {
   return COLUMN_SIZES[index === -1 ? 0 : index];
 }
 
-/**
- *
- * @param {Number} props.columns
- * @param {Boolean} props.isDisplay
- * @param {Array<Number>} props.numbers
- * @param {Number} props.rowNo
- */
-export default function Row(props) {
+export default function Row({
+  isDisplay,
+  columns,
+  rowNumbers,
+  rowIndex,
+  rowReveals,
+  colours,
+  setColourAtCoordinate,
+}) {
   return (
     <div data-testid="row" className="flex">
-      {[...Array(getColumns(props.columns)).keys()].map((e, i) => (
-        <Square
-          key={"col-" + i}
-          isDisplay={props.isDisplay}
-          number={props.numbers ? props.numbers[i] : undefined}
-          rowNo={props.rowNo}
-          colNo={i}
-          isWall={!props.isDisplay && props.row[i] === 0}
-          reveal={props.reveal ? props.reveal[i] : false}
-        />
-      ))}
-    </div>
+      {[...Array(getColumns(columns)).keys()].map((e, i) => {
+        if (isDisplay)
+          return (
+            <Square isDisplay key={"col-" + i} rowNo={rowIndex} colNo={i} />
+          );
+        return (
+          <Square
+            key={"col-" + i}
+            rowNo={rowIndex}
+            colNo={i}
+            number={rowNumbers[i]}
+            reveal={rowReveals[i]}
+            colour={colours[i]}
+            setColourAtCoordinate={setColourAtCoordinate}
+          />
+        );
+      })}
+    </div> //reveal -> ensure background is correct colour??
   );
 }
