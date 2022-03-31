@@ -39,7 +39,7 @@ function use2DColours(rows, columns, gridReveals, grid) {
     newColours[row][column] = newValue;
     setColours(newColours);
   }
-  return [colours, setAtCoordinate];
+  return [colours, setAtCoordinate, setColours];
 }
 
 /**
@@ -57,7 +57,7 @@ export default function PlayGame() {
   const [grid, newGrid] = useState(generateGrid(gridSize));
   const [gridReveals, newGridReveals] = useState(generateGrid(gridSize, true));
 
-  const [colours, setColourAtCoordinate] = use2DColours(
+  const [colours, setColourAtCoordinate, setColours] = use2DColours(
     rows,
     columns,
     gridReveals,
@@ -91,7 +91,7 @@ export default function PlayGame() {
             submitClicked={submitClicked}
             setClicked={setClicked}
             game={game}
-            setColourAtCoordinate={setColourAtCoordinate}
+            setColours={setColours}
           >
             Submit
           </GameButton>
@@ -105,7 +105,7 @@ export default function PlayGame() {
             submitClicked={submitClicked}
             setClicked={setClicked}
             game={game}
-            setColourAtCoordinate={setColourAtCoordinate}
+            setColours={setColours}
           >
             Submit without searching
           </GameButton>
@@ -116,7 +116,7 @@ export default function PlayGame() {
             setInput={setInput}
             setInputState={setInputState}
             setClicked={setClicked}
-            setColourAtCoordinate={setColourAtCoordinate}
+            setColours={setColours}
           >
             Next
           </GameButton>

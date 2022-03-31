@@ -43,10 +43,16 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
       input,
       setClicked,
       game,
+      setColours,
     } = props;
     setInputState(true);
     setClicked(true);
-    const distance = await displaySolution(grid, gridSize, noSearch);
+    const distance = await displaySolution(
+      grid,
+      gridSize,
+      noSearch,
+      setColours
+    );
     dispatch(setPostAnswer());
     changeSolution(distance);
     const offset = distance - parseInt(input, 10);
@@ -73,17 +79,21 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
 //if one button is clicked, disable the other
 function nextGrid(dispatch, gridSize) {
   return function (props) {
-    const { newGrid, newGridReveals, setInput, setInputState, setClicked } =
-      props;
-    document.querySelectorAll(".grid-square").forEach((e) => {
-      e.classList.replace("bg-orange-500", "bg-white");
-      e.classList.replace("bg-blue-500", "bg-white");
-      e.classList.replace("bg-slate-700", "bg-white");
-      e.classList.replace("bg-lime-400", "bg-white");
-      e.classList.replace("bg-green-500", "bg-white");
-      e.classList.replace("bg-teal-400", "bg-white");
-    });
-    newGrid(generateGrid(gridSize));
+    const {
+      newGrid,
+      newGridReveals,
+      setInput,
+      setInputState,
+      setClicked,
+      setColours,
+    } = props;
+    const nextGrid = generateGrid(gridSize);
+    setColours(
+      [...Array(nextGrid.length)].map(() =>
+        [...Array(nextGrid[0].length)].map(() => "bg-white")
+      )
+    );
+    newGrid(nextGrid);
     newGridReveals(generateGrid(gridSize, true));
     setInput("");
     setClicked(false);
