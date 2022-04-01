@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/mazesweeper/static/js/main.4406b72f.js",
+    "main.js": "/mazesweeper/static/js/main.dae581be.js",
     "index.html": "/mazesweeper/index.html",
-    "main.4406b72f.js.map": "/mazesweeper/static/js/main.4406b72f.js.map"
+    "main.dae581be.js.map": "/mazesweeper/static/js/main.dae581be.js.map"
   },
   "entrypoints": [
-    "static/js/main.4406b72f.js"
+    "static/js/main.dae581be.js"
   ]
 }
