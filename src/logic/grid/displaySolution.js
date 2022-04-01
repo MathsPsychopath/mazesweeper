@@ -52,26 +52,21 @@ export default async function displaySolution(
  * @param {Number} step the current index in states array
  * @param {Resolve} resolve resolution to indicate done
  */
-async function nextDijkstraFrame(states, step, resolve, setColourAtCoordinate) {
-  setTimeout(() => {
-    const currentState = states[step];
-    if (states.length === step - 1 || !currentState) {
-      resolve();
-      return;
-    }
-    for (const neighbour of currentState.neighbours) {
-      setColourAtCoordinate(neighbour[0], neighbour[1], "bg-lime-400");
-    }
-    setColourAtCoordinate(
-      currentState.current[0],
-      currentState.current[1],
-      "bg-blue-500"
-    );
+function nextDijkstraFrame(states, step, resolve, setColourAtCoordinate) {
+  const currentState = states[step];
+  if (states.length === step - 1 || !currentState) {
+    resolve();
+    return;
+  }
+  setColourAtCoordinate(
+    currentState.current[0],
+    currentState.current[1],
+    "bg-blue-500"
+  );
 
-    requestAnimationFrame(() => {
-      nextDijkstraFrame(states, ++step, resolve, setColourAtCoordinate);
-    });
-  }, 50);
+  requestAnimationFrame(() => {
+    nextDijkstraFrame(states, ++step, resolve, setColourAtCoordinate);
+  });
 }
 
 /**
