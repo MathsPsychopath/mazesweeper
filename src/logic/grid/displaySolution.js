@@ -20,10 +20,6 @@ export default async function displaySolution(
   const walledGrid = grid.map((row) =>
     row.map((square) => (square === 0 ? "bg-slate-700" : "bg-white"))
   );
-  console.log(grid);
-  console.log("HERE");
-  console.log(walledGrid);
-  console.log("HERE");
   setColours(walledGrid);
   //show initial exploration
   const states = [...dijkstra(grid, [0, 0], [rows - 1, columns - 1])];

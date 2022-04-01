@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid, { getSize } from "../../Grid/Grid";
 import Timer from "../../Timer/Timer";
 import Entry from "../../Common/Entry";
@@ -28,9 +28,13 @@ function initialiseColours(rows, columns, gridReveals, grid) {
 }
 
 function use2DColours(rows, columns, gridReveals, grid) {
-  const getInitialState = () =>
-    initialiseColours(rows, columns, gridReveals, grid);
-  const [colours, setColours] = useState(getInitialState);
+  const [colours, setColours] = useState(
+    initialiseColours(rows, columns, gridReveals, grid)
+  );
+  useEffect(
+    () => setColours(initialiseColours(rows, columns, gridReveals, grid)),
+    [columns, grid, gridReveals, rows]
+  );
 
   function setAtCoordinate(row, column, newValue) {
     setColours((oldColours) => {
@@ -64,7 +68,6 @@ export default function PlayGame() {
     gridReveals,
     grid
   );
-  //console.log(colours);
   return (
     <div className="mx-auto flex gap-x-10 flex-col lg:flex-row py-20">
       <Grid
