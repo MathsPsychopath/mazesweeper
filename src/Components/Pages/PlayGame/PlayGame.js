@@ -17,7 +17,6 @@ function initialiseColours(rows, columns, gridReveals, grid) {
   const gridColours = [...Array(rows)].map(() =>
     [...Array(columns)].map(() => DEFAULT_COLOUR)
   );
-  console.log(gridColours);
   for (let row = 0; row < rows; row++) {
     for (let column = 0; column < columns; column++) {
       if (gridReveals[row][column] === 1 && grid[row][column] === 0) {
@@ -29,15 +28,17 @@ function initialiseColours(rows, columns, gridReveals, grid) {
 }
 
 function use2DColours(rows, columns, gridReveals, grid) {
-  const [colours, setColours] = useState(
-    initialiseColours(rows, columns, gridReveals, grid)
-  );
+  const getInitialState = () =>
+    initialiseColours(rows, columns, gridReveals, grid);
+  const [colours, setColours] = useState(getInitialState);
 
   function setAtCoordinate(row, column, newValue) {
-    const newColours = [...colours];
-    newColours[row] = [...newColours[row]];
-    newColours[row][column] = newValue;
-    setColours(newColours);
+    setColours((oldColours) => {
+      const newColours = [...oldColours];
+      newColours[row] = [...newColours[row]];
+      newColours[row][column] = newValue;
+      return newColours;
+    });
   }
   return [colours, setAtCoordinate, setColours];
 }
@@ -63,7 +64,7 @@ export default function PlayGame() {
     gridReveals,
     grid
   );
-
+  //console.log(colours);
   return (
     <div className="mx-auto flex gap-x-10 flex-col lg:flex-row py-20">
       <Grid
@@ -92,6 +93,7 @@ export default function PlayGame() {
             setClicked={setClicked}
             game={game}
             setColours={setColours}
+            setColourAtCoordinate={setColourAtCoordinate}
           >
             Submit
           </GameButton>
@@ -106,6 +108,7 @@ export default function PlayGame() {
             setClicked={setClicked}
             game={game}
             setColours={setColours}
+            setColourAtCoordinate={setColourAtCoordinate}
           >
             Submit without searching
           </GameButton>

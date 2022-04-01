@@ -44,6 +44,7 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
       setClicked,
       game,
       setColours,
+      setColourAtCoordinate,
     } = props;
     setInputState(true);
     setClicked(true);
@@ -51,7 +52,8 @@ function handleSubmit(dispatch, elapsed, gridSize, mode, navigate) {
       grid,
       gridSize,
       noSearch,
-      setColours
+      setColours,
+      setColourAtCoordinate
     );
     dispatch(setPostAnswer());
     changeSolution(distance);

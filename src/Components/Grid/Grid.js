@@ -1,5 +1,5 @@
 import React from "react";
-import Row from "./Row";
+import Square from "./Square";
 
 const SIZES = ["10x10", "16x16", "16x30"];
 const DIMENSIONS = [
@@ -28,25 +28,28 @@ export default function Grid({
 }) {
   const [rows, columns] = getSize(gridSize);
   const rowIndices = [...Array(rows).keys()];
+  const colIndices = [...Array(columns).keys()];
   return (
     <div data-testid="grid" className="mx-auto">
-      {rowIndices.map((e, i) => {
-        if (isDisplay)
-          return (
-            <Row isDisplay columns={columns} key={"row-" + i} rowIndex={i} />
-          );
-        return (
-          <Row
-            columns={columns}
-            key={"row-" + i}
-            rowNumbers={numbers[i]}
-            rowIndex={i}
-            rowReveals={gridReveals[i]}
-            colours={colours[i]}
-            setColourAtCoordinate={setColourAtCoordinate}
-          />
-        );
-      })}
+      {rowIndices.map((r, i) => (
+        <div className="flex" key={`row-${i}`}>
+          {colIndices.map((c, j) => {
+            if (isDisplay)
+              return <Square rowNo={i} colNo={j} key={`col-${j}`} />;
+            return (
+              <Square
+                rowNo={i}
+                colNo={j}
+                number={numbers[i][j]}
+                reveal={gridReveals[i][j]}
+                colour={colours[i][j]}
+                setColourAtCoordinate={setColourAtCoordinate}
+                key={`col-${j}`}
+              />
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 }
