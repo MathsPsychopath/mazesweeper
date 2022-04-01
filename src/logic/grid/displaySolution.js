@@ -1,5 +1,4 @@
 import { dijkstra, backtrack } from "./dijkstra";
-import changeSquareColor from "./changeSquareColor";
 import { getSize } from "../../Components/Grid/Grid";
 
 /**
@@ -12,28 +11,23 @@ import { getSize } from "../../Components/Grid/Grid";
 export default async function displaySolution(
   grid,
   gridSize,
-  noSearch = false
+  noSearch = false,
+  setColours,
+  setColourAtCoordinate
 ) {
   const [rows, columns] = getSize(gridSize);
   //show walls
-  grid.forEach((row, i) =>
-    row.forEach(
-      (s, j) =>
-        grid[i][j] === 0 &&
-        changeSquareColor(
-          [i, j],
-          ["bg-white", "bg-orange-500", "bg-teal-400"],
-          "bg-slate-700"
-        )
-    )
+  const walledGrid = grid.map((row) =>
+    row.map((square) => (square === 0 ? "bg-slate-700" : "bg-white"))
   );
+  setColours(walledGrid);
   //show initial exploration
   const states = [...dijkstra(grid, [0, 0], [rows - 1, columns - 1])];
   if (!noSearch) {
     let forwardStep = 0;
     await new Promise((resolve) => {
       requestAnimationFrame(() => {
-        nextDijkstraFrame(states, forwardStep, resolve);
+        nextDijkstraFrame(states, forwardStep, resolve, setColourAtCoordinate);
       });
     });
   }
@@ -45,7 +39,7 @@ export default async function displaySolution(
     if (!map) return 0;
     const trace = backtrack(map, [0, 0], [rows - 1, columns - 1]);
     requestAnimationFrame(() => {
-      nextBacktrackFrame(trace, backStep, resolve);
+      nextBacktrackFrame(trace, backStep, resolve, setColourAtCoordinate);
     });
   }).then((step) => (backStep = step));
 
@@ -58,7 +52,7 @@ export default async function displaySolution(
  * @param {Number} step the current index in states array
  * @param {Resolve} resolve resolution to indicate done
  */
-async function nextDijkstraFrame(states, step, resolve) {
+async function nextDijkstraFrame(states, step, resolve, setColourAtCoordinate) {
   setTimeout(() => {
     const currentState = states[step];
     if (states.length === step - 1 || !currentState) {
@@ -66,16 +60,16 @@ async function nextDijkstraFrame(states, step, resolve) {
       return;
     }
     for (const neighbour of currentState.neighbours) {
-      changeSquareColor(
-        neighbour,
-        ["bg-white", "bg-orange-500"],
-        "bg-lime-400"
-      );
+      setColourAtCoordinate(neighbour[0], neighbour[1], "bg-lime-400");
     }
-    changeSquareColor(currentState.current, "bg-lime-400", "bg-blue-500");
+    setColourAtCoordinate(
+      currentState.current[0],
+      currentState.current[1],
+      "bg-blue-500"
+    );
 
     requestAnimationFrame(() => {
-      nextDijkstraFrame(states, ++step, resolve);
+      nextDijkstraFrame(states, ++step, resolve, setColourAtCoordinate);
     });
   }, 50);
 }
@@ -87,11 +81,13 @@ async function nextDijkstraFrame(states, step, resolve) {
  * @param {Resolve} resolve promise.resolve to indicate done
  * @returns
  */
-function nextBacktrackFrame(trace, step, resolve) {
-  changeSquareColor(trace[step++], "bg-blue-500", "bg-green-500");
+function nextBacktrackFrame(trace, step, resolve, setColourAtCoordinate) {
+  setColourAtCoordinate(...trace[step++], "bg-green-500");
   if (trace.length === step) {
     resolve(step);
     return;
   }
-  requestAnimationFrame(() => nextBacktrackFrame(trace, step, resolve));
+  requestAnimationFrame(() =>
+    nextBacktrackFrame(trace, step, resolve, setColourAtCoordinate)
+  );
 }

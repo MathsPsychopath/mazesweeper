@@ -25,7 +25,7 @@ export default function SelectGrid() {
           isDisplay={true}
         />
       </div>
-      <div className="grid content-between h-120">
+      <div className="grid content-between">
         <div className="grid grid-rows-4 justify-items-center">
           <h1 className="text-xl">Select a grid size...</h1>
           <OptionsList
@@ -44,7 +44,7 @@ export default function SelectGrid() {
         </div>
         <div className="p-4 lg:p-0">
           <Link to="/playgame">
-            <button className="flex mx-auto py-2 px-20 bg-blue-400 hover:bg-purple-200 active:bg-purple-400 text-white rounded-lg items-center">
+            <button className="flex mx-auto py-2 m-1 px-20 bg-blue-400 hover:bg-purple-200 active:bg-purple-400 text-white rounded-lg items-center">
               <IoPlay />
               Play Now!
             </button>
