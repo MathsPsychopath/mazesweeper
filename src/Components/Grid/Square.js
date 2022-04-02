@@ -1,43 +1,51 @@
 import { useWindowWidth } from "@react-hook/window-size";
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+
+const COLOR_1 = "bg-white";
+const COLOR_2 = "bg-orange-500";
+const COLOR_3 = "bg-teal-400";
 
 export default function Square({
   isDisplay,
-  rowNo,
-  colNo,
-  number,
   reveal,
-  colour,
-  setColourAtCoordinate,
+  number,
+  gridValue,
+  row,
+  col,
+  reset,
 }) {
   const width = useWindowWidth();
   const squareDim = width < 1920 ? "1.5em" : "2em";
   const classes =
-    "hover:border-2 hover:border-red-500 border border-black duration-50" +
-    "cursor-pointer transition-colors grid-square " +
-    `min-w-[${squareDim}] max-w-[${squareDim}] min-h-[${squareDim}] max-h-[${squareDim}] `;
+    "hover:border-2 hover:border-red-500 border border-black " +
+    "duration-50 cursor-pointer transition-colors grid-square " +
+    `[min-width:${squareDim}] [max-width:${squareDim}] [min-height:${squareDim}] [max-height:${squareDim}] `;
+  const [color, setColor] = useState(COLOR_1);
 
-  if (isDisplay) {
+  useEffect(() => {
+    setColor(COLOR_1);
+  }, [reset]);
+
+  if (isDisplay)
     return (
-      <div
-        data-testid="square"
-        className={classes}
-        id={"row-" + rowNo + "-col-" + colNo}
-      >
+      <div className={classes} id={`row-${row}-col-${col}`}>
         {" "}
       </div>
     );
-  }
   if (reveal)
     return (
-      <button data-testid="square" className={classes + `${colour}`} disabled>
+      <button
+        className={classes + (gridValue === 0 ? "bg-slate-700" : "bg-white")}
+        id={`row-${row}-col-${col}`}
+        disabled
+      >
         {" "}
       </button>
     );
   return (
     <button
-      data-testid="square"
-      className={classes + `${colour}`}
+      className={classes + color}
       onClick={() =>
         setColourAtCoordinate(
           rowNo,
@@ -49,6 +57,7 @@ export default function Square({
             : "bg-white"
         )
       }
+      id={`row-${row}-col-${col}`}
     >
       {number}
     </button>

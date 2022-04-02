@@ -18,33 +18,38 @@ export function getSize(size) {
   return DIMENSIONS[index === -1 ? 0 : index];
 }
 
+/**
+ *
+ * @param {String} props.gridSize
+ * @param {Boolean} props.isDisplay
+ * @param {Array<Array<Number>>} props.numbers
+ */
 export default function Grid({
-  isDisplay,
   gridSize,
-  numbers,
   gridReveals,
-  colours,
-  setColourAtCoordinate,
+  numbers,
+  grid,
+  isDisplay,
+  reset,
 }) {
   const [rows, columns] = getSize(gridSize);
   const rowIndices = [...Array(rows).keys()];
   const colIndices = [...Array(columns).keys()];
   return (
-    <div data-testid="grid" className="mx-auto">
-      {rowIndices.map((r, i) => (
+    <div className="mx-auto">
+      {rowIndices.map((e, i) => (
         <div className="flex" key={`row-${i}`}>
-          {colIndices.map((c, j) => {
-            if (isDisplay)
-              return <Square rowNo={i} colNo={j} key={`col-${j}`} />;
+          {colIndices.map((f, j) => {
+            if (isDisplay) return <Square isDisplay key={`col-${j}`} />;
             return (
               <Square
-                rowNo={i}
-                colNo={j}
-                number={numbers[i][j]}
                 reveal={gridReveals[i][j]}
-                colour={colours[i][j]}
-                setColourAtCoordinate={setColourAtCoordinate}
+                number={numbers[i][j]}
+                gridValue={grid[i][j]}
                 key={`col-${j}`}
+                row={i}
+                col={j}
+                reset={reset}
               />
             );
           })}
