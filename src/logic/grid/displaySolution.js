@@ -9,89 +9,52 @@ import { getSize } from "../../Components/Grid/Grid";
  * @param {Boolean} noSearch
  * @returns {Promise<Number>} the length of the shortest path
  */
-export default async function displaySolution(
+export default function getSolutionWithAnimation(
   grid,
   gridSize,
   noSearch = false
 ) {
+  let backStep = 0;
+  const animationFrames = [];
   const [rows, columns] = getSize(gridSize);
   //show walls
+  const initialFrame = [];
   grid.forEach((row, i) =>
     row.forEach(
       (s, j) =>
         grid[i][j] === 0 &&
-        changeSquareColor(
-          [i, j],
-          ["bg-white", "bg-orange-500", "bg-teal-400"],
-          "bg-slate-700"
-        )
+        initialFrame.push({ node: [i, j], colour: "bg-slate-700" })
     )
   );
-  //show initial exploration
+  animationFrames.push(initialFrame);
+  //get dijkstra searching algorithm
   const states = [...dijkstra(grid, [0, 0], [rows - 1, columns - 1])];
-  if (!noSearch) {
-    let forwardStep = 0;
-    await new Promise((resolve) => {
-      requestAnimationFrame(() => {
-        nextDijkstraFrame(states, forwardStep, resolve);
-      });
-    });
-  }
-  //show backtrack
-  let backStep = 0;
-  if (!states[states.length - 1].found) return backStep;
-  await new Promise((resolve) => {
-    const map = states[states.length - 1].previous;
-    if (!map) return 0;
-    const trace = backtrack(map, [0, 0], [rows - 1, columns - 1]);
-    requestAnimationFrame(() => {
-      nextBacktrackFrame(trace, backStep, resolve);
-    });
-  }).then((step) => (backStep = step));
+  if (!noSearch) getDijkstraFrames(states, animationFrames);
+  if (!states[states.length - 1].found) return [backStep, animationFrames];
 
-  return backStep;
+  //get backtrack animation
+  const map = states[states.length - 1].previous;
+  const trace = backtrack(map, [0, 0], [rows - 1, columns - 1]);
+  for (const node of trace) {
+    backStep++;
+    animationFrames.push([{ node, colour: "bg-green-500" }]);
+  }
+
+  return [backStep, animationFrames];
 }
 
 /**
- * wrapper around Dijksta's algorithm. changes square component colour
+ * gets animation frames for each state of the grid
  * @param {Array<Object>} states array of the algorithm progression
- * @param {Number} step the current index in states array
- * @param {Resolve} resolve resolution to indicate done
+ * @param {Array<Array<{Node:Array<Number>, Colour:String}>>} frames array to add frames to
  */
-async function nextDijkstraFrame(states, step, resolve) {
-  setTimeout(() => {
-    const currentState = states[step];
-    if (states.length === step - 1 || !currentState) {
-      resolve();
-      return;
-    }
+function getDijkstraFrames(states, frames) {
+  for (const currentState of states) {
+    const colourChanges = [];
     for (const neighbour of currentState.neighbours) {
-      changeSquareColor(
-        neighbour,
-        ["bg-white", "bg-orange-500", "bg-teal-400"],
-        "bg-lime-400"
-      );
+      colourChanges.push({ node: neighbour, colour: "bg-lime-400" });
     }
-    changeSquareColor(currentState.current, "bg-lime-400", "bg-blue-500");
-
-    requestAnimationFrame(() => {
-      nextDijkstraFrame(states, ++step, resolve);
-    });
-  }, 50);
-}
-
-/**
- *
- * @param {Array<Array<Number>>} trace the nodes on the final path
- * @param {Number} step current index in trace
- * @param {Resolve} resolve promise.resolve to indicate done
- * @returns
- */
-function nextBacktrackFrame(trace, step, resolve) {
-  changeSquareColor(trace[step++], "bg-blue-500", "bg-green-500");
-  if (trace.length === step) {
-    resolve(step);
-    return;
+    colourChanges.push({ node: currentState.current, colour: "bg-blue-500" });
+    frames.push(colourChanges);
   }
-  requestAnimationFrame(() => nextBacktrackFrame(trace, step, resolve));
 }
