@@ -77,7 +77,6 @@ export default function PlayGame() {
     changeSolution(distance);
     const [points, valid] = calculatePoints(distance, input, gridSize, mode);
     if (!valid && mode === "Chill & Casual") {
-      //animate(animationFrames)
       quit();
       return;
     }
@@ -88,7 +87,6 @@ export default function PlayGame() {
     );
     updateGameData(dispatch, game, elapsed, points, !valid, mode);
     dispatch(zeroElapsed());
-    //animate(animationFrames)
   }
 
   function nextGrid() {
