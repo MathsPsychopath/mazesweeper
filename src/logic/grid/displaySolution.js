@@ -1,5 +1,4 @@
 import { dijkstra, backtrack } from "./dijkstra";
-import changeSquareColor from "./changeSquareColor";
 import { getSize } from "../../Components/Grid/Grid";
 
 /**
@@ -7,7 +6,7 @@ import { getSize } from "../../Components/Grid/Grid";
  * @param {Array<Array<Number>>} grid binary grid of walls and paths
  * @param {String} gridSize 10x10, 16x16, 16x30
  * @param {Boolean} noSearch
- * @returns {Promise<Number>} the length of the shortest path
+ * @returns {[distance:Number, animationFrames:Array<({node, colour})>]} result
  */
 export default function getSolutionWithAnimation(
   grid,
