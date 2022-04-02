@@ -68,7 +68,7 @@ async function nextDijkstraFrame(states, step, resolve) {
     for (const neighbour of currentState.neighbours) {
       changeSquareColor(
         neighbour,
-        ["bg-white", "bg-orange-500"],
+        ["bg-white", "bg-orange-500", "bg-teal-400"],
         "bg-lime-400"
       );
     }
