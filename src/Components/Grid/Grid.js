@@ -30,6 +30,7 @@ export default function Grid({
   numbers,
   grid,
   isDisplay,
+  reset,
 }) {
   const [rows, columns] = getSize(gridSize);
   const rowIndices = [...Array(rows).keys()];
@@ -48,6 +49,7 @@ export default function Grid({
                 key={`col-${j}`}
                 row={i}
                 col={j}
+                reset={reset}
               />
             );
           })}
