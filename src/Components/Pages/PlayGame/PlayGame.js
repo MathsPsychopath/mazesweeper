@@ -24,6 +24,7 @@ import { zeroElapsed } from "../../../redux/Timer/timer.actions";
 import calculatePoints from "../../../logic/points/calculatePoints";
 import getTimeBonus from "../../../logic/points/getTimeBonus";
 import { useNavigate } from "react-router-dom";
+import Animation from "./Animation";
 
 function updateGameData(dispatch, game, elapsed, points, wasDeduction, mode) {
   const { gridsSolved, baseScore, penalties, timeBonus } = game;
@@ -111,6 +112,12 @@ export default function PlayGame() {
 
   return (
     <div className="mx-auto flex gap-x-10 flex-col lg:flex-row py-20">
+      {animationFrames.length > 0 && (
+        <Animation
+          setAnimationFrames={setAnimationFrames}
+          animationFrames={animationFrames}
+        />
+      )}
       <Grid
         gridSize={gridSize}
         numbers={generateAdjacency(grid)}
