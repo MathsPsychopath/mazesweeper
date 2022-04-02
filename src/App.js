@@ -4,7 +4,7 @@ import {
   changeGrid,
   setUnpublished,
 } from "./redux/MenuSelection/menu.actions";
-import HeaderFooter from "./Components/Common/HeaderFooter";
+import HeaderFooter from "./Components/Common/page/HeaderFooter";
 import { setTimer } from "./redux/Timer/timer.actions";
 import {
   changeGridsSolved,
