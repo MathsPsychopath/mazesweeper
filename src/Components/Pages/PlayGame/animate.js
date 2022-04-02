@@ -5,7 +5,6 @@ export default function animate(frames, resolve) {
     return;
   }
   for (const nodeChange of frames[0]) {
-    console.log(nodeChange);
     const node = document.getElementById(
       `row-${nodeChange.node[0]}-col-${nodeChange.node[1]}`
     );
