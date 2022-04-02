@@ -1,5 +1,5 @@
 import React from "react";
-import Row from "./Row";
+import Square from "./Square";
 
 const SIZES = ["10x10", "16x16", "16x30"];
 const DIMENSIONS = [
@@ -24,24 +24,34 @@ export function getSize(size) {
  * @param {Boolean} props.isDisplay
  * @param {Array<Array<Number>>} props.numbers
  */
-export default function Grid(props) {
-  const [rows, columns] = getSize(props.gridSize);
+export default function Grid({
+  gridSize,
+  gridReveals,
+  numbers,
+  grid,
+  isDisplay,
+}) {
+  const [rows, columns] = getSize(gridSize);
   const rowIndices = [...Array(rows).keys()];
+  const colIndices = [...Array(columns).keys()];
   return (
-    <div data-testid="grid" className="mx-auto">
-      {rowIndices.map((e, i) => {
-        return (
-          <Row
-            columns={columns}
-            key={"row-" + i}
-            isDisplay={props.isDisplay}
-            numbers={props.numbers ? props.numbers[i] : undefined}
-            rowNo={i}
-            row={props.grid ? props.grid[i] : null}
-            reveal={props.gridReveals ? props.gridReveals[i] : false}
-          />
-        );
-      })}
+    <div className="mx-auto">
+      {rowIndices.map((e, i) => (
+        <div className="flex" key={`row-${i}`}>
+          {colIndices.map((f, j) => {
+            if (isDisplay) return <Square isDisplay key={`col-${j}`} />;
+            return (
+              <Square
+                reveal={gridReveals[i][j]}
+                number={numbers[i][j]}
+                gridValue={grid[i][j]}
+                key={`col-${j}`}
+                id={`row-${i}-col-${j}`}
+              />
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 }
