@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import publishStats from "../../../logic/leaderboard/publishStats";
 import { MdPublish, MdCheckCircle } from "react-icons/md";
 import { AiOutlineLoading } from "react-icons/ai";
+import UsernamePrompt from "./UsernamePrompt";
 
 export default function Publish() {
-  const dispatch = useDispatch();
   const { publishState } = useSelector((state) => state.menu);
   const gameData = useSelector((state) => state.game);
+  const [promptVisible, setVisibility] = useState(false);
   if (publishState === "UNPUBLISHED") {
     return (
       <button
@@ -15,8 +15,11 @@ export default function Publish() {
           "flex items-center justify-center text-lg border-black text-white bg-blue-400 " +
           "hover:bg-purple-200 active:bg-purple-400 rounded-lg p-4 w-1/3 m-2"
         }
-        onClick={() => publishStats(dispatch, gameData)}
+        onClick={() => setVisibility(true)}
       >
+        {promptVisible && (
+          <UsernamePrompt gameData={gameData} setVisibility={setVisibility} />
+        )}
         <span className="text-lg">
           <MdPublish />
         </span>

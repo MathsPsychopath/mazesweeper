@@ -6,7 +6,7 @@ import {
 
 const URL = ""; //TODO replace with GCP CF Endpoint
 
-export default async function publishStats(dispatch, gameData) {
+export default async function publishStats(dispatch, gameData, username) {
   dispatch(setPublishing());
   const data = Object.keys(gameData)
     .filter(
@@ -17,6 +17,7 @@ export default async function publishStats(dispatch, gameData) {
       acc[key] = gameData[key];
       return acc;
     }, {});
+  data["username"] = username;
   console.log(data);
   await fetch(URL, {
     method: "POST",
