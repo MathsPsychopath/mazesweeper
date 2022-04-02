@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Grid from "../../Grid/Grid";
+import Grid, { getSize } from "../../Grid/Grid";
 import Timer from "../../Timer/Timer";
 import Entry from "../../Common/Entry";
 import {
@@ -7,15 +7,44 @@ import {
   generateAdjacency,
 } from "../../../logic/grid/generateGrid";
 import SolutionLabel from "./SolutionLabel";
-import { useSelector } from "react-redux";
-import GameButton from "./GameButton";
+import { useDispatch, useSelector } from "react-redux";
+import PlayGameButton from "./PlayGameButton";
+import getSolutionWithAnimation from "../../../logic/grid/getSolutionWithAnimation";
+import {
+  setPostAnswer,
+  setPreAnswer,
+  changePointAmount,
+  updatePenalties,
+  updateBaseScore,
+  changeGridsSolved,
+  updateTimeBonus,
+  appendSolveTime,
+} from "../../../redux/GameState/game.actions";
+import { zeroElapsed } from "../../../redux/Timer/timer.actions";
+import calculatePoints from "../../../logic/points/calculatePoints";
+import getTimeBonus from "../../../logic/points/getTimeBonus";
+import { useNavigate } from "react-router-dom";
+
+function updateGameData(dispatch, game, elapsed, points, wasDeduction, mode) {
+  const { gridsSolved, baseScore, penalties, timeBonus } = game;
+  if (wasDeduction) {
+    dispatch(updatePenalties(penalties - points));
+    return;
+  }
+  const currentTimeBonus = getTimeBonus(elapsed);
+  dispatch(updateBaseScore(baseScore + points - currentTimeBonus));
+  dispatch(changeGridsSolved(gridsSolved + 1));
+  dispatch(appendSolveTime(elapsed));
+  if (mode !== "Chill & Casual")
+    dispatch(updateTimeBonus(currentTimeBonus + timeBonus));
+}
 
 /**
  *
  * @returns PlayGame page
  */
 export default function PlayGame() {
-  const { gridSize } = useSelector((state) => state.menu);
+  const { gridSize, mode } = useSelector((state) => state.menu);
   const game = useSelector((state) => state.game);
   const [input, setInput] = useState("");
   const [submitClicked, setClicked] = useState(false);
@@ -23,6 +52,62 @@ export default function PlayGame() {
   const [solution, changeSolution] = useState(0);
   const [grid, newGrid] = useState(generateGrid(gridSize));
   const [gridReveals, newGridReveals] = useState(generateGrid(gridSize, true));
+  const [animationFrames, setAnimationFrames] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const quit = () => {
+    setTimeout(() => {
+      dispatch(setPreAnswer());
+      navigate("/results");
+    }, 2000);
+  };
+
+  function handleSubmit({ noSearch, game }, elapsed) {
+    setInputState(true);
+    setClicked(true);
+    const [distance, frames] = getSolutionWithAnimation(
+      grid,
+      gridSize,
+      noSearch
+    );
+    setAnimationFrames(frames);
+    dispatch(setPostAnswer());
+    changeSolution(distance);
+    const [points, valid] = calculatePoints(distance, input, gridSize, mode);
+    if (!valid && mode === "Chill & Casual") {
+      //animate(animationFrames)
+      quit();
+      return;
+    }
+    dispatch(
+      changePointAmount(
+        points + (mode !== "Chill & Casual" && getTimeBonus(elapsed))
+      )
+    );
+    updateGameData(dispatch, game, elapsed, points, !valid, mode);
+    dispatch(zeroElapsed());
+    //animate(animationFrames)
+  }
+
+  function nextGrid() {
+    const [rows, cols] = getSize(gridSize);
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const node = document.getElementById(`row-${i}-col-${j}`);
+        const newClass = node.className
+          .split(" ")
+          .filter((c) => !c.startsWith("bg"));
+        node.className = newClass.join(" ").trim();
+      }
+    }
+    newGrid(generateGrid(gridSize));
+    newGridReveals(generateGrid(gridSize, true));
+    setInput("");
+    setClicked(false);
+    setInputState(false);
+    dispatch(setPreAnswer());
+  }
 
   return (
     <div className="mx-auto flex gap-x-10 flex-col lg:flex-row py-20">
@@ -31,6 +116,7 @@ export default function PlayGame() {
         numbers={generateAdjacency(grid)}
         gridReveals={gridReveals}
         grid={grid}
+        reset={game.gridState === "PRE_ANSWER"}
       />
       <div className="flex flex-col justify-around items-center w-80 gap-y-4 mt-4 mx-auto">
         <Timer />
@@ -41,41 +127,27 @@ export default function PlayGame() {
           <h1>Points: {game.points}</h1>
         </div>
         <div className="flex justify-around">
-          <GameButton
-            changeSolution={changeSolution}
-            grid={grid}
+          <PlayGameButton
+            handler={handleSubmit}
             isDisabled={game.gridState === "POST_ANSWER" || submitClicked}
-            setInputState={setInputState}
-            input={input}
-            submitClicked={submitClicked}
-            setClicked={setClicked}
             game={game}
           >
             Submit
-          </GameButton>
-          <GameButton
-            changeSolution={changeSolution}
-            grid={grid}
-            isDisabled={game.gridState === "POST_ANSWER" || submitClicked}
-            setInputState={setInputState}
+          </PlayGameButton>
+          <PlayGameButton
             noSearch
-            input={input}
-            submitClicked={submitClicked}
-            setClicked={setClicked}
+            handler={handleSubmit}
+            isDisabled={game.gridState === "POST_ANSWER" || submitClicked}
             game={game}
           >
             Submit without searching
-          </GameButton>
-          <GameButton
+          </PlayGameButton>
+          <PlayGameButton
+            handler={nextGrid}
             isDisabled={game.gridState === "PRE_ANSWER"}
-            newGrid={newGrid}
-            newGridReveals={newGridReveals}
-            setInput={setInput}
-            setInputState={setInputState}
-            setClicked={setClicked}
           >
             Next
-          </GameButton>
+          </PlayGameButton>
         </div>
         <SolutionLabel
           isHidden={game.gridState === "PRE_ANSWER"}
