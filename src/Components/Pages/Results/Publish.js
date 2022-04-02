@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { MdPublish, MdCheckCircle } from "react-icons/md";
 import { AiOutlineLoading } from "react-icons/ai";
 import UsernamePrompt from "./UsernamePrompt";
