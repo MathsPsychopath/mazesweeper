@@ -1,5 +1,4 @@
 export default function animate(frames, resolve) {
-  console.log(frames);
   if (frames.length === 0) {
     resolve();
     return;

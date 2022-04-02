@@ -8,8 +8,7 @@ export default function Animation({ setAnimationFrames, animationFrames }) {
       promiseReject.current = reject;
       requestAnimationFrame(() => animate(animationFrames, resolve));
     });
-    (async () => await anim)();
-    setAnimationFrames([]);
+    anim.then(() => setAnimationFrames([]));
     return () => promiseReject.current();
   }, [animationFrames, setAnimationFrames]);
 

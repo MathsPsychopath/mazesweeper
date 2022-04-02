@@ -149,7 +149,7 @@ export default function PlayGame() {
           </PlayGameButton>
           <PlayGameButton
             handler={nextGrid}
-            isDisabled={game.gridState === "PRE_ANSWER"}
+            isDisabled={animationFrames.length !== 0}
           >
             Next
           </PlayGameButton>
