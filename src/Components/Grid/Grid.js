@@ -46,7 +46,8 @@ export default function Grid({
                 number={numbers[i][j]}
                 gridValue={grid[i][j]}
                 key={`col-${j}`}
-                id={`row-${i}-col-${j}`}
+                row={i}
+                col={j}
               />
             );
           })}
