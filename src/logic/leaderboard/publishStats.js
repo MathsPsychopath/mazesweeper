@@ -6,18 +6,10 @@ import {
 
 const URL = ""; //TODO replace with GCP CF Endpoint
 
-export default async function publishStats(dispatch, gameData, username) {
+export default async function publishStats(dispatch, gameData) {
   dispatch(setPublishing());
-  const data = Object.keys(gameData)
-    .filter(
-      (key) =>
-        !isNaN(Number(gameData[key].length === 0 ? undefined : gameData[key]))
-    )
-    .reduce((acc, key) => {
-      acc[key] = gameData[key];
-      return acc;
-    }, {});
-  data["username"] = username;
+  console.log(gameData);
+  const { gameState, gridState, solveTimes, ...data } = gameData;
   console.log(data);
   await fetch(URL, {
     method: "POST",
