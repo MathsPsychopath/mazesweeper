@@ -4,10 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Common/Button";
 import TextEntry from "../../Common/TextEntry";
 import publishStats from "../../../logic/leaderboard/publishStats";
-import {
-  setPublished,
-  setUnpublished,
-} from "../../../redux/MenuSelection/menu.actions";
 
 export default function UsernamePrompt({ gameData, setVisibility }) {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import { useWindowWidth } from "@react-hook/window-size";
+// import { useWindowWidth } from "@react-hook/window-size";
 import React, { useEffect } from "react";
 import { useState } from "react";
 
@@ -15,8 +15,8 @@ export default function Square({
   col,
   reset,
 }) {
-  const width = useWindowWidth();
-  const squareDim = width < 1920 ? "1.5em" : "2em";
+  // const width = useWindowWidth();
+  // const squareDim = width < 1920 ? "1.5em" : "2em";
   const classes =
     "hover:border-2 hover:border-red-500 border border-black " +
     "duration-50 cursor-pointer transition-colors grid-square grid-square ";
