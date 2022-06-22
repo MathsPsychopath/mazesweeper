@@ -5,8 +5,10 @@ import { AiOutlineLoading } from "react-icons/ai";
 import UsernamePrompt from "./UsernamePrompt";
 
 export default function Publish() {
-  const { publishState } = useSelector((state) => state.menu);
+  const { publishState, mode, gridSize } = useSelector((state) => state.menu);
   const gameData = useSelector((state) => state.game);
+  gameData.mode = mode;
+  gameData.gridSize = gridSize;
   const [promptVisible, setVisibility] = useState(false);
   const hasSignificantPts = gameData.points > 5;
   if (publishState === "UNPUBLISHED" || !promptVisible) {
