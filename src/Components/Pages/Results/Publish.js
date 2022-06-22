@@ -7,7 +7,7 @@ import UsernamePrompt from "./UsernamePrompt";
 export default function Publish() {
   const { publishState, mode, gridSize } = useSelector((state) => state.menu);
   const gameData = useSelector((state) => state.game);
-  gameData.mode = mode;
+  gameData.gameMode = mode;
   gameData.gridSize = gridSize;
   const [promptVisible, setVisibility] = useState(false);
   const hasSignificantPts = gameData.points > 5;
