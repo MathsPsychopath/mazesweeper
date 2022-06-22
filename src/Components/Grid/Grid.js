@@ -40,7 +40,8 @@ export default function Grid({
       {rowIndices.map((e, i) => (
         <div className="flex" key={`row-${i}`}>
           {colIndices.map((f, j) => {
-            if (isDisplay) return <Square isDisplay key={`col-${j}`} />;
+            if (isDisplay)
+              return <Square isDisplay row={i} col={j} key={`col-${j}`} />;
             return (
               <Square
                 reveal={gridReveals[i][j]}

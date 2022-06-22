@@ -8,14 +8,17 @@ export default function Publish() {
   const { publishState } = useSelector((state) => state.menu);
   const gameData = useSelector((state) => state.game);
   const [promptVisible, setVisibility] = useState(false);
-  if (publishState === "UNPUBLISHED") {
+  const hasSignificantPts = gameData.points > 5;
+  if (publishState === "UNPUBLISHED" || !promptVisible) {
     return (
       <button
         className={
-          "flex items-center justify-center text-lg border-black text-white bg-blue-400 " +
-          "hover:bg-purple-200 active:bg-purple-400 rounded-lg p-4 w-1/3 m-2"
+          "flex items-center justify-center text-lg border-black text-white rounded-lg p-4 w-1/3 m-2 " +
+          (hasSignificantPts
+            ? " bg-blue-400 hover:bg-purple-200 active:bg-purple-400 "
+            : " bg-gray-500 cursor-default")
         }
-        onClick={() => setVisibility(true)}
+        onClick={() => hasSignificantPts && setVisibility(true)}
       >
         {promptVisible && (
           <UsernamePrompt gameData={gameData} setVisibility={setVisibility} />

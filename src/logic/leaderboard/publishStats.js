@@ -4,7 +4,7 @@ import {
   setUnpublished,
 } from "../../redux/MenuSelection/menu.actions";
 
-const URL = ""; //TODO replace with GCP CF Endpoint
+const URL = "https://pacific-song-345416.wn.r.appspot.com/leaderboard"; //TODO replace with GCP CF Endpoint
 
 export default async function publishStats(dispatch, gameData) {
   dispatch(setPublishing());
@@ -22,6 +22,7 @@ export default async function publishStats(dispatch, gameData) {
   }).catch((err) => {
     console.log(err);
     dispatch(setUnpublished());
+    return;
   });
   dispatch(setPublished());
 }

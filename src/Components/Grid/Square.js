@@ -19,8 +19,7 @@ export default function Square({
   const squareDim = width < 1920 ? "1.5em" : "2em";
   const classes =
     "hover:border-2 hover:border-red-500 border border-black " +
-    "duration-50 cursor-pointer transition-colors grid-square " +
-    `[min-width:${squareDim}] [max-width:${squareDim}] [min-height:${squareDim}] [max-height:${squareDim}] `;
+    "duration-50 cursor-pointer transition-colors grid-square grid-square ";
   const [color, setColor] = useState(COLOR_1);
 
   useEffect(() => {
