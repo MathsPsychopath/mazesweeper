@@ -26,6 +26,7 @@ import PlayGame from "./Components/Pages/PlayGame/PlayGame";
 import Results from "./Components/Pages/Results/Results";
 import ModalRoot from "./Components/Common/ModalRoot";
 import Leaderboard from "./Components/Pages/Leaderboard/Leaderboard";
+import "./styles.css";
 
 function App() {
   const location = useLocation();
