@@ -10,7 +10,7 @@ export default function Publish() {
   gameData.gameMode = mode;
   gameData.gridSize = gridSize;
   const [promptVisible, setVisibility] = useState(false);
-  const hasSignificantPts = gameData.points > 5;
+  const hasSignificantPts = gameData.points >= 5;
   if (publishState === "UNPUBLISHED" || !promptVisible) {
     return (
       <button

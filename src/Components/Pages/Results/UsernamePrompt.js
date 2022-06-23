@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import reactDom from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "../../Common/Button";
 import TextEntry from "../../Common/TextEntry";
 import publishStats from "../../../logic/leaderboard/publishStats";
@@ -9,7 +9,6 @@ export default function UsernamePrompt({ gameData, setVisibility }) {
   const dispatch = useDispatch();
   const [input, setInput] = useState("");
   const ref = useRef(document.createElement("div")); //ref is used to persist over input state deltas
-  const { gridSize, mode } = useSelector((state) => state.menu);
   useEffect(() => {
     const node = ref.current;
     const modalRoot = document.getElementById("modal-root");
@@ -20,8 +19,6 @@ export default function UsernamePrompt({ gameData, setVisibility }) {
   }, [ref]);
 
   function handleClick() {
-    gameData.gridSize = gridSize;
-    gameData.mode = mode;
     gameData.username = input;
     setVisibility(false);
     publishStats(dispatch, gameData);

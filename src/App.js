@@ -35,7 +35,6 @@ function App() {
     case "/results":
       dispatch(setPostGame());
       dispatch(setTimer(150));
-      dispatch(changeMode("QuickMode"));
       break;
     case "/playgame":
       dispatch(zeroPoints());
@@ -48,6 +47,7 @@ function App() {
       dispatch(updateTimeBonus(0));
       break;
     default:
+      dispatch(changeMode("QuickMode"));
       dispatch(setPreGame());
       dispatch(setPreAnswer());
       dispatch(changeGrid("10x10"));

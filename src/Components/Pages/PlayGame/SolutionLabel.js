@@ -8,7 +8,10 @@ import { ImCross, ImCheckmark } from "react-icons/im";
  * @returns Correct or Incorrect Answer
  */
 export default function SolutionLabel(props) {
-  const correct = parseInt(props.answer, 10) === parseInt(props.solution, 10);
+  const solution = parseInt(props.solution, 10);
+  const correct =
+    (props.answer === "" && solution === 0) ||
+    parseInt(props.answer, 10) === solution;
   return (
     <div
       className={`${props.isHidden ? "hidden" : "flex"} flex-col items-center`}

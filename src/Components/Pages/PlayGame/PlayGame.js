@@ -21,19 +21,37 @@ import {
   appendSolveTime,
 } from "../../../redux/GameState/game.actions";
 import { zeroElapsed } from "../../../redux/Timer/timer.actions";
-import calculatePoints from "../../../logic/points/calculatePoints";
 import getTimeBonus from "../../../logic/points/getTimeBonus";
 import { useNavigate } from "react-router-dom";
 import Animation from "./Animation";
+import isValidDist from "../../../logic/points/isValidDist";
+import getInitialPoints from "../../../logic/points/getInitialPoints";
+import getDeduction from "../../../logic/points/getDeduction";
 
-function updateGameData(dispatch, game, elapsed, points, wasDeduction, mode) {
+function updateGameData(
+  dispatch,
+  game,
+  elapsed,
+  valid,
+  mode,
+  newBase,
+  newDeduct
+) {
   const { gridsSolved, baseScore, penalties, timeBonus } = game;
-  if (wasDeduction) {
-    dispatch(updatePenalties(penalties - points));
+  console.log(`newBase : ${newBase}, newDeduct: ${newDeduct}`);
+  dispatch(
+    changePointAmount(
+      newBase +
+        newDeduct +
+        (valid && mode !== "Chill & Casual" && getTimeBonus(elapsed))
+    )
+  );
+  if (!valid) {
+    dispatch(updatePenalties(penalties - newDeduct));
     return;
   }
   const currentTimeBonus = getTimeBonus(elapsed);
-  dispatch(updateBaseScore(baseScore + points - currentTimeBonus));
+  dispatch(updateBaseScore(baseScore + newBase));
   dispatch(changeGridsSolved(gridsSolved + 1));
   dispatch(appendSolveTime(elapsed));
   if (mode !== "Chill & Casual")
@@ -75,17 +93,17 @@ export default function PlayGame() {
     setAnimationFrames(frames);
     dispatch(setPostAnswer());
     changeSolution(distance);
-    const [points, valid] = calculatePoints(distance, input, gridSize, mode);
+    const offset = distance - (parseInt(input, 10) || 0);
+    const valid = isValidDist(offset, mode);
+    // const [points, valid] = calculatePoints(distance, input, gridSize, mode);
     if (!valid && mode === "Chill & Casual") {
       quit();
       return;
     }
-    dispatch(
-      changePointAmount(
-        points + (mode !== "Chill & Casual" && getTimeBonus(elapsed))
-      )
-    );
-    updateGameData(dispatch, game, elapsed, points, !valid, mode);
+    const baseScore = valid ? getInitialPoints(gridSize) : 0;
+    const deductions = getDeduction(offset, mode);
+
+    updateGameData(dispatch, game, elapsed, valid, mode, baseScore, deductions);
     dispatch(zeroElapsed());
   }
 
