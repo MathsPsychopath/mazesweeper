@@ -18,7 +18,7 @@ export default function SelectGrid() {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-col lg:flex-row justify-around my-12">
-      <div className="hidden md:block">
+      <div className="hidden md:block md:my-auto">
         <GridTypes
           info={grids.types[gridSize]}
           gridSize={gridSize}

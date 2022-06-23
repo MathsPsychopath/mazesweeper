@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Landing() {
   return (
-    <div className="text-left mx-auto w-9/12 mb-20 mt-8">
+    <div className="text-left mx-auto w-9/12 max-w-2xl mb-20 mt-8">
       <h1 className="font-bold text-3xl">About</h1>
       <p>
         This game is a MineSweeper-esque game. See "How to Play" for details on
@@ -13,17 +13,18 @@ export default function Landing() {
       <br />
       <h2 className="font-bold text-2xl">How this game was made</h2>
       <p>
-        This game was made using React, Redux and deployed via GitHub Actions to
-        GitHub Pages. The fact that the url is
-        "https://mathspsychopath.github.io/mazesweeper/" by default means it is
-        a repo hosted on GitHub.
+        This game was made using React, Redux, Tailwind CSS and deployed via
+        GitHub Actions to GitHub Pages. The fact that the origin is
+        "https://mathspsychopath.github.io/" by default means it is a repo
+        hosted on GitHub.
         <br />
         It also uses Jest to test certain bits of functionality, which is done
         before every deploy on Actions.
         <br />
-        The backend uses a Google Cloud Platform Cloud Function, and a MySQL
-        database instance. GCP over AWS because AWS is too complicated and I
-        wasted my free tier by activating and not using it in Sixth Form.
+        The backend uses a Google Cloud Platform App Engine service, Express.js
+        server, a MySQL database instance on private IP, as well as serverless
+        VPC access connectors. GCP was used over AWS because I wasted my free
+        trial on it.
       </p>
       <br />
       <h2 className="font-bold text-2xl">About me</h2>
