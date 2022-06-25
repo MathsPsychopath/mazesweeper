@@ -7,6 +7,7 @@ export default function OptionsList({
   updateValues,
   title,
   center = false,
+  multiselect = false,
 }) {
   return (
     <div className="flex flex-col">
@@ -14,10 +15,11 @@ export default function OptionsList({
       <div className={"flex gap-2 flex-wrap " + (center && "justify-center")}>
         {updateValues.map((value) => (
           <OptionButton
-            currentState={state === value}
+            currentState={state === value || (multiselect && state[value])}
             updateState={setState}
             updateValue={value}
             key={value}
+            multiselect={multiselect}
           >
             {value}
           </OptionButton>

@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function TextEntry({ input, setInput, isDisabled }) {
+export default function TextEntry({
+  input,
+  setInput,
+  isDisabled,
+  placeholder = "",
+}) {
   function handleChange(event) {
     return event.target.validity.valid ? event.target.value : input;
   }
@@ -13,6 +18,7 @@ export default function TextEntry({ input, setInput, isDisabled }) {
         onChange={(event) => setInput(handleChange(event))}
         className="w-full"
         disabled={isDisabled}
+        placeholder={placeholder}
       />
     </div>
   );
