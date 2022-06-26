@@ -5,7 +5,6 @@ import Options from "./Options";
 import Data from "./Data";
 
 // fix footer on bottom, unless content breaks through -> auto????
-//pls fix PlayGame 16x16 16x30 CSS
 
 const aliases = {
   points: "points",

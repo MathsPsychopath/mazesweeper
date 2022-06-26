@@ -17,7 +17,7 @@ export default function SelectGrid() {
   const { gridSize, mode } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
   return (
-    <div className="flex flex-col lg:flex-row justify-around my-12">
+    <div className="flex flex-col lg:flex-row justify-around my-12 xs:mx-4">
       <div className="hidden md:block md:my-auto">
         <GridTypes
           info={grids.types[gridSize]}

@@ -127,7 +127,7 @@ export default function PlayGame() {
   }
 
   return (
-    <div className="mx-auto flex gap-x-10 flex-col lg:flex-row py-20">
+    <div className="mx-0 xs:mx-4 lg:mx-auto flex gap-x-10 flex-col lg:flex-row py-20">
       {animationFrames.length > 0 && (
         <Animation
           setAnimationFrames={setAnimationFrames}
