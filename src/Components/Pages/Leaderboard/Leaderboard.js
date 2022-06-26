@@ -2,28 +2,54 @@ import React, { useEffect, useState } from "react";
 import Button from "../../Common/Button";
 import Loading from "./Loading";
 import Options from "./Options";
-// import Statistic from "../../Common/Statistic";
+import Data from "./Data";
 
 // fix footer on bottom, unless content breaks through -> auto????
-//pagination????
 //pls fix PlayGame 16x16 16x30 CSS
+
+const aliases = {
+  points: "points",
+  penalties: "penalties",
+  "grids solved": "grids_solved",
+  "base score": "base_score",
+};
 
 export default function Leaderboard() {
   const [entries, setEntries] = useState(25);
-  const [sortBy, setSort] = useState("points"); //points | base score | time bonus | grids solved
-  const [name, setName] = useState("Enter username"); //optional
-  const [gridSize, setSize] = useState("10x10"); //optional
-  const [mode, setMode] = useState("QuickMode"); //optional
-  // const [data, setData] = useState([]);
+  const [sortBy, setSort] = useState("points");
+  const [name, setName] = useState(""); //optional
+  const [gridSize, setSize] = useState(""); //optional
+  const [mode, setMode] = useState(""); //optional
+  const [data, setData] = useState([]);
   const [fetched, setFetchState] = useState(false);
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (!fetched) {
-      setFetchState(true);
-    }
-  }, [fetched]);
 
-  //need to change parameters to correct attr name for api
+  let url = `https://pacific-song-345416.wn.r.appspot.com/leaderboard?entries=${entries}&sortBy=${aliases[sortBy]}`;
+  if (gridSize) url += `&gridSize=${gridSize}`;
+  if (mode) url += `&mode=${encodeURIComponent(mode)}`;
+  if (name) url += `&username=${encodeURIComponent(name + "%")}`;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let raw;
+      try {
+        raw = await fetch(url);
+      } catch (error) {
+        setData(undefined);
+        setFetchState(true);
+        return;
+      }
+      const json = await raw.json();
+      setData(json);
+      setFetchState(true);
+    };
+    if (!fetched) {
+      (async () => {
+        await fetchData();
+      })();
+    }
+  }, [entries, fetched, url]);
+
   return (
     <div className="mx-auto py-8 rounded-md bg-white flex flex-col items-center max-w-5xl">
       <h1 className="font-bold text-3xl my-2 w-80 sm:w-auto">Leaderboard</h1>
@@ -57,7 +83,7 @@ export default function Leaderboard() {
         </Button>
       )}
       <div className="m-2 w-fit sm:w-[40em] flex flex-wrap sm:flex-col gap-2 sm:gap-4">
-        {fetched ? null : <Loading />}
+        {fetched ? <Data data={data} /> : <Loading />}
       </div>
     </div>
   );

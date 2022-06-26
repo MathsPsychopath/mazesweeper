@@ -18,10 +18,11 @@ export default function Options({
   useEffect(() => {
     if (Object.values(filters).every((value) => !value)) {
       setName(""); //add % in the request
+      setSize("");
+      setMode("");
     }
     console.log(filters);
-  }, [filters, setName, setSize]);
-  console.log(gridSize, name);
+  }, [filters, setMode, setName, setSize]);
   return (
     <div>
       <OptionsList
