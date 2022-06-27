@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/mazesweeper/static/css/main.120e622a.css",
-    "main.js": "/mazesweeper/static/js/main.52c9375d.js",
+    "main.css": "/mazesweeper/static/css/main.e0604c57.css",
+    "main.js": "/mazesweeper/static/js/main.a0dbdd13.js",
     "index.html": "/mazesweeper/index.html",
-    "main.120e622a.css.map": "/mazesweeper/static/css/main.120e622a.css.map",
-    "main.52c9375d.js.map": "/mazesweeper/static/js/main.52c9375d.js.map"
+    "main.e0604c57.css.map": "/mazesweeper/static/css/main.e0604c57.css.map",
+    "main.a0dbdd13.js.map": "/mazesweeper/static/js/main.a0dbdd13.js.map"
   },
   "entrypoints": [
-    "static/css/main.120e622a.css",
-    "static/js/main.52c9375d.js"
+    "static/css/main.e0604c57.css",
+    "static/js/main.a0dbdd13.js"
   ]
 }
