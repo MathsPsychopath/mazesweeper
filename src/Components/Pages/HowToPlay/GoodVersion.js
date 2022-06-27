@@ -16,10 +16,58 @@ export default function GoodVersion() {
       <p>
         Instead, you need to determine the shortest distance of the path(s) from
         the start to the end. The aim is to determine as many shortest distances
-        from the boards correctly under a set time. You also cannot click on a
-        square that is not a empty path - think of it like a maze where the
-        walls are pitfalls.
+        from the boards correctly under a set time. You deduce the paths
+        traversable and walls (non-traversable) from the grid numbers.
       </p>
+      <br />
+      <h2 className="text-3xl text-bold">Rules</h2>
+      <ol className="list-decimal list-inside indent-5">
+        <li>
+          A path is defined to be any direct consecutive sequence of empty path
+          squares between the start and end.
+          <ul className="list-disc list-inside indent-10">
+            <li>
+              2 path squares are in a sequence if one is in the perimeter of the
+              other - i.e., if the blue squares were paths and red squares were
+              walls, and center blue was your current location, (N, E, SE, SW)
+              would be your adjacent traversable path squares (forms sequence
+              with center).
+            </li>
+            <li>
+              Squares will either be revealed or unrevealed. Unrevealed squares
+              have numbers on them, whilst revealed squares are gray (wall) or
+              white (path).
+            </li>
+          </ul>
+        </li>
+        <img
+          src={require("./squares.png")}
+          className="mx-auto w-60 my-4"
+          alt="3x3 grid with centre selected and adjacent a different colour"
+        />
+        <li>
+          You need to find the shortest path (measured in number of squares)
+          from start to end, and type this value into the input box. If there is
+          no valid path, type 0/leave blank.
+        </li>
+        <li>
+          Points are awarded based on the difficulty & speed of answers you
+          give. See below for more on points.
+        </li>
+        <li>
+          Error amounts - in different game modes, you are allowed a certain
+          error boundary around the true answer in which answers will still be
+          accepted.
+          <ul className="list-disc list-inside indent-10">
+            <li>
+              "<em>QuickMode</em>" has error boundary of (+1,-1)
+            </li>
+            <li>"Normal" has error boundary of (+2,-2)</li>
+            <li>"Chill and Casual" has error boundary (+3,-3)</li>
+          </ul>
+        </li>
+      </ol>
+      <hr />
       <br />
       <h2 className="text-3xl text-bold">Game Modes</h2>
       <ol className="list-decimal list-inside indent-5">
@@ -47,53 +95,6 @@ export default function GoodVersion() {
           </ul>
         </li>
       </ol>
-      <br />
-      <h2 className="text-3xl text-bold">Rules</h2>
-      <ol className="list-decimal list-inside indent-5">
-        <li>
-          A path is defined to be any direct consecutive sequence of empty path
-          squares between the start and end.
-          <ul className="list-disc list-inside indent-10">
-            <li>
-              2 path squares are in a sequence if one is in the perimeter of the
-              other - i.e., if the green square was your current, any other path
-              square in its 8 sq. perimeter is valid as a addition to sequence
-              starting green.
-            </li>
-            <li>
-              A square will have a number in it, referring to the number of path
-              squares adjacent to the current
-            </li>
-          </ul>
-        </li>
-        <img
-          src={require("./squares.png")}
-          className="mx-auto w-60 my-4"
-          alt="3x3 grid with centre selected and adjacent a different colour"
-        />
-        <li>
-          You need to find the shortest path (measured in number of squares)
-          from start to end, and type this value into the input box. If there is
-          no valid path, type 0.
-        </li>
-        <li>
-          Points are awarded based on the difficulty & speed of answers you
-          give. See below for more on points.
-        </li>
-        <li>
-          Error amounts - in different game modes, you are allowed a certain
-          error boundary around the true answer in which answers will still
-          accepted.
-          <ul className="list-disc list-inside indent-10">
-            <li>
-              "<em>QuickMode</em>" has error boundary of (+1,-1)
-            </li>
-            <li>"Normal" has error boundary of (+2,-2)</li>
-            <li>"Chill and Casual" has error boundary (+3,-3)</li>
-          </ul>
-        </li>
-      </ol>
-      <hr />
       <br />
       <h2 className="text-3xl text-bold">Points</h2>
       <p>

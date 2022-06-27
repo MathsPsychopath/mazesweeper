@@ -25,7 +25,7 @@ export default async function publishStats(
       body: JSON.stringify(data),
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     dispatch(setUnpublished());
     setVisibility(false);
     setErrored(true);
