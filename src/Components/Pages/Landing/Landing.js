@@ -12,7 +12,7 @@ export default function Landing() {
       </p>
       <br />
       <h2 className="font-bold text-2xl">How this game was made</h2>
-      <p>
+      <div>
         This game was made using React, Redux, Tailwind CSS and deployed via
         GitHub Actions to GitHub Pages. The fact that the origin is
         "https://mathspsychopath.github.io/" by default means it is a repo
@@ -26,7 +26,7 @@ export default function Landing() {
         <br />
         If something doesn't work, it might be a problem with GCP Billing and my
         lack of funds
-      </p>
+      </div>
       <br />
       <h2 className="font-bold text-2xl">About me</h2>
       <p>

@@ -21,7 +21,6 @@ export default function Options({
       setSize("");
       setMode("");
     }
-    console.log(filters);
   }, [filters, setMode, setName, setSize]);
   return (
     <div>

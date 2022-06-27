@@ -38,7 +38,6 @@ function updateGameData(
   newDeduct
 ) {
   const { gridsSolved, baseScore, penalties, timeBonus } = game;
-  console.log(`newBase : ${newBase}, newDeduct: ${newDeduct}`);
   dispatch(
     changePointAmount(
       newBase +
