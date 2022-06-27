@@ -4,7 +4,7 @@ import { MdPublish, MdCheckCircle } from "react-icons/md";
 import { AiOutlineLoading } from "react-icons/ai";
 import UsernamePrompt from "./UsernamePrompt";
 
-export default function Publish() {
+export default function Publish({ setErrored }) {
   const { publishState, mode, gridSize } = useSelector((state) => state.menu);
   const gameData = useSelector((state) => state.game);
   gameData.gameMode = mode;
@@ -23,7 +23,11 @@ export default function Publish() {
         onClick={() => hasSignificantPts && setVisibility(true)}
       >
         {promptVisible && (
-          <UsernamePrompt gameData={gameData} setVisibility={setVisibility} />
+          <UsernamePrompt
+            gameData={gameData}
+            setVisibility={setVisibility}
+            setErrored={setErrored}
+          />
         )}
         <span className="text-lg">
           <MdPublish />

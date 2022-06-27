@@ -5,7 +5,11 @@ import Button from "../../Common/Button";
 import TextEntry from "../../Common/TextEntry";
 import publishStats from "../../../logic/leaderboard/publishStats";
 
-export default function UsernamePrompt({ gameData, setVisibility }) {
+export default function UsernamePrompt({
+  gameData,
+  setVisibility,
+  setErrored,
+}) {
   const dispatch = useDispatch();
   const [input, setInput] = useState("");
   const ref = useRef(document.createElement("div")); //ref is used to persist over input state deltas
@@ -20,8 +24,7 @@ export default function UsernamePrompt({ gameData, setVisibility }) {
 
   function handleClick() {
     gameData.username = input;
-    setVisibility(false);
-    publishStats(dispatch, gameData);
+    publishStats(dispatch, gameData, setErrored, setVisibility);
   }
 
   return reactDom.createPortal(

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Publish from "./Publish";
 import Statistic from "../../Common/Statistic";
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { formatTime } from "../../Timer/Timer";
 import CopyClipboard from "./CopyClipboard";
 import Button from "../../Common/Button";
+import { Notification } from "../../Common/Notification";
 
 const stats = ["Average Time", "Grids Solved", "Size"];
 const pointMetrics = [
@@ -31,6 +32,8 @@ export default function Results() {
 
   const pointsData = [baseScore, penalties * -1, timeBonus, points];
   const gameData = [getAverageTime(solveTimes), solveTimes.length, gridSize];
+  const [errored, setErrored] = useState(false);
+
   return (
     //TODO #5 add user's historical data
     <div className="mx-auto text-left w-full py-20 px-4 md:px-20 rounded-md flex flex-col items-center">
@@ -69,8 +72,13 @@ export default function Results() {
           Play Again
         </Button>
         <CopyClipboard points={points} gameData={gameData} />
-        <Publish />
+        <Publish setErrored={setErrored} />
       </div>
+      {errored && (
+        <Notification changeModalVis={setErrored}>
+          An error occurred when publishing. Please try again later
+        </Notification>
+      )}
     </div>
   );
 }

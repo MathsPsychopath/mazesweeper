@@ -1,29 +1,6 @@
-import React, { useState, useEffect } from "react";
-import reactDom from "react-dom";
-import { IoShareSocial, IoClose } from "react-icons/io5";
-
-function NotificationModal({ changeModalVis }) {
-  const modalRoot = document.getElementById("modal-root");
-  const modal = document.createElement("div");
-  useEffect(() => {
-    modalRoot.appendChild(modal);
-    return () => {
-      modalRoot.removeChild(modal);
-    };
-  }, [modal, modalRoot]);
-
-  return reactDom.createPortal(
-    <div className="z-50 fixed top-0 left-0 w-full flex justify-center items-center">
-      <div className="flex bg-purple-700 text-white p-2 w-full justify-center rounded-md">
-        <h1>Results copied to clipboard!</h1>
-        <button onClick={() => changeModalVis(false)}>
-          <IoClose />
-        </button>
-      </div>
-    </div>,
-    modal
-  );
-}
+import React, { useState } from "react";
+import { IoShareSocial } from "react-icons/io5";
+import { Notification } from "../../Common/Notification";
 
 async function handleClick(points, gameData, changeModalVis) {
   await navigator.clipboard
@@ -51,7 +28,11 @@ export default function CopyClipboard(props) {
         </span>
         Share
       </button>
-      {showModal && <NotificationModal changeModalVis={changeModalVis} />}
+      {showModal && (
+        <Notification changeModalVis={changeModalVis}>
+          Results copied to clipboard!
+        </Notification>
+      )}
     </>
   );
 }
