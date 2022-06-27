@@ -4,7 +4,7 @@
 
 MazeSweeper is a game heavily inspired by MineSweeper, except that you don't have to solve the board completely.
 
-Instead, you need to determine the shortest distance of the path(s) from the start to the end. The aim is to determine as many shortest distances from the boards correctly under a set time. You also cannot click on a square that is not a empty path - think of it like a maze where the walls are pitfalls.
+Instead, you need to determine the shortest distance of the path(s) from the start to the end. The aim is to determine as many shortest distances from the boards correctly under a set time. You deduce the paths traversable and walls (non-traversable) from the grid numbers.
 
 ## Game Modes
 
@@ -20,7 +20,7 @@ Instead, you need to determine the shortest distance of the path(s) from the sta
 ## Rules
 
 1.  A path is defined to be any direct consecutive sequence of empty path squares between the start and end.
-    - 2 path squares are in a sequence if one is in the perimeter of the other - i.e., if the green square was your current, any other path square in its 8 sq. perimeter is valid as a addition to sequence starting green.
+    - 2 path squares are in a sequence if one is in the perimeter of the other - i.e., if the blue squares were paths and red squares were walls, and center blue was your current location, (N, E, SE, SW) would be your adjacent traversable path squares (forms sequence with center).
     - A square will have a number in it, referring to the number of path squares adjacent to the current
 
 <p align="center">
@@ -72,4 +72,4 @@ In game modes like "_QuickMode_" and "Normal", if your answer is incorrect/not i
 
 This repo is hosted using GitHub Pages, and uses React.js (via CRA), Redux.
 Unit tests done by Jest, deployed with GitHub Actions.
-The backend uses a GCP Cloud Function and MySQL database
+The backend uses a GCP App Engine and MySQL database
