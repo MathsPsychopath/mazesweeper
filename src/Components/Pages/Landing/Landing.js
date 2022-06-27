@@ -17,14 +17,15 @@ export default function Landing() {
         GitHub Actions to GitHub Pages. The fact that the origin is
         "https://mathspsychopath.github.io/" by default means it is a repo
         hosted on GitHub.
+        <br /> It also uses Jest to test certain bits of functionality, which is
+        done before every deploy on Actions.
+        <hr className="bg-black h-px border-none" />
+        The backend uses a Google Cloud Platform App Engine service to host the
+        API, Express.js, a MySQL database instance on private IP, as well as
+        serverless VPC access connectors.
         <br />
-        It also uses Jest to test certain bits of functionality, which is done
-        before every deploy on Actions.
-        <br />
-        The backend uses a Google Cloud Platform App Engine service, Express.js
-        server, a MySQL database instance on private IP, as well as serverless
-        VPC access connectors. GCP was used over AWS because I wasted my free
-        trial on it.
+        If something doesn't work, it might be a problem with GCP Billing and my
+        lack of funds
       </p>
       <br />
       <h2 className="font-bold text-2xl">About me</h2>
