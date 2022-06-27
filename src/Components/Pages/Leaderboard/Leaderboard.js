@@ -4,8 +4,6 @@ import Loading from "./Loading";
 import Options from "./Options";
 import Data from "./Data";
 
-// fix footer on bottom, unless content breaks through -> auto????
-
 const aliases = {
   points: "points",
   penalties: "penalties",
