@@ -22,7 +22,9 @@ export default function Landing() {
         <hr className="bg-black h-px border-none" />
         The backend uses a Google Cloud Platform App Engine service to host the
         API, Express.js, a MySQL database instance on private IP, as well as
-        serverless VPC access connectors.
+        serverless VPC access connectors. 
+        <br/> If the "Leaderboard" tab doesn't work, 
+        it's because I've attempted to do some cost cutting
         <br />
         If something doesn't work, it might be a problem with GCP Billing and my
         lack of funds
